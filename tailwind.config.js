@@ -4,15 +4,15 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: 16,
 		},
 		fontFamily: {
 			sans: ["Overpass Variable", "sans-serif"],
 		},
 		extend: {
 			fontFamily: {
-				display: "Sigmar One, sans-serif",
-				displayText: "Srisakdi, sans-serif",
+				display: "Vina Sans, sans-serif",
+				display2: "Monoton, sans-serif",
+				line: "Flow Rounded, sans-serif",
 				handwriting: "Twinkle Star, sans-serif",
 				normal: "Overpass Variable, sans-serif",
 			},
@@ -21,6 +21,24 @@ export default {
 				primary: "#1D8DFD",
 				light_primary: "#56A9F4",
 				secondary: "#848484",
+			},
+			animation: {
+				floatVertical: "upDown 3s ease alternate infinite",
+			},
+			keyframes: {
+				upDown: {
+					"0%": { transform: "translateY(0%)" },
+					"50%": { transform: "translateY(-20%)" },
+					"100%": { transform: "translateY(20%)" },
+				},
+				fadeIn: {
+					from: {
+						opacity: 0,
+					},
+					to: {
+						opacity: 1,
+					},
+				},
 			},
 		},
 	},

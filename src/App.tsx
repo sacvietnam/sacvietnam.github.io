@@ -1,10 +1,12 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "@fontsource/sigmar-one";
-import "@fontsource/srisakdi";
 import "@fontsource/twinkle-star";
+import "@fontsource/flow-rounded";
 import "@fontsource-variable/overpass";
+import "@fontsource/monoton";
+import "@fontsource/vina-sans";
 import MainLayout from "./layouts/MainLayout";
+import Home from "./pages/Home";
 import Story from "./pages/Story";
 import Product from "./pages/Product";
 import Download from "./pages/Download";
@@ -16,10 +18,18 @@ const router = createBrowserRouter([
 		path: "/",
 		element: (
 			<MainLayout>
-				<Story />
+				<Home />
 			</MainLayout>
 		),
 		errorElement: <Error />,
+	},
+	{
+		path: "/story",
+		element: (
+			<MainLayout>
+				<Story />
+			</MainLayout>
+		),
 	},
 	{
 		path: "/product",
@@ -42,6 +52,14 @@ const router = createBrowserRouter([
 		element: (
 			<MainLayout>
 				<About />
+			</MainLayout>
+		),
+	},
+	{
+		path: "/contact",
+		element: (
+			<MainLayout>
+				<></>
 			</MainLayout>
 		),
 	},
