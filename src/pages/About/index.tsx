@@ -1,3 +1,6 @@
+import AnimatedText from "../../components/AnimatedText";
+import Member from "./Member";
+
 import img1 from "../../assets/imgs/team/thu.png";
 import img2 from "../../assets/imgs/team/thien.png";
 import img3 from "../../assets/imgs/team/doan.png";
@@ -6,100 +9,27 @@ import img5 from "../../assets/imgs/team/huyen.png";
 import img6 from "../../assets/imgs/team/nguyen.png";
 import img7 from "../../assets/imgs/team/thao.png";
 import img8 from "../../assets/imgs/team/thKien.png";
-import AnimatedText from "../../components/AnimatedText";
-import { motion } from "framer-motion";
-import { Popover } from "antd";
 
 const About = () => {
 	return (
 		<div>
 			<div className="max-w-screen-xl px-2 py-8 mx-auto">
 				<div>
-					<h4 className="mb-8 text-4xl text-center text-primary font-display">
+					<h2 className="mb-8 text-4xl text-center text-primary font-display">
 						<AnimatedText text="OUR MEMBER" />
-					</h4>
+					</h2>
 
-					<div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5 place-content-center">
+					<div className="flex flex-wrap justify-center">
 						{informations.map((current, index) => (
-							<motion.div
-								initial={{ opacity: 0, y: -16 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 0.25 * index }}
-								key={current.name}
-							>
-								<Popover
-									title={
-										<h4 className="text-xl text-center">{current.name}</h4>
-									}
-									trigger="click"
-									className="cursor-pointer"
-									content={
-										<div className="max-w-[400px]">
-											<p>
-												<span className="font-medium text-primary">
-													Interest:
-												</span>{" "}
-												{current.interest}
-											</p>
-											<p>
-												<span className="font-medium text-primary">
-													Reasons for participation:
-												</span>{" "}
-												{current.reasons}
-											</p>
-										</div>
-									}
-								>
-									<motion.div
-										whileTap={{ scale: 0.9 }}
-										className="relative h-[250px] md:h-[350px] rounded-md overflow-hidden group"
-									>
-										<img
-											src={current.img}
-											className="absolute top-0 bottom-0 right-0 block object-cover object-top w-full h-full select-none drop-shadow-2xl"
-										/>
-										<div
-											className="top-[20%] transition-all absolute bottom-0 left-0 right-0 z-[-1] rounded-r-md rounded-l-md"
-											style={{ backgroundColor: current.color }}
-										></div>
-									</motion.div>
-								</Popover>
-								<div className="mt-2 text-center">
-									<h4 className="font-semibold text-md md:text-xl">
-										{current.name}
-									</h4>
-									<p>{current.major}</p>
-								</div>
-							</motion.div>
+							<Member index={index} member={current} popover key={index} />
 						))}
 					</div>
 				</div>
-				<div className="mt-20">
-					<h4 className="mb-8 text-4xl text-center text-primary font-display">
+				<div className="flex flex-col items-center justify-center mt-20">
+					<h2 className="mb-8 text-4xl text-center text-primary font-display">
 						<AnimatedText text="MENTOR" />
-					</h4>
-					<motion.div
-						initial={{ opacity: 0, y: -16 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-					>
-						<motion.div className="flex flex-col items-center justify-center gap-4">
-							<div className="relative w-[300px] lg:w-[25%] h-[350px] overflow-hidden rounded-md">
-								<img
-									src={mentor.img}
-									className="absolute top-0 bottom-0 right-0 block object-cover object-top w-full h-full"
-								/>
-								<div
-									className="top-[20%] absolute bottom-0 left-0 right-0 z-[-1] rounded-r-md rounded-l-md"
-									style={{ backgroundColor: mentor.color }}
-								></div>
-							</div>
-							<div className="mt-2 text-center">
-								<h4 className="text-xl font-semibold">{mentor.name}</h4>
-								<p>Faculty of Electronics Technology</p>
-							</div>
-						</motion.div>
-					</motion.div>
+					</h2>
+					<Member index={0} member={mentor} popover={false} />
 				</div>
 			</div>
 		</div>
@@ -108,7 +38,7 @@ const About = () => {
 
 export default About;
 
-type MemberInformation = {
+export type MemberInformation = {
 	name: string;
 	major?: string;
 	interest?: string;
@@ -116,6 +46,7 @@ type MemberInformation = {
 	img: string;
 	color: string;
 };
+
 const informations: MemberInformation[] = [
 	{
 		img: img1,
@@ -189,4 +120,5 @@ const mentor: MemberInformation = {
 	img: img8,
 	color: "#4CAF50",
 	name: "TS. Cao Văn Kiên",
+	major: "Faculty of Electronics Technology",
 };

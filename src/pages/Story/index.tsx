@@ -11,7 +11,7 @@ import driverImg from "./resources/driver.jpeg";
 import beImg from "./resources/be.jpg";
 import gojekImg from "./resources/gojek.jpg";
 import grabImg from "./resources/grab.jpg";
-import beltImg from "./resources/belt.jpg";
+import beltImg from "../../assets/imgs/belt.png";
 
 const Story = () => {
 	const navigate = useNavigate();
