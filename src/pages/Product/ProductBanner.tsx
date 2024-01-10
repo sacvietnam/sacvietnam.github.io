@@ -11,8 +11,8 @@ const ProductBanner = () => {
 					<AnimatedText text="Smart Aircon Belt" />
 				</div>
 				<motion.div
-					initial={{ opacity: 0, rotateY: 90 }}
-					animate={{ opacity: 1, rotateY: 0 }}
+					initial={{ rotateY: 90, scale: 0.8 }}
+					animate={{ rotateY: 0, scale: 1 }}
 					transition={{ duration: 1 }}
 				>
 					<motion.img
@@ -21,7 +21,7 @@ const ProductBanner = () => {
 						whileTap={{ rotate: 6 }}
 						src={beltSrc}
 						alt="belt"
-						className="relative z-10 w-full  max-w-[40%] mx-auto"
+						className="relative z-10 w-full  max-w-[40%] mx-auto cursor-grab active:cursor-grabbing"
 					/>
 				</motion.div>
 			</div>

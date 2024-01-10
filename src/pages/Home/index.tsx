@@ -1,7 +1,8 @@
-// import videoSrc from "../../assets/videos/t4mp_video.mp4";
 import Banner from "../../components/Banner";
 import TCButton from "../../components/TCButton";
 import { useNavigate } from "react-router-dom";
+import ExploreSVG from "./explore.svg?react";
+
 const Home = () => {
 	const navigate = useNavigate();
 
@@ -36,6 +37,7 @@ const Home = () => {
 						<TCButton label="The Story" onPress={naviToStory} />
 						<TCButton label="The Product" onPress={naviToProduct} />
 					</div>
+					<ExploreSVG width={300} height={250} />
 				</div>
 			</div>
 		</div>

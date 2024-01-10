@@ -1,4 +1,5 @@
 import AnimatedText from "../../components/AnimatedText";
+import Features from "./Features";
 import ProductBanner from "./ProductBanner";
 import { motion } from "framer-motion";
 
@@ -45,12 +46,8 @@ const Product = () => {
 				</motion.div>
 			</div>
 
-			<div className="max-w-screen-xl mx-auto mt-20">
-				<AnimatedText
-					text="Features"
-					className="text-3xl text-center lg:text-4xl font-display text-primary"
-				/>
-			</div>
+			
+			<Features/>
 		</>
 	);
 };

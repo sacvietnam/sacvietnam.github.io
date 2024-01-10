@@ -59,7 +59,7 @@ const routesObject: RouteObject[] = routes.map((route) => {
 	return {
 		path: route.path,
 		element: element,
-		errorElement: <Error />,
+		errorElement: route.path === "/" ? <Error /> : null,
 		id: route.path,
 	};
 });
