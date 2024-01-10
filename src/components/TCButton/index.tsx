@@ -3,10 +3,9 @@ import { motion } from "framer-motion";
 type ButtonProps = {
 	label: string;
 	onPress?: VoidFunction;
-	variant?: string;
 };
 
-const TCButton = ({ label, onPress, variant }: ButtonProps) => {
+const TCButton = ({ label, onPress }: ButtonProps) => {
 	return (
 		<motion.div className="inline-block drop-shadow-md">
 			<motion.button

@@ -1,4 +1,3 @@
-import AnimatedText from "../../components/AnimatedText";
 import Features from "./Features";
 import ProductBanner from "./ProductBanner";
 import { motion } from "framer-motion";
