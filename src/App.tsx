@@ -6,7 +6,7 @@ import "@fontsource/flow-rounded";
 import "@fontsource-variable/overpass";
 import "@fontsource/monoton";
 import "@fontsource/vina-sans";
-const router = createBrowserRouter(routesObject);
+const router = createBrowserRouter(routesObject, { basename: "/sac-official" });
 
 export default function App() {
 	return (
