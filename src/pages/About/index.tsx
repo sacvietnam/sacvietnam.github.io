@@ -9,6 +9,7 @@ import img5 from "../../assets/imgs/team/huyen.png";
 import img6 from "../../assets/imgs/team/nguyen.png";
 import img7 from "../../assets/imgs/team/thao.png";
 import img8 from "../../assets/imgs/team/thKien.png";
+import Each from "../../util/Each";
 
 const About = () => {
 	return (
@@ -20,9 +21,12 @@ const About = () => {
 					</h2>
 
 					<div className="flex flex-wrap justify-center">
-						{informations.map((current, index) => (
-							<Member index={index} member={current} popover key={index} />
-						))}
+						<Each
+							of={informations}
+							render={(current, index) => (
+								<Member index={index} member={current} popover key={index} />
+							)}
+						/>
 					</div>
 				</div>
 				<div className="flex flex-col items-center justify-center mt-20">

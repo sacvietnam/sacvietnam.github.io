@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useMobile from "./../../hooks/useMobile";
 import { FiMenu } from "react-icons/fi";
 import Logo from "../Logo";
+import Each from "../../util/Each";
 
 const menuItem: { label: string; path: string }[] = [
 	{ label: "The story", path: "/story" },
@@ -45,11 +46,14 @@ const Header = () => {
 									className="flex flex-col items-center justify-center gap-8 pt-4 font-bold md:flex-row md:pt-0"
 									onClick={toggleMenu}
 								>
-									{menuItem.map((item) => (
-										<li key={item.path} className="hoverable-text">
-											<Link to={item.path}>{item.label}</Link>
-										</li>
-									))}
+									<Each
+										of={menuItem}
+										render={(item) => (
+											<li key={item.path} className="p-2 hoverable-text">
+												<Link to={item.path}>{item.label}</Link>
+											</li>
+										)}
+									/>
 								</ul>
 							</div>
 						</motion.div>

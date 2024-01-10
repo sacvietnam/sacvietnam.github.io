@@ -9,6 +9,7 @@ import img2 from "./appImgs/2.jpg";
 import img3 from "./appImgs/3.jpg";
 import img4 from "./appImgs/4.jpg";
 import { motion } from "framer-motion";
+import Each from "../../util/Each";
 
 const imgSources = [img1, img2, img3, img4];
 
@@ -76,21 +77,24 @@ const Download = () => {
 					<h3 className="mb-2 text-xl">Some images of the software:</h3>
 					<Image.PreviewGroup items={imgSources}>
 						<div className="flex gap-2 overflow-x-auto flex-nowrap snap-mandatory snap-x">
-							{imgSources.map((path, index) => (
-								<motion.div
-									initial={{ x: -100, opacity: 0 }}
-									animate={{ x: 0, opacity: 1 }}
-									transition={{ delay: 0.5 * index + 0.5, duration: 0.5 }}
-								>
-									<Image
-										key={path}
-										src={path}
-										width={200}
-										height={400}
-										className="object-contain select-none min-w-[200px]  snap-center"
-									/>
-								</motion.div>
-							))}
+							<Each
+								of={imgSources}
+								render={(path, index) => (
+									<motion.div
+										initial={{ x: -100, opacity: 0 }}
+										animate={{ x: 0, opacity: 1 }}
+										transition={{ delay: 0.5 * index + 0.5, duration: 0.5 }}
+									>
+										<Image
+											key={path}
+											src={path}
+											width={200}
+											height={400}
+											className="object-contain select-none min-w-[200px]  snap-center"
+										/>
+									</motion.div>
+								)}
+							/>
 						</div>
 					</Image.PreviewGroup>
 				</div>

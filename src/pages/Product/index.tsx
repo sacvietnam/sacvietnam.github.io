@@ -47,7 +47,7 @@ const Product = () => {
 
 			<div className="max-w-screen-xl mx-auto mt-20">
 				<AnimatedText
-					text="1. Features"
+					text="Features"
 					className="text-3xl text-center lg:text-4xl font-display text-primary"
 				/>
 			</div>

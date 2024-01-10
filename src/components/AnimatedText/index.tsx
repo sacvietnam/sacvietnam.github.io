@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { useAnimation, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
-const Title = styled.h2``;
+import Each from "../../util/Each";
 
 const Word = styled(motion.span)`
 	display: inline-block;
@@ -60,35 +59,41 @@ export default function AnimatedText({
 	};
 
 	return (
-		<Title aria-label={text} role="heading" className={className}>
-			{text.split(" ").map((word, index) => {
-				return (
-					<Word
-						ref={ref}
-						aria-hidden="true"
-						key={index}
-						initial="hidden"
-						animate={ctrls}
-						variants={wordAnimation}
-						transition={{
-							delayChildren: index * 0.25,
-							staggerChildren: 0.05,
-						}}
-					>
-						{word.split("").map((character, index) => {
-							return (
-								<Character
-									aria-hidden="true"
-									key={index}
-									variants={characterAnimation}
-								>
-									{character}
-								</Character>
-							);
-						})}
-					</Word>
-				);
-			})}
-		</Title>
+		<h2 aria-label={text} role="heading" className={className}>
+			<Each
+				of={text.split(" ")}
+				render={(word, index) => {
+					return (
+						<Word
+							ref={ref}
+							aria-hidden="true"
+							key={index}
+							initial="hidden"
+							animate={ctrls}
+							variants={wordAnimation}
+							transition={{
+								delayChildren: index * 0.25,
+								staggerChildren: 0.05,
+							}}
+						>
+							<Each
+								of={word.split(" ")}
+								render={(character, index) => {
+									return (
+										<Character
+											aria-hidden="true"
+											key={index}
+											variants={characterAnimation}
+										>
+											{character}
+										</Character>
+									);
+								}}
+							/>
+						</Word>
+					);
+				}}
+			/>
+		</h2>
 	);
 }
