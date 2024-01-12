@@ -1,3 +1,4 @@
+import Application from "./Application";
 import Features from "./Features";
 import ProductBanner from "./ProductBanner";
 import { motion } from "framer-motion";
@@ -45,8 +46,10 @@ const Product = () => {
 				</motion.div>
 			</div>
 
-			
-			<Features/>
+			<Features />
+
+			<Application />
+
 		</>
 	);
 };

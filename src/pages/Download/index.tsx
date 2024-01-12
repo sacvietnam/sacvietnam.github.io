@@ -4,14 +4,9 @@ import appIconSrc from "../../assets/imgs/product/app_icon.png";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Image, Spin } from "antd";
-import img1 from "./appImgs/1.jpg";
-import img2 from "./appImgs/2.jpg";
-import img3 from "./appImgs/3.jpg";
-import img4 from "./appImgs/4.jpg";
 import { motion } from "framer-motion";
 import Each from "../../util/Each";
-
-const imgSources = [img1, img2, img3, img4];
+import appImgs from "../../assets/imgs/appImgs";
 
 const Download = () => {
 	const [isClicked, setClicked] = useState<boolean>(false);
@@ -75,10 +70,10 @@ const Download = () => {
 				</div>
 				<div className="w-full mt-8">
 					<h3 className="mb-2 text-xl">Some images of the software:</h3>
-					<Image.PreviewGroup items={imgSources}>
+					<Image.PreviewGroup items={appImgs}>
 						<div className="flex gap-2 overflow-x-auto flex-nowrap snap-mandatory snap-x">
 							<Each
-								of={imgSources}
+								of={appImgs}
 								render={(path, index) => (
 									<motion.div
 										initial={{ x: -100, opacity: 0 }}
@@ -90,7 +85,7 @@ const Download = () => {
 											src={path}
 											width={200}
 											height={400}
-											className="object-contain select-none min-w-[200px]  snap-center"
+											className="object-contain select-none min-w-[200px] snap-center"
 										/>
 									</motion.div>
 								)}

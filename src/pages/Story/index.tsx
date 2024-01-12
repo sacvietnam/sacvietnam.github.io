@@ -41,7 +41,7 @@ const Story = () => {
 					<FloatInViewContent
 						firstContent={
 							<TitleNSub
-								title="We are students of Ho Chi Minh City University of Industry, Vietnam."
+								title="We are students Industry University of Ho Chi Minh City, Vietnam."
 								sub="Sophomore and junior students from various majors."
 							/>
 						}

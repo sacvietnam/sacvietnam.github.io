@@ -17,7 +17,7 @@ const About = () => {
 			<div className="max-w-screen-xl px-2 py-8 mx-auto">
 				<div>
 					<h2 className="mb-8 text-4xl text-center text-primary font-display">
-						<AnimatedText text="OUR MEMBER" />
+						<AnimatedText text="OUR MEMBERS" />
 					</h2>
 
 					<div className="flex flex-wrap justify-center">
@@ -54,7 +54,7 @@ export type MemberInformation = {
 const informations: MemberInformation[] = [
 	{
 		img: img1,
-		color: "#2196F3",
+		color: "#ecbdc7",
 		name: "Trần Thị Minh Thư",
 		major: "English Language",
 		interest:
@@ -64,7 +64,7 @@ const informations: MemberInformation[] = [
 	},
 	{
 		img: img2,
-		color: "#3F51B5",
+		color: "#2196F3",
 		name: "Lê Chí Thiện",
 		major: "IoT and Applied Artificial Intelligence",
 		interest:

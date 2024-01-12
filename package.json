@@ -1,6 +1,7 @@
 {
 	"name": "sac-website",
 	"private": true,
+	"homepage": "https://thanhcanhit.github.io/sac-official/",
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
@@ -8,7 +9,9 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
 	},
 	"dependencies": {
 		"@fontsource-variable/overpass": "^5.0.17",
@@ -36,6 +39,7 @@
 		"eslint": "^8.38.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.3.4",
+		"gh-pages": "^6.1.1",
 		"postcss": "^8.4.32",
 		"tailwindcss": "^3.4.0",
 		"typescript": "^5.0.2",

@@ -13,7 +13,7 @@ const Footer = () => {
 					</div>
 					<h3 className="font-semibold text-primary">THE SHARKS TEAM</h3>
 					<p className="text-center">
-						Sinh viên Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
+						Students of Ho Chi Minh City University of Industry
 					</p>
 					<div className="flex gap-4">
 						<a href="https://iuh.edu.vn/">
