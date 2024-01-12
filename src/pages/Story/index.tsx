@@ -41,7 +41,7 @@ const Story = () => {
 					<FloatInViewContent
 						firstContent={
 							<TitleNSub
-								title="We are students Industry University of Ho Chi Minh City, Vietnam."
+								title="We are students of Industry University of Ho Chi Minh City, Vietnam."
 								sub="Sophomore and junior students from various majors."
 							/>
 						}
@@ -84,31 +84,24 @@ const Story = () => {
 						secondContent={
 							<>
 								<motion.img
-									initial={{ opacity: 0, x: "-100%" }}
 									whileInView={{ opacity: 1, x: 32, y: 16 }}
-									transition={{ duration: 1, delay: 0.2 }}
 									viewport={{ once: true }}
 									src={beImg}
-									width={"33%"}
-									className="object-cover translate-x-8 translate-y-4 rounded-md drop-shadow-lg"
+									className="object-cover w-1/3 translate-x-8 translate-y-4 rounded-md drop-shadow-lg"
 								/>
 								<motion.img
-									initial={{ opacity: 0, y: "20%" }}
 									whileInView={{ opacity: 1, y: 0 }}
-									transition={{ duration: 1, delay: 0.2 }}
 									viewport={{ once: true }}
 									src={grabImg}
 									width={"33%"}
-									className="object-cover z-[1] rounded-md drop-shadow-lg"
+									className="object-cover w-1/3  z-[1] rounded-md drop-shadow-lg"
 								/>
 								<motion.img
-									initial={{ opacity: 0, x: "100%" }}
 									whileInView={{ opacity: 1, x: -32, y: 16 }}
-									transition={{ duration: 1, delay: 0.2 }}
 									viewport={{ once: true }}
 									src={gojekImg}
 									width={"33%"}
-									className="object-cover -translate-x-8 translate-y-4 rounded-md drop-shadow-lg"
+									className="object-cover w-1/3 -translate-x-8 translate-y-4 rounded-md drop-shadow-lg"
 								/>
 							</>
 						}

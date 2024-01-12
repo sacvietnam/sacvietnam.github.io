@@ -58,7 +58,7 @@ const features: FeatureObject[] = [
 		Icon: PiWindDuotone,
 	},
 	{
-		name: "Body Temperature & Humidity",
+		name: "Body Temp & Humidity",
 		description:
 			"Monitor the temperature and humidity inside your clothing to better protect yourself.",
 		Icon: MdOutlineMonitorHeart,

@@ -78,7 +78,7 @@ const Download = () => {
 									<motion.div
 										initial={{ x: -100, opacity: 0 }}
 										animate={{ x: 0, opacity: 1 }}
-										transition={{ delay: 0.5 * index + 0.5, duration: 0.5 }}
+										transition={{ delay: 0.2 * index + 0.1, duration: 0.2 }}
 									>
 										<Image
 											key={path}
