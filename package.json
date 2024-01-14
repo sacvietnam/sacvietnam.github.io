@@ -1,7 +1,7 @@
 {
 	"name": "sac-website",
 	"private": true,
-	"homepage": "https://thanhcanhit.github.io/sac-official/",
+	"homepage": "https://github.com/sacvietnam/",
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {

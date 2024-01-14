@@ -1,7 +1,7 @@
 import Logo from "../Logo";
 import logoTheShark from "../../assets/imgs/logo/thesharks.jpg";
 import logoIUH from "../../assets/imgs/logo/iuh.jpg";
-import { FaFacebook, FaYoutube } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
 	return (
@@ -13,7 +13,7 @@ const Footer = () => {
 					</div>
 					<h3 className="font-semibold text-primary">THE SHARKS TEAM</h3>
 					<p className="text-center">
-					Students of Industry University of Ho Chi Minh City
+						Students of Industrial University of Ho Chi Minh City
 					</p>
 					<div className="flex gap-4">
 						<a href="https://iuh.edu.vn/">
@@ -33,11 +33,8 @@ const Footer = () => {
 				<div className="flex flex-col items-center gap-2 md:items-end">
 					<h3 className="font-semibold">Social Media</h3>
 					<div className="flex gap-4">
-						<a href="/">
+						<a href="https://www.facebook.com/profile.php?id=61555656479452">
 							<FaFacebook className="w-10 h-10 text-primary" />
-						</a>
-						<a href="/">
-							<FaYoutube className="w-12 h-12 text-red-500" />
 						</a>
 					</div>
 				</div>
