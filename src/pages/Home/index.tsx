@@ -22,7 +22,7 @@ const Home = () => {
 			<div className="max-w-screen-xl px-2 mx-auto">
 				<div className="flex flex-col">
 					<div className="text-center max-w-[800px] min-h-[300px] mx-auto my-2">
-						<h2 className="mb-4 text-4xl font-medium tracking-wide md:text-5xl font-display text-primary">
+						<h2 className="mt-2 mb-4 text-4xl leading-snug tracking-wide md:text-5xl font-display text-primary">
 							{lang.getContentCurrentLang({
 								en: "Welcome to SAC",
 								vi: "Chào mừng bạn đến với SAC",
@@ -35,10 +35,12 @@ const Home = () => {
 							})}
 						</p>
 
-						<LanguageButton variant="normal" />
+						<div className="my-2">
+							<LanguageButton variant="normal" />
+						</div>
 					</div>
 				</div>
-				<div className="flex flex-col items-center">
+				<div className="flex flex-col items-center mt-32">
 					<h2 className="mb-8 text-2xl text-center text-primary font-display">
 						{lang.getContentCurrentLang({
 							en: "Explore information about:",

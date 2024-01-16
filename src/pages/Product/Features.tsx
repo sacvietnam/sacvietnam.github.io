@@ -27,7 +27,7 @@ const Features = () => {
 					en: "Overview of Features",
 					vi: "Tổng quan tính năng",
 				})}
-				className="text-3xl text-center lg:text-4xl font-display text-primary"
+				className="text-2xl text-center lg:text-4xl font-display text-primary"
 			/>
 
 			<div className="flex flex-col items-center justify-center my-4">

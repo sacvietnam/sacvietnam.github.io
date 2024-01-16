@@ -13,10 +13,10 @@ const MainLayout = ({ children }: { children: React.ReactElement }) => {
 	return (
 		<div className="text-text">
 			<Header />
-			<main className="container mx-auto min-h-lvh">{children}</main>
+			<main className="mx-auto min-h-lvh">{children}</main>
 			<Footer />
 			<ToTopButton />
-			<ScrollProgressBar/>
+			<ScrollProgressBar />
 		</div>
 	);
 };

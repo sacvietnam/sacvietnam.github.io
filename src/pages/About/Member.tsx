@@ -28,25 +28,41 @@ const Member = ({ member, index, popover }: MemberProps) => {
 			className="w-1/2 p-2 md:w-1/3 lg:w-1/5"
 		>
 			<Popover
-				title={<h4 className="text-xl text-center">{member.name}</h4>}
+				title={
+					<h4 className="text-xl text-center" style={{ color: member.color }}>
+						{member.name}
+					</h4>
+				}
 				trigger="click"
 				className="cursor-pointer"
 				content={
 					popover && isValid ? (
 						<div className="max-w-[400px]">
+							<hr className="mb-2" />
 							<p>
-								<span className="font-semibold text-primary">Interest: </span>
+								<span className="font-semibold" style={{ color: member.color }}>
+									{getContentCurrentLang({ en: "Interest", vi: "Quan tâm" })}:{" "}
+								</span>
 								{getContentCurrentLang(member.interest || emptyContent)}
 							</p>
 							<p>
-								<span className="font-semibold text-primary">
-									Reasons for participation:{" "}
+								<span className="font-semibold" style={{ color: member.color }}>
+									{getContentCurrentLang({
+										en: "Reasons for participation",
+										vi: "Lý do tham gia",
+									})}
+									:{" "}
 								</span>
 								{getContentCurrentLang(member.reasons || emptyContent)}
 							</p>
 						</div>
 					) : (
-						<p>This member doesn't have detail information</p>
+						<p>
+							{getContentCurrentLang({
+								en: "This member doesn't have detail information",
+								vi: "Không có nhiều thông tin về thành viên này",
+							})}
+						</p>
 					)
 				}
 			>

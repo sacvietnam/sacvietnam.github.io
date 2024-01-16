@@ -8,6 +8,7 @@ const Word = styled(motion.span)`
 	display: inline-block;
 	margin-right: 0.25em;
 	white-space: nowrap;
+	line-height: 1.3;
 `;
 
 const Character = styled(motion.span)`

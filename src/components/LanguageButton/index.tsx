@@ -43,7 +43,7 @@ const LanguageButton = ({ variant }: LanguageButtonProps) => {
 					<img
 						src={getContentCurrentLang({ vi: enSrc, en: viSrc })}
 						alt="flag"
-						className="block object-cover w-10 h-5 -translate-y-0.5"
+						className="block object-cover w-10 h-5 -translate-y-0.5 rounded-md"
 					/>
 				</div>
 			</motion.button>

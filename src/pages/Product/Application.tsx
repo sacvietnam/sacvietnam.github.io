@@ -29,7 +29,7 @@ const Application = () => {
 					en: "Overview of Application",
 					vi: "Tổng quan ứng dụng",
 				})}
-				className="text-3xl text-center lg:text-4xl font-display text-primary"
+				className="text-2xl text-center lg:text-4xl font-display text-primary"
 			/>
 			<div className="grid grid-cols-1 gap-0 mt-8 lg:gap-12 lg:grid-cols-3 place-items-center">
 				<div className="flex flex-col justify-around order-2 w-full h-full">

@@ -24,10 +24,6 @@ const InnerDevice = styled.div`
 	position: absolute;
 	z-index: -1;
 	inset: 0;
-	padding: 8px;
-	padding-top: 12px;
-	padding-right: 16px;
-	border-radius: 60px;
 	overflow: hidden;
 `;
 
@@ -54,14 +50,14 @@ const PhoneMockup = () => {
 
 	return (
 		<Device className="w-[200px] lg:w-[300px]">
-			<InnerDevice>
+			<InnerDevice className=" md:px-4 md:py-2.5 p-2.5 py-1 overflow-hidden rounded-[50px] md:rounded-[60px]">
 				<AnimatePresence>
 					<motion.img
 						key={index}
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						src={imgSrc}
-						className="w-full h-full border"
+						className="object-cover w-full h-full border"
 					/>
 				</AnimatePresence>
 			</InnerDevice>
