@@ -5,13 +5,29 @@ import useMobile from "./../../hooks/useMobile";
 import { FiMenu } from "react-icons/fi";
 import Logo from "../Logo";
 import Each from "../../util/Each";
+import useLang, { ContentMultiLang } from "../../hooks/useLang";
 
-const menuItem: { label: string; path: string }[] = [
-	{ label: "The story", path: "/story" },
-	{ label: "The product ", path: "/product" },
-	{ label: "Download ", path: "/download" },
-	{ label: "Meet the team", path: "/about-us" },
-	// { label: "Contact", path: "/contact" },
+const menuItem: { label: ContentMultiLang; path: string }[] = [
+	{
+		label: { en: "Home", vi: "Trang chủ" },
+		path: "/",
+	},
+	{
+		label: { en: "The story", vi: "Câu chuyện" },
+		path: "/story",
+	},
+	{
+		label: { en: "The product", vi: "Sản phẩm" },
+		path: "/product",
+	},
+	{
+		label: { en: "Download", vi: "Tải xuống" },
+		path: "/download",
+	},
+	{
+		label: { en: "Meet the team", vi: "Gặp gỡ đội" },
+		path: "/about-us",
+	},
 ];
 
 const Header = () => {
@@ -21,6 +37,8 @@ const Header = () => {
 	const toggleMenu = () => {
 		setOpen(!isOpen);
 	};
+
+	const { getContentCurrentLang } = useLang();
 
 	return (
 		<div className="container sticky top-0 z-50 p-2 bg-white border-b-2 border-gray-200 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 ">
@@ -50,7 +68,9 @@ const Header = () => {
 										of={menuItem}
 										render={(item) => (
 											<li key={item.path} className="p-2 hoverable-text">
-												<Link to={item.path}>{item.label}</Link>
+												<Link to={item.path}>
+													{getContentCurrentLang(item.label)}
+												</Link>
 											</li>
 										)}
 									/>

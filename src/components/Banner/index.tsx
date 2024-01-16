@@ -7,10 +7,10 @@ const Banner = () => {
 	return (
 		<div className="h-[400px] bg-primary relative flex items-end">
 			<div className="absolute left-0 right-0 text-center text-white top-10 md:top-12">
-				<div className="flex flex-col items-center justify-center gap-0 md:flex-row md:gap-2">
+				<div className="flex flex-col items-center justify-center gap-0 md:mt-4 md:flex-row md:gap-2">
 					<AnimatedText
 						text="Smart Aircon Clothing"
-						className="mb-4 text-4xl tracking-wider md:text-5xl font-display drop-shadow-md"
+						className="mb-4 text-3xl tracking-wider md:text-5xl font-display drop-shadow-md"
 					/>
 					<motion.div
 						drag

@@ -15,10 +15,10 @@
 	},
 	"dependencies": {
 		"@fontsource-variable/overpass": "^5.0.17",
+		"@fontsource/bungee": "^5.0.18",
 		"@fontsource/flow-rounded": "^5.0.18",
 		"@fontsource/monoton": "^5.0.18",
 		"@fontsource/twinkle-star": "^5.0.18",
-		"@fontsource/vina-sans": "^5.0.18",
 		"antd": "^5.12.7",
 		"framer-motion": "^10.16.16",
 		"react": "^18.2.0",

@@ -10,7 +10,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				display: "Vina Sans, sans-serif",
+				display: "Bungee, sans-serif",
 				display2: "Monoton, sans-serif",
 				line: "Flow Rounded, sans-serif",
 				handwriting: "Twinkle Star, sans-serif",

@@ -12,19 +12,29 @@ import beImg from "./resources/be.jpg";
 import gojekImg from "./resources/gojek.jpg";
 import grabImg from "./resources/grab.jpg";
 import beltImg from "../../assets/imgs/belt.png";
+import useLang from "../../hooks/useLang.ts";
 
 const Story = () => {
 	const navigate = useNavigate();
 	const naviToProduct = () => {
 		navigate("/product");
 	};
+
+	const { getContentCurrentLang } = useLang();
+
 	return (
 		<div className="py-20 overflow-hidden">
 			<div className="max-w-screen-xl px-2 mx-auto">
 				<div className="flex flex-col gap-20 min-h-svh">
 					<ConceptBlock
-						title="Let us tell you a story"
-						description="The story that created this product"
+						title={getContentCurrentLang({
+							en: "Let us tell you a story",
+							vi: "Để chúng tôi kể cho bạn 1 câu chuyện",
+						})}
+						description={getContentCurrentLang({
+							en: "The story that created this product",
+							vi: "Câu chuyện đã tạo nên sản phẩm này",
+						})}
 					/>
 					<motion.div
 						className="flex flex-col items-center gap-8 mx-auto text-secondary"
@@ -33,7 +43,13 @@ const Story = () => {
 						animate={{ opacity: 1, y: 0 }}
 					>
 						<FaArrowDownLong className="text-5xl animate-floatVertical" />
-						<motion.h4 className="text-xl">Scroll down to explore.</motion.h4>
+						<motion.h4 className="text-xl">
+							{getContentCurrentLang({
+								en: "Scroll down to explore",
+								vi: "Cuộn xuống để khám phá",
+							})}
+							.
+						</motion.h4>
 					</motion.div>
 				</div>
 
@@ -41,8 +57,14 @@ const Story = () => {
 					<FloatInViewContent
 						firstContent={
 							<TitleNSub
-								title="We are students of Industry University of Ho Chi Minh City, Vietnam."
-								sub="Sophomore and junior students from various majors."
+								title={getContentCurrentLang({
+									en: "We are students of Industry University of Ho Chi Minh City, Vietnam.",
+									vi: "Chúng tôi là sinh viên Trường Đại học Công nghiệp Thành phố Hồ Chí Minh (IUH)",
+								})}
+								sub={getContentCurrentLang({
+									en: "Sophomore and junior students from various majors.",
+									vi: "Sinh viên năm 2, năm 3 thuộc nhiều ngành khác nhau",
+								})}
 							/>
 						}
 						secondContent={<StudentsSVG className="max-w-[100%] w-[400px]" />}
@@ -53,16 +75,28 @@ const Story = () => {
 						}
 						secondContent={
 							<TitleNSub
-								title="We have noticed that,"
-								sub="With year-round hot temperatures, the incidence of heat-related illnesses also increases in major cities."
+								title={getContentCurrentLang({
+									en: "We have noticed that,",
+									vi: "Chúng tôi nhận ra rằng,",
+								})}
+								sub={getContentCurrentLang({
+									en: "With year-round hot temperatures, the incidence of heat-related illnesses also increases in major cities.",
+									vi: "Với nhiệt độ nắng nóng quanh năm, tỉ lệ người bị ảnh hưởng bởi nhiệt độ cao cũng tăng ở các thành phố lớn.",
+								})}
 							/>
 						}
 					/>
 					<FloatInViewContent
 						firstContent={
 							<TitleNSub
-								title="But outside that harsh weather..."
-								sub="Many people are still doing their jobs despite the scorching heat adversely affecting their health."
+								title={getContentCurrentLang({
+									en: "But outside that harsh weather...",
+									vi: "Nhưng bên ngoài thời tiết khắc nghiệt ấy...",
+								})}
+								sub={getContentCurrentLang({
+									en: "Many people are still doing their jobs despite the scorching heat adversely affecting their health.",
+									vi: "Rất nhiều người vẫn đang làm công việc của họ dù cho nhiệt độ cao ảnh hưởng xấu đến sức khỏe của họ.",
+								})}
 							/>
 						}
 						secondContent={
@@ -77,8 +111,14 @@ const Story = () => {
 						direction="vertical"
 						firstContent={
 							<TitleNSub
-								title="Technology drivers"
-								sub="Every day they work outdoors for 8 - 12 hours, even more."
+								title={getContentCurrentLang({
+									en: "Technology drivers",
+									vi: "Những tài xế công nghệ",
+								})}
+								sub={getContentCurrentLang({
+									en: "Every day they work outdoors for 8 - 12 hours, even more.",
+									vi: "Mỗi ngày họ đều làm việc ngoài cái nắng ấy từ 8 đến 12 tiếng, thậm chí là hơn",
+								})}
 							/>
 						}
 						secondContent={
@@ -111,8 +151,14 @@ const Story = () => {
 						firstContent={
 							<div className="py-8">
 								<TitleNSub
-									title="But what about their health?"
-									sub="How can they continue their work in a cool state while still ensuring their health is minimally affected?"
+									title={getContentCurrentLang({
+										en: "But what about their health?",
+										vi: "Nhưng còn sức khỏe của họ thì sao?",
+									})}
+									sub={getContentCurrentLang({
+										en: "How can they continue their work in a cool state while still ensuring their health is minimally affected?",
+										vi: "Làm thế nào để họ tiếp tục công việc trong trạng thái mát mẻ mà vẫn đảm bảo sức khỏe không bị ảnh hưởng?",
+									})}
 								/>
 							</div>
 						}
@@ -124,8 +170,14 @@ const Story = () => {
 						firstContent={
 							<div className="md:max-w-[80%] mx-auto">
 								<TitleNSub
-									title="Resolve this problem"
-									sub="To address the above-mentioned issue, we have created a product: Smart Cooling Belt"
+									title={getContentCurrentLang({
+										en: "Resolve this problem",
+										vi: "Giải quyết vấn đề này",
+									})}
+									sub={getContentCurrentLang({
+										en: "To address the above-mentioned issue, we have created a product: Smart Cooling Belt",
+										vi: "Để giải quyết vấn đề nói trên, chúng tôi đã tạo ra sản phẩm: Đai Điều Hòa Thông Minh",
+									})}
 								/>
 							</div>
 						}
@@ -139,10 +191,24 @@ const Story = () => {
 
 					<div className="flex flex-col gap-4 mx-auto text-center">
 						<h3 className="text-2xl">
-							Hope you have gained a better understanding of our idea. ❤️
+							{getContentCurrentLang({
+								en: "Hope you have gained a better understanding of our idea. ❤️",
+								vi: "Hy vọng bạn đã hiểu hơn về ý tưởng của chúng tôi. ❤️",
+							})}
 						</h3>
-						<p className="text-lg text-secondary">Continue exploring:</p>
-						<TCButton label="The Product" onPress={naviToProduct} />
+						<p className="text-lg text-secondary">
+							{getContentCurrentLang({
+								en: "Continue exploring:",
+								vi: "Tiếp tục khám phá:",
+							})}
+						</p>
+						<TCButton
+							label={getContentCurrentLang({
+								en: "The Product",
+								vi: "Sản phẩm",
+							})}
+							onPress={naviToProduct}
+						/>
 					</div>
 				</div>
 			</div>

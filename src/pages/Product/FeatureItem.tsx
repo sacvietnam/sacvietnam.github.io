@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import AnimatedText from "../../components/AnimatedText";
 import { FeatureObject } from "../../util/type";
+import useLang from "../../hooks/useLang";
 
 type FeatureItemProps = {
 	item: FeatureObject;
@@ -10,6 +11,7 @@ type FeatureItemProps = {
 };
 
 const FeatureItem = ({ item, className, show }: FeatureItemProps) => {
+	const { getContentCurrentLang } = useLang();
 	const [flip, setFlip] = useState<boolean>(false);
 
 	const toggleFlip = () => {
@@ -41,7 +43,7 @@ const FeatureItem = ({ item, className, show }: FeatureItemProps) => {
 							animate={{ scale: 1 }}
 							className="p-2 text-xs text-justify md:text-base text-secondary"
 						>
-							{item.description}
+							{getContentCurrentLang(item.description)}
 						</motion.span>
 					</>
 				) : (

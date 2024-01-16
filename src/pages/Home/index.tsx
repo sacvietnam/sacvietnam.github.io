@@ -2,9 +2,12 @@ import Banner from "../../components/Banner";
 import TCButton from "../../components/TCButton";
 import { useNavigate } from "react-router-dom";
 import ExploreSVG from "./explore.svg?react";
+import useLang from "../../hooks/useLang";
+import LanguageButton from "../../components/LanguageButton";
 
 const Home = () => {
 	const navigate = useNavigate();
+	const lang = useLang();
 
 	const naviToStory = () => {
 		navigate("/story");
@@ -20,22 +23,43 @@ const Home = () => {
 				<div className="flex flex-col">
 					<div className="text-center max-w-[800px] min-h-[300px] mx-auto my-2">
 						<h2 className="mb-4 text-4xl font-medium tracking-wide md:text-5xl font-display text-primary">
-							Welcome to SAC
+							{lang.getContentCurrentLang({
+								en: "Welcome to SAC",
+								vi: "Chào mừng bạn đến với SAC",
+							})}
 						</h2>
-						<p className="max-w-[90%] md:max-w-[80%] mx-auto text-lg md:text-xl text-secondary ">
-							We are designing a product that combines a fabric belt and a mini
-							fan, called an air conditioner belt, with bluetooth (smartphone)
-							connection.
+						<p className="max-w-[90%] md:max-w-[80%] mx-auto text-lg md:text-xl text-secondary mb-4">
+							{lang.getContentCurrentLang({
+								en: "We are designing a product that combines a fabric belt and a mini fan, called an air conditioner belt, with bluetooth (smartphone) connection.",
+								vi: "Chúng tôi đang thiết kế một sản phẩm kết hợp đai vải và quạt mini gọi là đai điều hòa với nhiều tính năng, được điều khiển thông qua kết nối bluetooth (smartphone).",
+							})}
 						</p>
+
+						<LanguageButton variant="normal" />
 					</div>
 				</div>
 				<div className="flex flex-col items-center">
-					<h2 className="mb-8 text-4xl text-primary font-display">
-						explore information about:
+					<h2 className="mb-8 text-2xl text-center text-primary font-display">
+						{lang.getContentCurrentLang({
+							en: "Explore information about:",
+							vi: "Khám phá thông tin về:",
+						})}
 					</h2>
 					<div className="flex gap-4">
-						<TCButton label="The Story" onPress={naviToStory} />
-						<TCButton label="The Product" onPress={naviToProduct} />
+						<TCButton
+							label={lang.getContentCurrentLang({
+								en: "The Story",
+								vi: "Câu chuyện",
+							})}
+							onPress={naviToStory}
+						/>
+						<TCButton
+							label={lang.getContentCurrentLang({
+								en: "The Product",
+								vi: "Sản phẩm",
+							})}
+							onPress={naviToProduct}
+						/>
 					</div>
 					<ExploreSVG width={300} height={250} />
 				</div>

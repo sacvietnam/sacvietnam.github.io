@@ -2,8 +2,11 @@ import Logo from "../Logo";
 import logoTheShark from "../../assets/imgs/logo/thesharks.jpg";
 import logoIUH from "../../assets/imgs/logo/iuh.jpg";
 import { FaFacebook } from "react-icons/fa";
+import useLang from "../../hooks/useLang";
 
 const Footer = () => {
+	const { getContentCurrentLang } = useLang();
+
 	return (
 		<div className="bg-white border-t text-text">
 			<div className="grid max-w-screen-xl grid-cols-1 gap-4 p-2 mx-auto md:grid-cols-2">
@@ -13,7 +16,10 @@ const Footer = () => {
 					</div>
 					<h3 className="font-semibold text-primary">THE SHARKS TEAM</h3>
 					<p className="text-center">
-						Students of Industrial University of Ho Chi Minh City
+						{getContentCurrentLang({
+							en: "Students of Industrial University of Ho Chi Minh City",
+							vi: "Sinh viên Trường Đại học Công nghiệp Thành phố Hồ Chí Minh",
+						})}
 					</p>
 					<div className="flex gap-4">
 						<a href="https://iuh.edu.vn/">
@@ -31,7 +37,9 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className="flex flex-col items-center gap-2 md:items-end">
-					<h3 className="font-semibold">Social Media</h3>
+					<h3 className="font-semibold">
+						{getContentCurrentLang({ en: "Social Media", vi: "Mạng xã hội" })}
+					</h3>
 					<div className="flex gap-4">
 						<a href="https://www.facebook.com/profile.php?id=61555656479452">
 							<FaFacebook className="w-10 h-10 text-primary" />

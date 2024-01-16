@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { MemberInformation } from ".";
 import { Popover } from "antd";
+import useLang from "../../hooks/useLang";
 
 type MemberProps = {
 	member: MemberInformation;
@@ -9,6 +10,14 @@ type MemberProps = {
 };
 
 const Member = ({ member, index, popover }: MemberProps) => {
+	const { getContentCurrentLang } = useLang();
+
+	const emptyContent = { en: "", vi: "" };
+	const isValid: boolean =
+		member.interest != undefined &&
+		member.major != undefined &&
+		member.reasons != undefined;
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: -16 }}
@@ -23,17 +32,17 @@ const Member = ({ member, index, popover }: MemberProps) => {
 				trigger="click"
 				className="cursor-pointer"
 				content={
-					popover ? (
+					popover && isValid ? (
 						<div className="max-w-[400px]">
 							<p>
 								<span className="font-semibold text-primary">Interest: </span>
-								{member.interest}
+								{getContentCurrentLang(member.interest || emptyContent)}
 							</p>
 							<p>
 								<span className="font-semibold text-primary">
 									Reasons for participation:{" "}
 								</span>
-								{member.reasons}
+								{getContentCurrentLang(member.reasons || emptyContent)}
 							</p>
 						</div>
 					) : (
@@ -57,7 +66,7 @@ const Member = ({ member, index, popover }: MemberProps) => {
 			</Popover>
 			<div className="mt-2 text-center">
 				<h4 className="font-semibold text-md md:text-xl">{member.name}</h4>
-				<p>{member.major}</p>
+				<p>{getContentCurrentLang(member.major || emptyContent)}</p>
 			</div>
 		</motion.div>
 	);
