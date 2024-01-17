@@ -9,7 +9,7 @@ const Product = () => {
 			<ProductBanner />
 			<div className="max-w-screen-xl mx-auto">
 				<motion.div>
-					<div className="flex justify-center gap-2 text-2xl text-center md:text-3xl lg:text-4xl font-display2 text-primary">
+					<div className="flex justify-center gap-2 pt-4 text-2xl text-center md:text-3xl lg:text-4xl font-display2 text-primary">
 						<motion.span
 							className="inline-block"
 							initial={{ opacity: 0, x: 80 }}
@@ -49,7 +49,6 @@ const Product = () => {
 			<Features />
 
 			<Application />
-
 		</>
 	);
 };

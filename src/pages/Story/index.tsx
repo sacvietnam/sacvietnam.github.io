@@ -11,8 +11,8 @@ import driverImg from "./resources/driver.jpeg";
 import beImg from "./resources/be.jpg";
 import gojekImg from "./resources/gojek.jpg";
 import grabImg from "./resources/grab.jpg";
-import beltImg from "../../assets/imgs/belt.png";
 import useLang from "../../hooks/useLang.ts";
+import ProductPreview from "../../components/ProductPreview/index.tsx";
 
 const Story = () => {
 	const navigate = useNavigate();
@@ -183,7 +183,7 @@ const Story = () => {
 						}
 						secondContent={
 							<div>
-								<img src={beltImg} className="mx-auto max-w-[50%]" />
+								<ProductPreview />
 							</div>
 						}
 						direction="vertical"

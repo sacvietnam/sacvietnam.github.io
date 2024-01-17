@@ -6,6 +6,8 @@ import { FiMenu } from "react-icons/fi";
 import Logo from "../Logo";
 import Each from "../../util/Each";
 import useLang, { ContentMultiLang } from "../../hooks/useLang";
+import LanguageButton from "../LanguageButton";
+import { Popover } from "antd";
 
 const menuItem: { label: ContentMultiLang; path: string }[] = [
 	{
@@ -74,6 +76,17 @@ const Header = () => {
 											</li>
 										)}
 									/>
+									<Popover
+										trigger="hover"
+										content={getContentCurrentLang({
+											en: "Chuyển sang Tiếng Việt",
+											vi: "Switch to English",
+										})}
+									>
+										<li>
+											<LanguageButton variant="round" />
+										</li>
+									</Popover>
 								</ul>
 							</div>
 						</motion.div>

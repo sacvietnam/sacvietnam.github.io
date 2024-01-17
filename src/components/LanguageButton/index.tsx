@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import useLang from "../../hooks/useLang";
 import viSrc from "./VI.png";
 import enSrc from "./EN.png";
-import { useNavigate } from "react-router-dom";
 
 type LanguageButtonProps = {
 	variant: "normal" | "round";
@@ -11,13 +10,11 @@ type LanguageButtonProps = {
 const LanguageButton = ({ variant }: LanguageButtonProps) => {
 	const { getContentCurrentLang, control } = useLang();
 	const [currentLang, setLang] = control;
-	const navigate = useNavigate();
 
 	const onPress = () => {
 		const nextLang = currentLang == "en" ? "vi" : "en";
 		setLang(nextLang);
 
-		navigate("/");
 		window.location.reload();
 	};
 
