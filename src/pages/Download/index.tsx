@@ -9,6 +9,18 @@ import Each from "../../util/Each";
 import appImgs from "../../assets/imgs/appImgs";
 import useLang from "../../hooks/useLang";
 
+const appInfo: {
+	releaseDate: string;
+	version: string;
+	size: string;
+	apk: string;
+} = {
+	releaseDate: "17/01/2024",
+	version: "1.1",
+	size: "45mb",
+	apk: "/apk/SAC Remote 1.1.apk",
+};
+
 const Download = () => {
 	const [isClicked, setClicked] = useState<boolean>(false);
 	const { getContentCurrentLang } = useLang();
@@ -54,7 +66,19 @@ const Download = () => {
 							<FcAndroidOs className="text-5xl" />
 						</div>
 						<p>
-							{getContentCurrentLang({ en: "Size", vi: "Kích thước" })}: ~38mb
+							{getContentCurrentLang({ en: "Version", vi: "Phiên bản" })}:{" "}
+							{appInfo.version}
+						</p>
+						<p>
+							{getContentCurrentLang({
+								en: "Release Date",
+								vi: "Ngày phát hành",
+							})}
+							: {appInfo.releaseDate}
+						</p>
+						<p>
+							{getContentCurrentLang({ en: "Size", vi: "Kích thước" })}:{" "}
+							{appInfo.size}
 						</p>
 						{isClicked ? (
 							<button
@@ -71,7 +95,7 @@ const Download = () => {
 							<Link
 								onClick={() => setClicked(true)}
 								download
-								to="/apk/SAC Remote.apk"
+								to={appInfo.apk}
 								target="_blank"
 								className="mx-auto md:mx-0 w-fit"
 							>

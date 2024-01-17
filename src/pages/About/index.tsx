@@ -143,7 +143,7 @@ const informations: MemberInformation[] = [
 	},
 	{
 		img: img6,
-		color: "#009688",
+		color: "#7E57C2",
 		name: "Lê Thị Bình Nguyên",
 		major: {
 			en: "Marketing",
@@ -160,7 +160,7 @@ const informations: MemberInformation[] = [
 	},
 	{
 		img: img7,
-		color: "#F44336",
+		color: "#009688",
 		name: "Lê Thị Thu Thảo",
 		major: {
 			en: "E-commerce",
