@@ -38,7 +38,7 @@ const LanguageButton = ({ variant }: LanguageButtonProps) => {
 							en: "Chuyển sang Tiếng Việt",
 						})}
 					<img
-						src={getContentCurrentLang({ vi: enSrc, en: viSrc })}
+						src={getContentCurrentLang(variant == "normal" ? { vi: enSrc, en: viSrc } : { vi: viSrc, en: enSrc})}
 						alt="flag"
 						className="block object-cover w-10 h-5 -translate-y-0.5 rounded-md"
 					/>

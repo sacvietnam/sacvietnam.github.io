@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import beltSrc1 from "../../assets/imgs/product/belt.png";
 import beltSrc2 from "../../assets/imgs/product/belt-top.png";
@@ -16,11 +16,7 @@ const ProductPreview = () => {
 	};
 
 	return (
-		<motion.div
-			initial={{ rotateY: 90, scale: 0.8 }}
-			animate={{ rotateY: 0, scale: 1 }}
-			transition={{ duration: 1 }}
-		>
+		<motion.div>
 			<AnimatePresence>
 				<motion.img
 					drag

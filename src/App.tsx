@@ -7,7 +7,7 @@ import "@fontsource/flow-rounded";
 import "@fontsource-variable/overpass";
 import "@fontsource/monoton";
 
-const router = createHashRouter(routesObject, { basename: "/" });
+const router = createHashRouter(routesObject);
 export default function App() {
 	return (
 		<React.StrictMode>

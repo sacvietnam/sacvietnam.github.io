@@ -18,7 +18,7 @@ const appInfo: {
 	releaseDate: "17/01/2024",
 	version: "1.1",
 	size: "45mb",
-	apk: "/apk/SAC Remote 1.1.apk",
+	apk: "https://sacvietnam.github.io/apk/SAC%20Remote%201.1.apk",
 };
 
 const Download = () => {
@@ -92,10 +92,9 @@ const Download = () => {
 								})}
 							</button>
 						) : (
-							<Link
+							<a
 								onClick={() => setClicked(true)}
-								download
-								to={appInfo.apk}
+								href="/apk/SAC Remote 1.1.apk"
 								target="_blank"
 								className="mx-auto md:mx-0 w-fit"
 							>
@@ -106,7 +105,7 @@ const Download = () => {
 										vi: "Tải xuống cho Android",
 									})}
 								</button>
-							</Link>
+							</a>
 						)}
 					</div>
 				</div>
