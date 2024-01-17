@@ -29,7 +29,7 @@ const ProductBanner = () => {
 						whileTap={{ rotate: 6 }}
 						src={beltSrc}
 						alt="belt"
-						className="relative z-10 w-full  max-w-[40%] mx-auto cursor-grab active:cursor-grabbing"
+						className="relative z-10 w-full max-h-[500px]  max-w-[40%] mx-auto cursor-grab active:cursor-grabbing"
 					/>
 				</motion.div>
 			</div>
