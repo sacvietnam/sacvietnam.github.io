@@ -16,7 +16,7 @@ const ProductPreview = () => {
 	};
 
 	useEffect(() => {
-		const toId = setTimeout(onPress, 3000);
+		const toId = setTimeout(onPress, 5 * 1000);
 
 		return () => {
 			clearTimeout(toId);
