@@ -44,13 +44,18 @@ const Application = () => {
 					))}
 				</div>
 				<div className="order-1 lg:order-2 h-fit">
-					<PhoneMockup />
 					<div className="flex justify-center my-4">
-						<TCButton
-							label={getContentCurrentLang({ en: "Show All", vi: "Hiện hết" })}
-							onPress={toggleShowAll}
-						/>
+						{!showAll && (
+							<TCButton
+								label={getContentCurrentLang({
+									en: "Show All",
+									vi: "Hiện hết",
+								})}
+								onPress={toggleShowAll}
+							/>
+						)}
 					</div>
+					<PhoneMockup />
 				</div>
 				<div className="flex flex-col justify-around order-3 w-full h-full">
 					{secondBlockFetures.map((item) => (

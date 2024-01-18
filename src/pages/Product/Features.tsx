@@ -31,18 +31,22 @@ const Features = () => {
 			/>
 
 			<div className="flex flex-col items-center justify-center my-4">
-				<TCButton
-					label={getContentCurrentLang({ en: "Show All", vi: "Hiện hết" })}
-					onPress={toggleShowAll}
-				/>
-				<p className="mt-2 text-center text-secondary">
-					(
-					{getContentCurrentLang({
-						en: "Press on the features for more details",
-						vi: "Chạm vào các thẻ để đọc chi tiết",
-					})}
-					)
-				</p>
+				{!showAll && (
+					<>
+						<TCButton
+							label={getContentCurrentLang({ en: "Show All", vi: "Hiện hết" })}
+							onPress={toggleShowAll}
+						/>
+						<p className="mt-2 text-center text-secondary">
+							(
+							{getContentCurrentLang({
+								en: "Press on the features for more details",
+								vi: "Chạm vào các thẻ để đọc chi tiết",
+							})}
+							)
+						</p>
+					</>
+				)}
 			</div>
 			<div className="flex flex-wrap mt-8">
 				<Each

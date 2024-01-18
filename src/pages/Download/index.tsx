@@ -1,7 +1,6 @@
 import { FcAndroidOs } from "react-icons/fc";
 import { MdOutlineFileDownload } from "react-icons/md";
 import appIconSrc from "../../assets/imgs/product/app_icon.png";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Image, Spin } from "antd";
 import { motion } from "framer-motion";

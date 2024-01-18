@@ -41,7 +41,11 @@ const Member = ({ member, index, popover }: MemberProps) => {
 							<hr className="mb-2" />
 							<p>
 								<span className="font-semibold" style={{ color: member.color }}>
-									{getContentCurrentLang({ en: "Interest", vi: "Quan tâm" })}:{" "}
+									{getContentCurrentLang({
+										en: "Interest",
+										vi: "Lĩnh vực quan tâm",
+									})}
+									:{" "}
 								</span>
 								{getContentCurrentLang(member.interest || emptyContent)}
 							</p>

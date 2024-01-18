@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import beltSrc1 from "../../assets/imgs/product/belt.png";
 import beltSrc2 from "../../assets/imgs/product/belt-top.png";
@@ -14,6 +14,14 @@ const ProductPreview = () => {
 			return prev >= imgSrcs.length - 1 ? 0 : prev + 1;
 		});
 	};
+
+	useEffect(() => {
+		const toId = setTimeout(onPress, 3000);
+
+		return () => {
+			clearTimeout(toId);
+		};
+	}, [index]);
 
 	return (
 		<motion.div>
