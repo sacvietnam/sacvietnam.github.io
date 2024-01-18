@@ -21,9 +21,11 @@ export default function App() {
 			</React.StrictMode>
 
 			{/* Loading first */}
-			<img src={product1} />
-			<img src={product2} />
-			<img src={product3} />
+			<div className="hidden">
+				<img src={product1} />
+				<img src={product2} />
+				<img src={product3} />
+			</div>
 		</>
 	);
 }
