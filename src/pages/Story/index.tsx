@@ -80,7 +80,7 @@ const Story = () => {
 									vi: "Chúng tôi nhận ra rằng,",
 								})}
 								sub={getContentCurrentLang({
-									en: "With year-round hot temperatures, the incidence of heat-related illnesses also increases in major cities.",
+									en: "With the year-round prolonged hot temperatures, the rate of workers affected by high temperatures is increasing in major cities.",
 									vi: "Với nhiệt độ nắng nóng kéo dài quanh năm, tỉ lệ người lao động bị ảnh hưởng bởi nhiệt độ cao ngày càng tăng ở các thành phố lớn.",
 								})}
 							/>
@@ -94,7 +94,7 @@ const Story = () => {
 									vi: "Nhưng bên ngoài thời tiết khắc nghiệt ấy...",
 								})}
 								sub={getContentCurrentLang({
-									en: "Many people are still doing their jobs despite the scorching heat adversely affecting their health.",
+									en: "Despite the adverse effects of hot weather on health, a significant number of workers still have to continue performing outdoor tasks.",
 									vi: "Bất chấp tác động khắc nghiệt của thời tiết nóng đến sức khỏe, một số lượng đáng kể người lao động vẫn phải tiếp tục thực hiện công việc ngoài trời.",
 								})}
 							/>
@@ -112,11 +112,11 @@ const Story = () => {
 						firstContent={
 							<TitleNSub
 								title={getContentCurrentLang({
-									en: "Technology drivers",
+									en: "The Tech Drivers",
 									vi: "Những tài xế công nghệ",
 								})}
 								sub={getContentCurrentLang({
-									en: "Every day they work outdoors for 8 - 12 hours, even more.",
+									en: "Every day, they have to work outdoors under that sunlight for 8 to 12 hours, and sometimes even more.",
 									vi: "Mỗi ngày, họ phải làm việc ngoài trời dưới ánh nắng đó từ 8 đến 12 tiếng, và đôi khi cả hơn thế.",
 								})}
 							/>
