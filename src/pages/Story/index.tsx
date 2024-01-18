@@ -81,7 +81,7 @@ const Story = () => {
 								})}
 								sub={getContentCurrentLang({
 									en: "With year-round hot temperatures, the incidence of heat-related illnesses also increases in major cities.",
-									vi: "Với nhiệt độ nắng nóng quanh năm, tỉ lệ người bị ảnh hưởng bởi nhiệt độ cao cũng tăng ở các thành phố lớn.",
+									vi: "Với nhiệt độ nắng nóng kéo dài quanh năm, tỉ lệ người lao động bị ảnh hưởng bởi nhiệt độ cao ngày càng tăng ở các thành phố lớn.",
 								})}
 							/>
 						}
@@ -95,7 +95,7 @@ const Story = () => {
 								})}
 								sub={getContentCurrentLang({
 									en: "Many people are still doing their jobs despite the scorching heat adversely affecting their health.",
-									vi: "Rất nhiều người vẫn đang làm công việc của họ dù cho nhiệt độ cao ảnh hưởng xấu đến sức khỏe của họ.",
+									vi: "Bất chấp tác động khắc nghiệt của thời tiết nóng đến sức khỏe, một số lượng đáng kể người lao động vẫn phải tiếp tục thực hiện công việc ngoài trời.",
 								})}
 							/>
 						}
@@ -117,7 +117,7 @@ const Story = () => {
 								})}
 								sub={getContentCurrentLang({
 									en: "Every day they work outdoors for 8 - 12 hours, even more.",
-									vi: "Mỗi ngày họ đều làm việc ngoài cái nắng ấy từ 8 đến 12 tiếng, thậm chí là hơn",
+									vi: "Mỗi ngày, họ phải làm việc ngoài trời dưới ánh nắng đó từ 8 đến 12 tiếng, và đôi khi cả hơn thế.",
 								})}
 							/>
 						}

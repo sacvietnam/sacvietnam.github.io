@@ -43,7 +43,7 @@ const Header = () => {
 	const { getContentCurrentLang } = useLang();
 
 	return (
-		<div className="container sticky top-0 z-50 p-2 bg-white border-b-2 border-gray-200 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 ">
+		<div className="sticky top-0 z-50 p-2 bg-white border-b-2 border-gray-200 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 ">
 			<div className="flex flex-col justify-between max-w-screen-xl mx-auto md:flex-row md:items-center ">
 				<div className="flex items-center justify-between">
 					<Logo />
