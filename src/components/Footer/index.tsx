@@ -8,7 +8,7 @@ const Footer = () => {
 	const { getContentCurrentLang } = useLang();
 
 	return (
-		<div className="bg-white border-t text-text">
+		<footer className="bg-white border-t text-text">
 			<div className="grid max-w-screen-xl grid-cols-1 gap-4 p-2 mx-auto md:grid-cols-2">
 				<div className="flex flex-col items-center gap-2 md:items-start">
 					<div className="items-center">
@@ -50,7 +50,7 @@ const Footer = () => {
 			<div className="text-center text-white p-1/2 bg-primary">
 				<span>2024 The Sharks Team</span>
 			</div>
-		</div>
+		</footer>
 	);
 };
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useMobile from "./../../hooks/useMobile";
 import { FiMenu } from "react-icons/fi";
 import Logo from "../Logo";
@@ -43,7 +43,7 @@ const Header = () => {
 	const { getContentCurrentLang } = useLang();
 
 	return (
-		<div className="sticky top-0 z-50 p-2 bg-white border-b-2 border-gray-200 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 ">
+		<header className="sticky top-0 z-50 p-2 bg-white border-b-2 border-gray-200 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 ">
 			<div className="flex flex-col justify-between max-w-screen-xl mx-auto md:flex-row md:items-center ">
 				<div className="flex items-center justify-between">
 					<Logo />
@@ -61,7 +61,7 @@ const Header = () => {
 							animate={{ opacity: 1, height: "auto" }}
 							exit={{ height: 0, opacity: 0 }}
 						>
-							<div>
+							<nav>
 								<ul
 									className="flex flex-col items-center justify-center gap-8 pt-4 font-bold md:flex-row md:pt-0"
 									onClick={toggleMenu}
@@ -70,9 +70,18 @@ const Header = () => {
 										of={menuItem}
 										render={(item) => (
 											<li key={item.path} className="p-2 hoverable-text">
-												<Link to={item.path}>
+												<NavLink
+													to={item.path}
+													className={({ isActive, isPending }) =>
+														isPending
+															? "pending text-secondary"
+															: isActive
+															? "active text-primary"
+															: ""
+													}
+												>
 													{getContentCurrentLang(item.label)}
-												</Link>
+												</NavLink>
 											</li>
 										)}
 									/>
@@ -88,12 +97,12 @@ const Header = () => {
 										</li>
 									</Popover>
 								</ul>
-							</div>
+							</nav>
 						</motion.div>
 					)}
 				</AnimatePresence>
 			</div>
-		</div>
+		</header>
 	);
 };
 
