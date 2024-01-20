@@ -63,9 +63,11 @@ const routesObject: RouteObject[] = routes.map((route) => {
 		element: (
 			<Suspense
 				fallback={
-					<div className="container mx-auto">
-						<Spin />
-					</div>
+					<MainLayout>
+						<div className="container flex items-center justify-center mx-auto w-lvw h-lvh">
+							<Spin />
+						</div>
+					</MainLayout>
 				}
 			>
 				{element}
