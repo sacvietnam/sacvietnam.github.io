@@ -1,1 +1,0 @@
-const s="/assets/1-1ed12b0c.jpg",t="/assets/2-eea13f37.jpg",g="/assets/3-108ea1a6.jpg",a="/assets/4-7b3ea015.jpg",e="/assets/5-5dcf9f9c.jpg",c="/assets/5_1-757e7908.jpg",p="/assets/6-4b195508.jpg",o="/assets/7-eba19357.jpg",m=[s,t,g,a,e,c,p,o];export{m as a};
