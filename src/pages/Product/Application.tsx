@@ -77,7 +77,10 @@ export default Application;
 
 const appFeatures: FeatureObject[] = [
 	{
-		name: "Monitor Status",
+		name: {
+			en: "Monitor Status",
+			vi: "Theo dõi trạng thái",
+		},
 		description: {
 			en: "Directly monitor the device status: battery level, device power source, temperature, and humidity from the device's sensors.",
 			vi: "Theo dõi trực tiếp trạng thái thiết bị: lượng pin, nguồn, nhiệt độ và độ ẩm từ cảm biến thiết bị.",
@@ -85,7 +88,10 @@ const appFeatures: FeatureObject[] = [
 		Icon: IoIosInformationCircleOutline,
 	},
 	{
-		name: "Device control",
+		name: {
+			en: "Device control",
+			vi: "Điều khiển thiết bị",
+		},
 		description: {
 			en: "Power on/off the device, adjust fan speed, set up other automatic on/off features.",
 			vi: "Bật/tắt nguồn thiết bị, thay đổi tốc độ quạt, thiết lập các tính năng tự động.",
@@ -93,7 +99,10 @@ const appFeatures: FeatureObject[] = [
 		Icon: RiRemoteControlLine,
 	},
 	{
-		name: "Offline operation",
+		name: {
+			en: "Offline operation",
+			vi: "Không cần kết nối mạng",
+		},
 		description: {
 			en: "Utilizing BLE (Bluetooth Low Energy) helps save battery power.",
 			vi: "Ứng dụng BLE (Bluetooth Low Energy) để tiết kiệm năng lượng.",
@@ -101,7 +110,10 @@ const appFeatures: FeatureObject[] = [
 		Icon: LiaBluetooth,
 	},
 	{
-		name: "Lightweight",
+		name: {
+			en: "Lightweight",
+			vi: "Nhỏ gọn",
+		},
 		description: {
 			en: "The app takes up very little storage space on your phone.",
 			vi: "Dung lượng gọn nhẹ, không chiếm nhiều dung lượng điện thoại của bạn.",

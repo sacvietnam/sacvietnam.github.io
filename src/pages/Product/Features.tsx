@@ -69,50 +69,68 @@ export default Features;
 
 const features: FeatureObject[] = [
 	{
-		name: "Body Cooling",
+		name: {
+			en: "Body Cooling",
+			vi: "Làm mát cơ thể",
+		},
 		description: {
 			en: "With 3 different fan speeds, you won't have to worry about getting hot.",
-			vi: "Với 3 chế độ quạt tùy chọn, bạn không phải lo về vấn đề nóng bức",
+			vi: "Với 3 chế độ quạt tùy chọn, bạn không phải lo về vấn đề nóng bức.",
 		},
 		Icon: PiWindDuotone,
 	},
 	{
-		name: "Body Temp & Humidity",
+		name: {
+			en: "Body Temp & Humidity",
+			vi: "Nhiệt & độ ẩm cơ thể",
+		},
 		description: {
 			en: "Monitor the temperature and humidity inside your clothing to better protect yourself.",
-			vi: "Theo dõi nhiệt độ và độ ẩm bên trong trang phục của bạn để bảo vệ bản thân tốt hơn",
+			vi: "Theo dõi nhiệt độ và độ ẩm bên trong trang phục của bạn để bảo vệ bản thân tốt hơn.",
 		},
 		Icon: MdOutlineMonitorHeart,
 	},
 	{
-		name: "Smart Design",
+		name: {
+			en: "Smart Design",
+			vi: "Làm mát cơ thể",
+		},
 		description: {
 			en: "It can be disassembled & cleaned and can be paired with various types of clothing, suitable even for those who have to wear uniforms for work.",
-			vi: "Dễ dàng tháo rời & vệ sinh và có thể sử dụng kèm với nhiều loại trang phục, cực kỳ phù hợp với những người phải mặc đồng phục để làm việc",
+			vi: "Dễ dàng tháo rời & vệ sinh và có thể sử dụng kèm với nhiều loại trang phục, cực kỳ phù hợp với những người phải mặc đồng phục để làm việc.",
 		},
 		Icon: MdOutlineDesignServices,
 	},
 	{
-		name: "Control via smartphone",
+		name: {
+			en: "Control via smartphone",
+			vi: "Điều khiển với smartphone",
+		},
 		description: {
 			en: "Connect to the phone to monitor body status, device status, and customize the device through Bluetooth.",
-			vi: "Kết nối với điện thoại thông minh để theo dõi trạng thái cơ thể, thiết bị và tùy chỉnh thiết bị ",
+			vi: "Kết nối với điện thoại thông minh để theo dõi trạng thái cơ thể, thiết bị và tùy chỉnh thiết bị.",
 		},
 		Icon: FaMobileAlt,
 	},
 	{
-		name: "Auto-adjustment",
+		name: {
+			en: "Auto-adjustment",
+			vi: "Tự động điều chỉnh",
+		},
 		description: {
 			en: "Based on your body's condition, the device will provide settings tailored to your state.",
-			vi: "Dựa trên trạng thái cơ thể, thiết bị sẽ cung cấp thiết lập phù hợp",
+			vi: "Dựa trên trạng thái cơ thể, thiết bị sẽ cung cấp thiết lập phù hợp.",
 		},
 		Icon: TbFocusAuto,
 	},
 	{
-		name: "Long battery life",
+		name: {
+			en: "Long battery life",
+			vi: "Thời lượng pin dài",
+		},
 		description: {
-			en: "Long battery life allows you to work outdoors all day.",
-			vi: "Với thường lượng pin dài giúp bạn làm việc ngoài trời cả ngày.",
+			en: "The battery usually lasts about 6 - 8 hours to help you work outdoors all day.",
+			vi: "Với thường lượng pin dài khoảng 6 - 8 tiếng giúp bạn làm việc ngoài trời cả ngày.",
 		},
 		Icon: LuBatteryFull,
 	},

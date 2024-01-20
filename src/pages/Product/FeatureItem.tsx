@@ -22,7 +22,7 @@ const FeatureItem = ({ item, className, show }: FeatureItemProps) => {
 		<motion.div
 			className={className}
 			onClick={show ? undefined : toggleFlip}
-			key={item.name}
+			key={item.name.en}
 			initial={{ rotateY: 90 }}
 			animate={{ rotateY: 0 }}
 		>
@@ -32,11 +32,11 @@ const FeatureItem = ({ item, className, show }: FeatureItemProps) => {
 			>
 				{show || flip ? (
 					<>
-						<div className="flex items-center justify-between gap-1 text-xs font-semibold md:gap-2 md:text-xl text-primary">
+						<div className="flex items-center gap-2 px-2 text-xs font-semibold md:gap-2 md:text-xl text-primary">
 							<div className="-translate-y-0.5">
 								<item.Icon />
 							</div>
-							<AnimatedText text={item.name} />
+							<AnimatedText text={getContentCurrentLang(item.name)} />
 						</div>
 						<motion.span
 							initial={{ scale: 0.4 }}
@@ -49,7 +49,9 @@ const FeatureItem = ({ item, className, show }: FeatureItemProps) => {
 				) : (
 					<>
 						{<item.Icon className="text-4xl text-secondary" />}
-						<h3 className="text-sm font-semibold md:text-xl">{item.name}</h3>
+						<h3 className="text-sm font-semibold md:text-xl">
+							{getContentCurrentLang(item.name)}
+						</h3>
 					</>
 				)}
 			</motion.div>

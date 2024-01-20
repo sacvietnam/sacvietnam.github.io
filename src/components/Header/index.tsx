@@ -69,20 +69,20 @@ const Header = () => {
 									<Each
 										of={menuItem}
 										render={(item) => (
-											<li key={item.path} className="p-2 hoverable-text">
+											<motion.li whileTap={{scale: 0.9}} key={item.path} className="p-2 hoverable-text">
 												<NavLink
 													to={item.path}
 													className={({ isActive, isPending }) =>
 														isPending
 															? "pending text-secondary"
 															: isActive
-															? "active text-primary"
+															? "active text-primary font-display font-medium"
 															: ""
 													}
 												>
 													{getContentCurrentLang(item.label)}
 												</NavLink>
-											</li>
+											</motion.li>
 										)}
 									/>
 									<Popover
