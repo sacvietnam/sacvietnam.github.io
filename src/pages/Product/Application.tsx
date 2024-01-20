@@ -1,15 +1,15 @@
+import FeatureItem from "./FeatureItem";
+import { useState } from "react";
 import AnimatedText from "../../components/AnimatedText";
 import PhoneMockup from "../../components/PhoneMockup";
+import TCButton from "../../components/TCButton";
+import useLang from "../../hooks/useLang";
 import { FeatureObject } from "../../util/type";
 
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { RiRemoteControlLine } from "react-icons/ri";
 import { LiaBluetooth } from "react-icons/lia";
 import { MdLineWeight } from "react-icons/md";
-import FeatureItem from "./FeatureItem";
-import { useState } from "react";
-import TCButton from "../../components/TCButton";
-import useLang from "../../hooks/useLang";
 
 const Application = () => {
 	const [showAll, setShowAll] = useState<boolean>(false);

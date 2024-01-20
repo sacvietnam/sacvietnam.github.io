@@ -1,11 +1,13 @@
+import { Spin } from "antd";
+import React, { Suspense } from "react";
 import { RouteObject } from "react-router-dom";
-import About from "../pages/About";
-import Download from "../pages/Download";
-import Home from "../pages/Home";
-import Product from "../pages/Product";
-import Story from "../pages/Story";
-import Error from "../pages/Error";
-import MainLayout from "../layouts/MainLayout";
+const About = React.lazy(() => import("../pages/About"));
+const Download = React.lazy(() => import("../pages/Download"));
+const Home = React.lazy(() => import("../pages/Home"));
+const Product = React.lazy(() => import("../pages/Product"));
+const Story = React.lazy(() => import("../pages/Story"));
+const Error = React.lazy(() => import("../pages/Error"));
+const MainLayout = React.lazy(() => import("../layouts/MainLayout"));
 
 type Props = {
 	children?: React.ReactNode;
@@ -58,7 +60,17 @@ const routesObject: RouteObject[] = routes.map((route) => {
 
 	return {
 		path: route.path,
-		element: element,
+		element: (
+			<Suspense
+				fallback={
+					<div className="container mx-auto">
+						<Spin />
+					</div>
+				}
+			>
+				{element}
+			</Suspense>
+		),
 		errorElement: route.path === "/" ? <Error /> : null,
 		id: route.path,
 	};

@@ -1,6 +1,6 @@
 import Logo from "../Logo";
-import logoTheShark from "../../assets/imgs/logo/thesharks.jpg";
-import logoIUH from "../../assets/imgs/logo/iuh.jpg";
+import logoTheShark from "../../assets/imgs/logo/thesharks.png";
+import logoIUH from "../../assets/imgs/logo/iuh.png";
 import { FaFacebook } from "react-icons/fa";
 import useLang from "../../hooks/useLang";
 

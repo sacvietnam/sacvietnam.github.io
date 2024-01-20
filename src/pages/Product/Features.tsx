@@ -3,6 +3,7 @@ import Each from "../../util/Each";
 import AnimatedText from "../../components/AnimatedText";
 import FeatureItem from "./FeatureItem";
 import TCButton from "../../components/TCButton";
+import useLang from "../../hooks/useLang";
 
 import { PiWindDuotone } from "react-icons/pi";
 import { MdOutlineMonitorHeart, MdOutlineDesignServices } from "react-icons/md";
@@ -10,7 +11,6 @@ import { FaMobileAlt } from "react-icons/fa";
 import { TbFocusAuto } from "react-icons/tb";
 import { LuBatteryFull } from "react-icons/lu";
 import { FeatureObject } from "../../util/type";
-import useLang from "../../hooks/useLang";
 
 const Features = () => {
 	const [showAll, setShowAll] = useState<boolean>(false);

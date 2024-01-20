@@ -20,7 +20,7 @@ export default function App() {
 				<RouterProvider router={router} />
 			</React.StrictMode>
 
-			{/* Loading first */}
+			{/* Loading first for UX */}
 			<div className="hidden">
 				<img src={product1} />
 				<img src={product2} />

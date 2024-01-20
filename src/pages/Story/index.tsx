@@ -5,14 +5,15 @@ import { useNavigate } from "react-router-dom";
 import FloatInViewContent from "../../components/FloatInViewContent";
 import TitleNSub from "../../components/TitleNSub.tsx";
 import TCButton from "../../components/TCButton/index.tsx";
+import useLang from "../../hooks/useLang.ts";
+import ProductPreview from "../../components/ProductPreview/index.tsx";
+
 import StudentsSVG from "./resources/students.svg?react";
 import hotImg from "./resources/hot.jpg";
 import driverImg from "./resources/driver.jpeg";
 import beImg from "./resources/be.jpg";
 import gojekImg from "./resources/gojek.jpg";
 import grabImg from "./resources/grab.jpg";
-import useLang from "../../hooks/useLang.ts";
-import ProductPreview from "../../components/ProductPreview/index.tsx";
 
 const Story = () => {
 	const navigate = useNavigate();

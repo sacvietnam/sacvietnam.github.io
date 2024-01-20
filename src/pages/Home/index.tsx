@@ -1,9 +1,9 @@
 import Banner from "../../components/Banner";
 import TCButton from "../../components/TCButton";
 import { useNavigate } from "react-router-dom";
-import ExploreSVG from "./explore.svg?react";
 import useLang from "../../hooks/useLang";
 import LanguageButton from "../../components/LanguageButton";
+import ExploreSVG from "./explore.svg?react";
 
 const Home = () => {
 	const navigate = useNavigate();
