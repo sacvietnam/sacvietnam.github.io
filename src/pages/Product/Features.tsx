@@ -93,7 +93,7 @@ const features: FeatureObject[] = [
 	{
 		name: {
 			en: "Smart Design",
-			vi: "Làm mát cơ thể",
+			vi: "Thiết kế thông minh",
 		},
 		description: {
 			en: "It can be disassembled & cleaned and can be paired with various types of clothing, suitable even for those who have to wear uniforms for work.",

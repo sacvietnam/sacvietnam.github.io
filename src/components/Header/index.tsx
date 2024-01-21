@@ -57,8 +57,8 @@ const Header = () => {
 				<AnimatePresence>
 					{(!isMobile || isOpen) && (
 						<motion.div
-							initial={{ opacity: 0, height: 0 }}
-							animate={{ opacity: 1, height: "auto" }}
+							initial={isMobile && { opacity: 0, height: 0 }}
+							animate={isMobile && { opacity: 1, height: "auto" }}
 							exit={{ height: 0, opacity: 0 }}
 						>
 							<nav>
@@ -69,7 +69,11 @@ const Header = () => {
 									<Each
 										of={menuItem}
 										render={(item) => (
-											<motion.li whileTap={{scale: 0.9}} key={item.path} className="p-2 hoverable-text">
+											<motion.li
+												whileTap={{ scale: 0.9 }}
+												key={item.path}
+												className="p-2 hoverable-text"
+											>
 												<NavLink
 													to={item.path}
 													className={({ isActive, isPending }) =>
