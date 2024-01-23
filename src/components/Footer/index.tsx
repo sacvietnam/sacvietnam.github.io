@@ -1,8 +1,10 @@
 import Logo from "../Logo";
 import logoTheShark from "../../assets/imgs/logo/thesharks.png";
 import logoIUH from "../../assets/imgs/logo/iuh.png";
-import { FaFacebook } from "react-icons/fa";
 import useLang from "../../hooks/useLang";
+
+import { FaFacebook } from "react-icons/fa";
+import { FaPhoneVolume } from "react-icons/fa6";
 
 const Footer = () => {
 	const { getContentCurrentLang } = useLang();
@@ -21,6 +23,18 @@ const Footer = () => {
 							vi: "Sinh viên Trường Đại học Công nghiệp Thành phố Hồ Chí Minh",
 						})}
 					</p>
+					<div className="flex items-center gap-1 text-secondary group">
+						<FaPhoneVolume className="transition-transform group-hover:-rotate-12 group-hover:text-primary" />
+						<h3 className="font-semibold ">
+							Hotline:{" "}
+							<a
+								className="transition-opacity text-primary hover:opacity-75"
+								href="tel:0886389890"
+							>
+								0886389890
+							</a>
+						</h3>
+					</div>
 					<div className="flex gap-4">
 						<a href="https://iuh.edu.vn/">
 							<img

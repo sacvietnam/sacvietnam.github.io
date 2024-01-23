@@ -39,7 +39,7 @@ const Home = () => {
 							<LanguageButton variant="normal" />
 						</div>
 
-						<div className="h-[400px] lg:h-[500px] max-h-[80vh] mt-16">
+						<div className="h-[400px] lg:h-[500px] max-h-[80vh] mt-16 border shadow-sm">
 							<iframe
 								width="100%"
 								height="100%"
