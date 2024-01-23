@@ -38,9 +38,20 @@ const Home = () => {
 						<div className="my-2">
 							<LanguageButton variant="normal" />
 						</div>
+
+						<div className="h-[400px] lg:h-[500px] max-h-[80vh] mt-16">
+							<iframe
+								width="100%"
+								height="100%"
+								src="https://www.youtube-nocookie.com/embed/rIX9grP3Swk?si=ds9eq90OtEpQvFDl"
+								title="SAC Story"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowFullScreen
+							></iframe>
+						</div>
 					</div>
 				</div>
-				<div className="flex flex-col items-center mt-32">
+				<div className="flex flex-col items-center mt-16">
 					<h2 className="mb-8 text-2xl text-center text-primary font-display">
 						{lang.getContentCurrentLang({
 							en: "Explore information about:",
