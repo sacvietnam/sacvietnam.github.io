@@ -56,14 +56,16 @@ const Footer = () => {
 						<div className="flex items-center gap-2 text-secondary group  max-w-[400px]">
 							<HiMiniHome className="transition-transform min-w-5 -translate-y-0.5 group-hover:-rotate-12 group-hover:text-primary" />
 							<h3 className="font-medium">
-								Address:{" "}
+								{getContentCurrentLang({ en: "Address: ", vi: "Địa chỉ: " })}
 								<a
 									target="_blank"
 									className="transition-opacity text-primary hover:opacity-75"
 									href="https://maps.app.goo.gl/KHdGvGRkz3PPztaU7"
 								>
-									X7.02 LAB, 12 Nguyen Van Bao, Ward 4, District Go Vap, Ho Chi
-									Minh City, Viet Nam
+									{getContentCurrentLang({
+										en: "X7.02 LAB, 12 Nguyen Van Bao, Ward 4, District Go Vap, Ho Chi Minh City, Viet Nam",
+										vi: "X7.02 LAB, Số 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, Thành phố Hồ Chí Minh",
+									})}
 								</a>
 							</h3>
 						</div>
