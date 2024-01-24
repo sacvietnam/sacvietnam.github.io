@@ -193,8 +193,8 @@ const Story = () => {
 					<div className="flex flex-col gap-4 mx-auto text-center">
 						<h3 className="text-2xl">
 							{getContentCurrentLang({
-								en: "Hope you have gained a better understanding of our idea. ❤️",
-								vi: "Hy vọng bạn đã hiểu hơn về ý tưởng của chúng tôi. ❤️",
+								en: "Hope you have gained a better understanding of our idea. ",
+								vi: "Hy vọng bạn đã hiểu hơn về ý tưởng của chúng tôi. ",
 							})}
 						</h3>
 						<p className="text-lg text-secondary">
