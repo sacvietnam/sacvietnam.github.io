@@ -12,20 +12,13 @@ const Banner = () => {
 						text="Smart Aircon Clothing"
 						className="mb-4 text-3xl tracking-wider md:text-5xl font-display drop-shadow-md"
 					/>
-					<motion.div
-						drag
-						dragConstraints={{ left: 0, right: 0, bottom: 0, top: 0 }}
-						className="z-10 -translate-y-1 cursor-grab active:cursor-grabbing"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ ease: "easeOut", duration: 0.5, delay: 1 }}
-					>
+					<div>
 						<Fan
 							className=" animate-spin drop-shadow-md"
 							width={50}
 							height={50}
 						/>
-					</motion.div>
+					</div>
 				</div>
 				<motion.div
 					initial={{ opacity: 0, y: -20 }}

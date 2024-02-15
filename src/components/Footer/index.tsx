@@ -56,7 +56,7 @@ const Footer = () => {
 						<div className="flex items-center gap-2 text-secondary group  max-w-[400px]">
 							<HiMiniHome className="transition-transform min-w-5 -translate-y-0.5 group-hover:-rotate-12 group-hover:text-primary" />
 							<h3 className="font-medium">
-								{getContentCurrentLang({ en: "Address: ", vi: "Địa chỉ: " })}
+								{getContentCurrentLang({en:"Address: ", vi:"Địa chỉ:"})}
 								<a
 									target="_blank"
 									className="transition-opacity text-primary hover:opacity-75"
