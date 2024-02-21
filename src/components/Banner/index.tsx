@@ -12,7 +12,7 @@ const Banner = () => {
 						text="Smart Aircon Clothing"
 						className="mb-4 text-3xl tracking-wider md:text-5xl font-display drop-shadow-md"
 					/>
-					<div>
+					<div className="relative grid place-items-center -top-2">
 						<Fan
 							className=" animate-spin drop-shadow-md"
 							width={50}

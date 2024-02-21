@@ -3,7 +3,6 @@ import TCButton from "../../components/TCButton";
 import { useNavigate } from "react-router-dom";
 import useLang from "../../hooks/useLang";
 import LanguageButton from "../../components/LanguageButton";
-import ExploreSVG from "./explore.svg?react";
 
 const Home = () => {
 	const navigate = useNavigate();
@@ -39,7 +38,7 @@ const Home = () => {
 							<LanguageButton variant="normal" />
 						</div>
 
-						<div className="h-[400px] lg:h-[500px] max-h-[80vh] mt-16 border shadow-sm">
+						<div className="h-[400px] lg:h-[500px] max-h-[80vh] mt-16 border shadow-md rounded-lg overflow-hidden ">
 							<iframe
 								width="100%"
 								height="100%"
@@ -74,7 +73,6 @@ const Home = () => {
 							onPress={naviToProduct}
 						/>
 					</div>
-					<ExploreSVG width={300} height={250} />
 				</div>
 			</div>
 		</div>
