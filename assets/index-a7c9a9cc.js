@@ -1,0 +1,1 @@
+import{j as o}from"./index-a1d9af00.js";import{m as e}from"./useLang-699abf68.js";const m=({label:r,onPress:s})=>o.jsx(e.div,{className:"inline-block drop-shadow-md",children:o.jsx(e.button,{whileHover:{scale:1.05},whileTap:{scale:.9},onClick:s,className:"px-4 py-2 text-white rounded-md drop-shadow-md bg-primary min-w-[120px]",children:r})});export{m as T};
