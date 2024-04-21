@@ -1,13 +1,13 @@
 import Logo from "../Logo";
 import logoTheShark from "../../assets/imgs/logo/thesharks.png";
 import logoIUH from "../../assets/imgs/logo/iuh.png";
-import useLang from "../../hooks/useLang";
-
 import { FaFacebook } from "react-icons/fa";
 import { MdLocalPhone } from "react-icons/md";
 import { HiMiniHome } from "react-icons/hi2";
 import { HiMail } from "react-icons/hi";
 import { IconType } from "react-icons";
+import { useContext } from "react";
+import { LangContext } from "../../contexts/LangContext";
 
 const ContactInfo = ({
 	Icon,
@@ -36,7 +36,7 @@ const ContactInfo = ({
 };
 
 const Footer = () => {
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 
 	return (
 		<footer className="bg-white border-t text-text">
@@ -47,7 +47,7 @@ const Footer = () => {
 					</div>
 					<h3 className="font-semibold text-primary">THE SHARKS TEAM</h3>
 					<p className="text-center">
-						{getContentCurrentLang({
+						{trans({
 							en: "Students of Industrial University of Ho Chi Minh City",
 							vi: "Sinh viên Trường Đại học Công nghiệp Thành phố Hồ Chí Minh",
 						})}
@@ -56,13 +56,13 @@ const Footer = () => {
 						<div className="flex items-center gap-2 text-secondary group  max-w-[400px]">
 							<HiMiniHome className="transition-transform min-w-5 -translate-y-0.5 group-hover:-rotate-12 group-hover:text-primary" />
 							<h3 className="font-medium">
-								{getContentCurrentLang({en:"Address: ", vi:"Địa chỉ:"})}
+								{trans({ en: "Address: ", vi: "Địa chỉ:" })}
 								<a
 									target="_blank"
 									className="transition-opacity text-primary hover:opacity-75"
 									href="https://maps.app.goo.gl/KHdGvGRkz3PPztaU7"
 								>
-									{getContentCurrentLang({
+									{trans({
 										en: "X7.02 LAB, 12 Nguyen Van Bao, Ward 4, District Go Vap, Ho Chi Minh City, Viet Nam",
 										vi: "X7.02 LAB, Số 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, Thành phố Hồ Chí Minh",
 									})}
@@ -93,7 +93,7 @@ const Footer = () => {
 				</div>
 				<div className="flex flex-col items-center gap-2 md:items-end">
 					<h3 className="font-semibold">
-						{getContentCurrentLang({ en: "Social Media", vi: "Mạng xã hội" })}
+						{trans({ en: "Social Media", vi: "Mạng xã hội" })}
 					</h3>
 					<div className="flex gap-4">
 						<a href="https://www.facebook.com/profile.php?id=61555656479452">

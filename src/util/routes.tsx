@@ -8,6 +8,8 @@ const Product = React.lazy(() => import("../pages/Product"));
 const Story = React.lazy(() => import("../pages/Story"));
 const Error = React.lazy(() => import("../pages/Error"));
 const MainLayout = React.lazy(() => import("../layouts/MainLayout"));
+const Order = React.lazy(() => import("../pages/Order"));
+const Blog = React.lazy(() => import("../pages/Blog"));
 
 type Props = {
 	children?: React.ReactNode;
@@ -37,6 +39,14 @@ const routes: {
 	{
 		path: "/about-us",
 		element: About,
+	},
+	{
+		path: "/order",
+		element: Order,
+	},
+	{
+		path: "/blog",
+		element: Blog,
 	},
 ];
 

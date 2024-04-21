@@ -11,11 +11,12 @@ import "@fontsource/monoton";
 import product1 from "./assets/imgs/product/belt.png";
 import product2 from "./assets/imgs/product/belt-top.png";
 import product3 from "./assets/imgs/product/belt-top-center.png";
+import LanguageProvider from "./contexts/LangContext";
 
 const router = createHashRouter(routesObject);
 export default function App() {
 	return (
-		<>
+		<LanguageProvider>
 			<React.StrictMode>
 				<RouterProvider router={router} />
 			</React.StrictMode>
@@ -26,6 +27,6 @@ export default function App() {
 				<img src={product2} />
 				<img src={product3} />
 			</div>
-		</>
+		</LanguageProvider>
 	);
 }

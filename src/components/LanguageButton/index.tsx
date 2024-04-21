@@ -1,21 +1,19 @@
 import { motion } from "framer-motion";
-import useLang from "../../hooks/useLang";
 import viSrc from "./VI.png";
 import enSrc from "./EN.png";
+import { useContext } from "react";
+import { LangContext } from "../../contexts/LangContext";
 
 type LanguageButtonProps = {
 	variant: "normal" | "round";
 };
 
 const LanguageButton = ({ variant }: LanguageButtonProps) => {
-	const { getContentCurrentLang, control } = useLang();
-	const [currentLang, setLang] = control;
-
+	const { trans, language, setLanguage } = useContext(LangContext);
 	const onPress = () => {
-		const nextLang = currentLang == "en" ? "vi" : "en";
-		setLang(nextLang);
+		const nextLang = language == "en" ? "vi" : "en";
+		setLanguage(nextLang);
 
-		window.location.reload();
 	};
 
 	return (
@@ -33,12 +31,16 @@ const LanguageButton = ({ variant }: LanguageButtonProps) => {
 					}
 				>
 					{variant === "normal" &&
-						getContentCurrentLang({
+						trans({
 							vi: "Switch to English",
 							en: "Chuyển sang Tiếng Việt",
 						})}
 					<img
-						src={getContentCurrentLang(variant == "normal" ? { vi: enSrc, en: viSrc } : { vi: viSrc, en: enSrc})}
+						src={trans(
+							variant == "normal"
+								? { vi: enSrc, en: viSrc }
+								: { vi: viSrc, en: enSrc }
+						)}
 						alt="flag"
 						className="block object-cover w-10 h-5 -translate-y-0.5 rounded-md"
 					/>

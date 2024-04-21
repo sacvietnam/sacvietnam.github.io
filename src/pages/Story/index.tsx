@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import FloatInViewContent from "../../components/FloatInViewContent";
 import TitleNSub from "../../components/TitleNSub.tsx";
 import TCButton from "../../components/TCButton/index.tsx";
-import useLang from "../../hooks/useLang.ts";
 import ProductPreview from "../../components/ProductPreview/index.tsx";
 
 import StudentsSVG from "./resources/students.svg?react";
@@ -14,6 +13,8 @@ import driverImg from "./resources/driver.jpeg";
 import beImg from "./resources/be.jpg";
 import gojekImg from "./resources/gojek.jpg";
 import grabImg from "./resources/grab.jpg";
+import { useContext } from "react";
+import { LangContext } from "../../contexts/LangContext.tsx";
 
 const Story = () => {
 	const navigate = useNavigate();
@@ -21,18 +22,18 @@ const Story = () => {
 		navigate("/product");
 	};
 
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 
 	return (
 		<div className="py-20 overflow-hidden">
 			<div className="max-w-screen-xl px-2 mx-auto">
 				<div className="flex flex-col gap-20 min-h-svh">
 					<ConceptBlock
-						title={getContentCurrentLang({
+						title={trans({
 							en: "Let us tell you a story",
 							vi: "Để chúng tôi kể cho bạn 1 câu chuyện",
 						})}
-						description={getContentCurrentLang({
+						description={trans({
 							en: "The story that created this product",
 							vi: "Câu chuyện đã tạo nên sản phẩm này",
 						})}
@@ -45,7 +46,7 @@ const Story = () => {
 					>
 						<FaArrowDownLong className="text-5xl animate-floatVertical" />
 						<motion.h4 className="text-xl">
-							{getContentCurrentLang({
+							{trans({
 								en: "Scroll down to explore",
 								vi: "Cuộn xuống để khám phá",
 							})}
@@ -58,11 +59,11 @@ const Story = () => {
 					<FloatInViewContent
 						firstContent={
 							<TitleNSub
-								title={getContentCurrentLang({
+								title={trans({
 									en: "We are students of Industry University of Ho Chi Minh City, Vietnam.",
 									vi: "Chúng tôi là sinh viên Trường Đại học Công nghiệp Thành phố Hồ Chí Minh (IUH)",
 								})}
-								sub={getContentCurrentLang({
+								sub={trans({
 									en: "Sophomore and junior students from various majors.",
 									vi: "Sinh viên năm 2, năm 3 thuộc nhiều ngành khác nhau",
 								})}
@@ -76,11 +77,11 @@ const Story = () => {
 						}
 						secondContent={
 							<TitleNSub
-								title={getContentCurrentLang({
+								title={trans({
 									en: "We have noticed that,",
 									vi: "Chúng tôi nhận ra rằng,",
 								})}
-								sub={getContentCurrentLang({
+								sub={trans({
 									en: "With the year-round prolonged hot temperatures, the rate of workers affected by high temperatures is increasing in major cities.",
 									vi: "Với nhiệt độ nắng nóng kéo dài quanh năm, tỉ lệ người lao động bị ảnh hưởng bởi nhiệt độ cao ngày càng tăng ở các thành phố lớn.",
 								})}
@@ -90,11 +91,11 @@ const Story = () => {
 					<FloatInViewContent
 						firstContent={
 							<TitleNSub
-								title={getContentCurrentLang({
+								title={trans({
 									en: "But outside that harsh weather...",
 									vi: "Nhưng bên ngoài thời tiết khắc nghiệt ấy...",
 								})}
-								sub={getContentCurrentLang({
+								sub={trans({
 									en: "Despite the adverse effects of hot weather on health, a significant number of workers still have to continue performing outdoor tasks.",
 									vi: "Bất chấp tác động khắc nghiệt của thời tiết nóng đến sức khỏe, một số lượng đáng kể người lao động vẫn phải tiếp tục thực hiện công việc ngoài trời.",
 								})}
@@ -112,11 +113,11 @@ const Story = () => {
 						direction="vertical"
 						firstContent={
 							<TitleNSub
-								title={getContentCurrentLang({
+								title={trans({
 									en: "The Tech Drivers",
 									vi: "Những tài xế công nghệ",
 								})}
-								sub={getContentCurrentLang({
+								sub={trans({
 									en: "Every day, they have to work outdoors under that sunlight for 8 to 12 hours, and sometimes even more.",
 									vi: "Mỗi ngày, họ phải làm việc ngoài trời dưới ánh nắng đó từ 8 đến 12 tiếng, và đôi khi cả hơn thế.",
 								})}
@@ -152,11 +153,11 @@ const Story = () => {
 						firstContent={
 							<div className="py-8">
 								<TitleNSub
-									title={getContentCurrentLang({
+									title={trans({
 										en: "But what about their health?",
 										vi: "Nhưng còn sức khỏe của họ thì sao?",
 									})}
-									sub={getContentCurrentLang({
+									sub={trans({
 										en: "How can they continue their work in a cool state while still ensuring their health is minimally affected?",
 										vi: "Làm thế nào để họ tiếp tục công việc trong trạng thái mát mẻ mà vẫn đảm bảo sức khỏe không bị ảnh hưởng?",
 									})}
@@ -171,11 +172,11 @@ const Story = () => {
 						firstContent={
 							<div className="md:max-w-[80%] mx-auto">
 								<TitleNSub
-									title={getContentCurrentLang({
+									title={trans({
 										en: "Resolve this problem",
 										vi: "Giải quyết vấn đề này",
 									})}
-									sub={getContentCurrentLang({
+									sub={trans({
 										en: "To address the above-mentioned issue, we have created a product: Smart Cooling Belt",
 										vi: "Để giải quyết vấn đề nói trên, chúng tôi đã tạo ra sản phẩm: Đai Điều Hòa Thông Minh",
 									})}
@@ -192,19 +193,19 @@ const Story = () => {
 
 					<div className="flex flex-col gap-4 mx-auto text-center">
 						<h3 className="text-2xl">
-							{getContentCurrentLang({
+							{trans({
 								en: "Hope you have gained a better understanding of our idea. ",
 								vi: "Hy vọng bạn đã hiểu hơn về ý tưởng của chúng tôi. ",
 							})}
 						</h3>
 						<p className="text-lg text-secondary">
-							{getContentCurrentLang({
+							{trans({
 								en: "Continue exploring:",
 								vi: "Tiếp tục khám phá:",
 							})}
 						</p>
 						<TCButton
-							label={getContentCurrentLang({
+							label={trans({
 								en: "The Product",
 								vi: "Sản phẩm",
 							})}

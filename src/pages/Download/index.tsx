@@ -1,12 +1,12 @@
 import { FcAndroidOs } from "react-icons/fc";
 import { MdOutlineFileDownload } from "react-icons/md";
 import appIconSrc from "../../assets/imgs/product/app_icon.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Image, Spin } from "antd";
 import { motion } from "framer-motion";
 import Each from "../../util/Each";
 import appImgs from "../../assets/imgs/appImgs";
-import useLang from "../../hooks/useLang";
+import { LangContext } from "../../contexts/LangContext";
 
 const appInfo: {
 	releaseDate: string;
@@ -22,7 +22,7 @@ const appInfo: {
 
 const Download = () => {
 	const [isClicked, setClicked] = useState<boolean>(false);
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 
 	useEffect(() => {
 		let to = 0;
@@ -50,14 +50,14 @@ const Download = () => {
 					<div className="flex flex-col gap-2 text-center md:text-left">
 						<h2 className="text-5xl font-display text-primary">SAC Remote</h2>
 						<p className="text-justify text-secondary">
-							{getContentCurrentLang({
+							{trans({
 								en: "The application allows viewing temperature, humidity, and battery information sent from the SAC device. You can also set the fan speed and automatically turn the device on and off.",
 								vi: "Ứng dụng cho phép theo dõi các thông tin nhiệt độ, độ ẩm, lượng pin và các thông tin khác từ thiết bị SAC. Bạn cũng có thể thiết lập tốc độ quạt và các tính năng tự động khác",
 							})}
 						</p>
 						<div className="flex flex-col items-center gap-2 md:items-start">
 							<p>
-								{getContentCurrentLang({
+								{trans({
 									en: "Available in:",
 									vi: "Hiện có trên:",
 								})}
@@ -65,19 +65,17 @@ const Download = () => {
 							<FcAndroidOs className="text-5xl" />
 						</div>
 						<p>
-							{getContentCurrentLang({ en: "Version", vi: "Phiên bản" })}:{" "}
-							{appInfo.version}
+							{trans({ en: "Version", vi: "Phiên bản" })}: {appInfo.version}
 						</p>
 						<p>
-							{getContentCurrentLang({
+							{trans({
 								en: "Release Date",
 								vi: "Ngày phát hành",
 							})}
 							: {appInfo.releaseDate}
 						</p>
 						<p>
-							{getContentCurrentLang({ en: "Size", vi: "Kích thước" })}:{" "}
-							{appInfo.size}
+							{trans({ en: "Size", vi: "Kích thước" })}: {appInfo.size}
 						</p>
 						{isClicked ? (
 							<button
@@ -85,7 +83,7 @@ const Download = () => {
 								className="flex items-center gap-2 px-4 py-2 mx-auto transition-all bg-white rounded-md text-text md:mx-0 drop-shadow-lg w-fit"
 							>
 								<Spin />{" "}
-								{getContentCurrentLang({
+								{trans({
 									en: "Downloading...",
 									vi: "Đang tải xuống...",
 								})}
@@ -99,7 +97,7 @@ const Download = () => {
 							>
 								<button className="flex items-center gap-2 px-4 py-2 mx-auto text-white transition-all rounded-md md:mx-0 bg-primary drop-shadow-lg w-fit hover:bg-light_primary hover:scale-105 active:scale-95">
 									<MdOutlineFileDownload className="text-xl text-white" />
-									{getContentCurrentLang({
+									{trans({
 										en: "Download for Android",
 										vi: "Tải xuống cho Android",
 									})}
@@ -110,7 +108,7 @@ const Download = () => {
 				</div>
 				<div className="w-full mt-8">
 					<h3 className="mb-2 text-xl">
-						{getContentCurrentLang({
+						{trans({
 							en: "Some images of the software:",
 							vi: "Vài hình ảnh về ứng dụng:",
 						})}

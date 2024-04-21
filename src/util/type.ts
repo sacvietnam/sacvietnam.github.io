@@ -1,8 +1,8 @@
 import { IconType } from "react-icons";
-import { ContentMultiLang } from "../hooks/useLang";
+import { MultilangContent } from "../contexts/LangContext";
 
 export type FeatureObject = {
-	name: ContentMultiLang;
-	description: ContentMultiLang;
+	name: MultilangContent;
+	description: MultilangContent;
 	Icon: IconType;
 };

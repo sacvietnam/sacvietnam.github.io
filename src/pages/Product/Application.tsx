@@ -1,19 +1,19 @@
 import FeatureItem from "./FeatureItem";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AnimatedText from "../../components/AnimatedText";
 import PhoneMockup from "../../components/PhoneMockup";
 import TCButton from "../../components/TCButton";
-import useLang from "../../hooks/useLang";
 import { FeatureObject } from "../../util/type";
 
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { RiRemoteControlLine } from "react-icons/ri";
 import { LiaBluetooth } from "react-icons/lia";
 import { MdLineWeight } from "react-icons/md";
+import { LangContext } from "../../contexts/LangContext";
 
 const Application = () => {
 	const [showAll, setShowAll] = useState<boolean>(false);
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 
 	const firstBlockFetures = [appFeatures[0], appFeatures[1]];
 	const secondBlockFetures = [appFeatures[2], appFeatures[3]];
@@ -25,7 +25,7 @@ const Application = () => {
 	return (
 		<div className="max-w-screen-xl p-2 pb-8 mx-auto">
 			<AnimatedText
-				text={getContentCurrentLang({
+				text={trans({
 					en: "Overview of Application",
 					vi: "Tổng quan ứng dụng",
 				})}
@@ -47,7 +47,7 @@ const Application = () => {
 					<div className="flex justify-center my-4">
 						{!showAll && (
 							<TCButton
-								label={getContentCurrentLang({
+								label={trans({
 									en: "Show All",
 									vi: "Hiện hết",
 								})}

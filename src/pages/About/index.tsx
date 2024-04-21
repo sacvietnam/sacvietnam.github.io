@@ -10,17 +10,18 @@ import img6 from "../../assets/imgs/team/nguyen.png";
 import img7 from "../../assets/imgs/team/thao.png";
 import img8 from "../../assets/imgs/team/thKien.png";
 import Each from "../../util/Each";
-import useLang, { ContentMultiLang } from "../../hooks/useLang";
+import { useContext } from "react";
+import { LangContext, MultilangContent } from "../../contexts/LangContext";
 
 const About = () => {
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 	return (
 		<div>
 			<div className="max-w-screen-xl px-2 py-8 mx-auto">
 				<div>
 					<h2 className="mb-8 text-4xl text-center text-primary font-display">
 						<AnimatedText
-							text={getContentCurrentLang({
+							text={trans({
 								en: "OUR MEMBERS",
 								vi: "THÀNH VIÊN",
 							})}
@@ -39,7 +40,7 @@ const About = () => {
 				<div className="flex flex-col items-center justify-center mt-20">
 					<h2 className="mb-8 text-4xl text-center text-primary font-display">
 						<AnimatedText
-							text={getContentCurrentLang({
+							text={trans({
 								en: "MENTOR",
 								vi: "CỐ VẤN",
 							})}
@@ -56,9 +57,9 @@ export default About;
 
 export type MemberInformation = {
 	name: string;
-	major?: ContentMultiLang;
-	interest?: ContentMultiLang;
-	reasons?: ContentMultiLang;
+	major?: MultilangContent;
+	interest?: MultilangContent;
+	reasons?: MultilangContent;
 	img: string;
 	color: string;
 };

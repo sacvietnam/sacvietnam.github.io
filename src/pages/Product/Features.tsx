@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Each from "../../util/Each";
 import AnimatedText from "../../components/AnimatedText";
 import FeatureItem from "./FeatureItem";
 import TCButton from "../../components/TCButton";
-import useLang from "../../hooks/useLang";
 
 import { PiWindDuotone } from "react-icons/pi";
 import { MdOutlineMonitorHeart, MdOutlineDesignServices } from "react-icons/md";
@@ -11,10 +10,11 @@ import { FaMobileAlt } from "react-icons/fa";
 import { TbFocusAuto } from "react-icons/tb";
 import { LuBatteryFull } from "react-icons/lu";
 import { FeatureObject } from "../../util/type";
+import { LangContext } from "../../contexts/LangContext";
 
 const Features = () => {
 	const [showAll, setShowAll] = useState<boolean>(false);
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 
 	const toggleShowAll = () => {
 		setShowAll(true);
@@ -23,7 +23,7 @@ const Features = () => {
 	return (
 		<div className="max-w-screen-xl py-8 pb-20 mx-auto mt-20">
 			<AnimatedText
-				text={getContentCurrentLang({
+				text={trans({
 					en: "Overview of Features",
 					vi: "Tổng quan tính năng",
 				})}
@@ -34,12 +34,12 @@ const Features = () => {
 				{!showAll && (
 					<>
 						<TCButton
-							label={getContentCurrentLang({ en: "Show All", vi: "Hiện hết" })}
+							label={trans({ en: "Show All", vi: "Hiện hết" })}
 							onPress={toggleShowAll}
 						/>
 						<p className="mt-2 text-center text-secondary">
 							(
-							{getContentCurrentLang({
+							{trans({
 								en: "Press on the features for more details",
 								vi: "Chạm vào các thẻ để đọc chi tiết",
 							})}

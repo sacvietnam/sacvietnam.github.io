@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import useMobile from "./../../hooks/useMobile";
 import { FiMenu } from "react-icons/fi";
 import Logo from "../Logo";
 import Each from "../../util/Each";
-import useLang, { ContentMultiLang } from "../../hooks/useLang";
 import LanguageButton from "../LanguageButton";
 import { Popover } from "antd";
+import { LangContext, MultilangContent } from "../../contexts/LangContext";
 
-const menuItem: { label: ContentMultiLang; path: string }[] = [
+const menuItem: { label: MultilangContent; path: string }[] = [
 	{
 		label: { en: "Home", vi: "Trang chủ" },
 		path: "/",
@@ -21,6 +21,14 @@ const menuItem: { label: ContentMultiLang; path: string }[] = [
 	{
 		label: { en: "The product", vi: "Sản phẩm" },
 		path: "/product",
+	},
+	{
+		label: { en: "Order", vi: "Đặt mua" },
+		path: "/order",
+	},
+	{
+		label: { en: "Blog", vi: "Blog" },
+		path: "/blog",
 	},
 	{
 		label: { en: "Download", vi: "Tải xuống" },
@@ -40,7 +48,7 @@ const Header = () => {
 		setOpen(!isOpen);
 	};
 
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 
 	return (
 		<header className="sticky top-0 z-50 p-2 bg-white border-b-2 border-gray-200 shadow-sm bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60">
@@ -84,14 +92,14 @@ const Header = () => {
 															: ""
 													}
 												>
-													{getContentCurrentLang(item.label)}
+													{trans(item.label)}
 												</NavLink>
 											</motion.li>
 										)}
 									/>
 									<Popover
 										trigger="hover"
-										content={getContentCurrentLang({
+										content={trans({
 											en: "Chuyển sang Tiếng Việt",
 											vi: "Switch to English",
 										})}

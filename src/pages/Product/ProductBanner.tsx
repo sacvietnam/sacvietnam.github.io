@@ -1,17 +1,18 @@
 import Wave from "react-wavify";
 import AnimatedText from "../../components/AnimatedText";
-import useLang from "../../hooks/useLang";
 import ProductPreview from "../../components/ProductPreview";
+import { useContext } from "react";
+import { LangContext } from "../../contexts/LangContext";
 
 const ProductBanner = () => {
-	const { getAnyCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 
 	return (
 		<div className="bg-primary h-[150px] md:h-[300px] lg:h-[400px] relative flex items-center justify-center select-none mb-[50px] md:mb-[100px] lg:mb-[150px]	">
 			<div className="absolute top-0 bottom-0 z-10 w-full -translate-x-1/2 translate-y-1/2 left-1/2">
 				<div className="absolute z-10 w-full text-3xl text-center text-white -translate-y-full -top-2 text-nowrap font-display md:text-6xl lg:text-7xl">
 					<AnimatedText
-						text={getAnyCurrentLang({
+						text={trans({
 							en: "Smart Aircon Belt",
 							vi: "Đai điều hòa TM",
 						})}

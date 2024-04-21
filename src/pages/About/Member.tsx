@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { MemberInformation } from ".";
 import { Popover } from "antd";
-import useLang from "../../hooks/useLang";
+import { useContext } from "react";
+import { LangContext } from "../../contexts/LangContext";
 
 type MemberProps = {
 	member: MemberInformation;
@@ -10,7 +11,7 @@ type MemberProps = {
 };
 
 const Member = ({ member, index, popover }: MemberProps) => {
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 
 	const emptyContent = { en: "", vi: "" };
 	const isValid: boolean =
@@ -41,28 +42,28 @@ const Member = ({ member, index, popover }: MemberProps) => {
 							<hr className="mb-2" />
 							<p>
 								<span className="font-semibold" style={{ color: member.color }}>
-									{getContentCurrentLang({
+									{trans({
 										en: "Interest",
 										vi: "Lĩnh vực quan tâm",
 									})}
 									:{" "}
 								</span>
-								{getContentCurrentLang(member.interest || emptyContent)}
+								{trans(member.interest || emptyContent)}
 							</p>
 							<p>
 								<span className="font-semibold" style={{ color: member.color }}>
-									{getContentCurrentLang({
+									{trans({
 										en: "Reasons for participation",
 										vi: "Lý do tham gia",
 									})}
 									:{" "}
 								</span>
-								{getContentCurrentLang(member.reasons || emptyContent)}
+								{trans(member.reasons || emptyContent)}
 							</p>
 						</div>
 					) : (
 						<p>
-							{getContentCurrentLang({
+							{trans({
 								en: "This member doesn't have detail information",
 								vi: "Không có nhiều thông tin về thành viên này",
 							})}
@@ -86,7 +87,7 @@ const Member = ({ member, index, popover }: MemberProps) => {
 			</Popover>
 			<div className="mt-2 text-center">
 				<h4 className="font-semibold text-md md:text-xl">{member.name}</h4>
-				<p>{getContentCurrentLang(member.major || emptyContent)}</p>
+				<p>{trans(member.major || emptyContent)}</p>
 			</div>
 		</motion.div>
 	);

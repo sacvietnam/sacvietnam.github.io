@@ -1,12 +1,13 @@
 import Banner from "../../components/Banner";
 import TCButton from "../../components/TCButton";
 import { useNavigate } from "react-router-dom";
-import useLang from "../../hooks/useLang";
 import LanguageButton from "../../components/LanguageButton";
+import { useContext } from "react";
+import { LangContext } from "../../contexts/LangContext";
 
 const Home = () => {
 	const navigate = useNavigate();
-	const lang = useLang();
+	const { trans } = useContext(LangContext);
 
 	const naviToStory = () => {
 		navigate("/story");
@@ -22,13 +23,13 @@ const Home = () => {
 				<div className="flex flex-col">
 					<div className="text-center max-w-[800px] min-h-[300px] mx-auto my-2">
 						<h2 className="mt-2 mb-4 text-4xl leading-snug tracking-wide md:text-5xl font-display text-primary">
-							{lang.getContentCurrentLang({
+							{trans({
 								en: "Welcome to SAC",
 								vi: "Chào mừng bạn đến với SAC",
 							})}
 						</h2>
 						<p className="max-w-[90%] md:max-w-[80%] mx-auto text-lg md:text-xl text-secondary mb-4">
-							{lang.getContentCurrentLang({
+							{trans({
 								en: "We are designing a product that combines a fabric belt and a mini fan, called an air conditioner belt, with bluetooth (smartphone) connection.",
 								vi: "Chúng tôi đang thiết kế một sản phẩm kết hợp đai vải và quạt mini gọi là đai điều hòa với nhiều tính năng, được điều khiển thông qua kết nối bluetooth (smartphone).",
 							})}
@@ -52,21 +53,21 @@ const Home = () => {
 				</div>
 				<div className="flex flex-col items-center mt-16">
 					<h2 className="mb-8 text-2xl text-center text-primary font-display">
-						{lang.getContentCurrentLang({
+						{trans({
 							en: "Explore information about:",
 							vi: "Khám phá thông tin về:",
 						})}
 					</h2>
 					<div className="flex gap-4">
 						<TCButton
-							label={lang.getContentCurrentLang({
+							label={trans({
 								en: "The Story",
 								vi: "Câu chuyện",
 							})}
 							onPress={naviToStory}
 						/>
 						<TCButton
-							label={lang.getContentCurrentLang({
+							label={trans({
 								en: "The Product",
 								vi: "Sản phẩm",
 							})}

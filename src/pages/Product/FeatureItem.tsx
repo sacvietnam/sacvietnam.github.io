@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import AnimatedText from "../../components/AnimatedText";
 import { FeatureObject } from "../../util/type";
-import useLang from "../../hooks/useLang";
+import { LangContext } from "../../contexts/LangContext";
 
 type FeatureItemProps = {
 	item: FeatureObject;
@@ -11,7 +11,7 @@ type FeatureItemProps = {
 };
 
 const FeatureItem = ({ item, className, show }: FeatureItemProps) => {
-	const { getContentCurrentLang } = useLang();
+	const { trans } = useContext(LangContext);
 	const [flip, setFlip] = useState<boolean>(false);
 
 	const toggleFlip = () => {
@@ -36,21 +36,21 @@ const FeatureItem = ({ item, className, show }: FeatureItemProps) => {
 							<div className="-translate-y-0.5">
 								<item.Icon />
 							</div>
-							<AnimatedText text={getContentCurrentLang(item.name)} />
+							<AnimatedText text={trans(item.name)} />
 						</div>
 						<motion.span
 							initial={{ scale: 0.4 }}
 							animate={{ scale: 1 }}
 							className="p-2 text-xs text-justify md:text-base text-secondary"
 						>
-							{getContentCurrentLang(item.description)}
+							{trans(item.description)}
 						</motion.span>
 					</>
 				) : (
 					<>
 						{<item.Icon className="text-4xl text-secondary" />}
 						<h3 className="text-sm font-semibold md:text-xl">
-							{getContentCurrentLang(item.name)}
+							{trans(item.name)}
 						</h3>
 					</>
 				)}
