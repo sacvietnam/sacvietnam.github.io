@@ -17,8 +17,8 @@
 		"images": ["https://placehold.co/600x400", "https://placehold.co/600x400"],
 		"price": 600000,
 		"discount": {
-			"type": "percent",
-			"value": 0
+			"type": "fixed",
+			"value": 20000
 		},
 		"description": "Đai điều hòa phiên bản nâng cấp với nhiều tính năng thông minh. Thông qua app trên điện thoại có thể theo dõi các thông tin về nhiệt độ, độ ẩm bên trong cơ thể. Điều chỉnh tốc độ gió, hay có thể tự động bật tắt quạt tùy vào nhiệt độ và độ ẩm cơ thể của bạn.",
 		"inventory": 0
@@ -30,7 +30,7 @@
 		"price": 800000,
 		"discount": {
 			"type": "percent",
-			"value": 0
+			"value": 5
 		},
 		"description": "Là phiên bản nâng cấp của đai điều hòa thông minh với những tính năng hiện tại đang chưa nghĩ ra",
 		"inventory": 0

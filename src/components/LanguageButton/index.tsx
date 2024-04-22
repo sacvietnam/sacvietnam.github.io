@@ -14,6 +14,7 @@ const LanguageButton = ({ variant }: LanguageButtonProps) => {
 		const nextLang = language == "en" ? "vi" : "en";
 		setLanguage(nextLang);
 
+		window.location.reload();
 	};
 
 	return (
