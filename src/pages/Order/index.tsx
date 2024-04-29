@@ -1,23 +1,46 @@
-import { useContext } from "react";
-import productsPlaceholder from "./sac.products.json";
+import { useContext, useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import { LangContext } from "../../contexts/LangContext";
 import Wave from "react-wavify";
-import { getAllProducts } from "../../services/productService";
+import { getAllProducts, getProductSize } from "../../services/productService";
 import { useQuery } from "@tanstack/react-query";
 import { IProduct } from "../../models/DataModel";
-const placeholderProducts = productsPlaceholder as IProduct[];
+import { Pagination, Skeleton, Space } from "antd";
+
+// quantity of products per page
+const pageSize = 6;
 
 const Order = () => {
-	console.log(placeholderProducts);
-
-	const { isPending, data } = useQuery({
+	const [currentPage, setCurrentPage] = useState<number>(1);
+	const {
+		isPending,
+		data: products,
+		refetch,
+	} = useQuery({
 		queryKey: ["products"],
-		queryFn: getAllProducts,
+		queryFn: () => getAllProducts(pageSize, currentPage),
 		select: (response) => response as IProduct[],
 	});
 
+	const { data: totalProducts } = useQuery({
+		queryKey: ["productsSize"],
+		queryFn: getProductSize,
+	});
 	const lang = useContext(LangContext);
+
+	const changePage = (page: number) => {
+		setCurrentPage(page);
+	};
+
+	// scroll to top when change page
+	useEffect(() => {
+		refetch();
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	}, [currentPage, refetch]);
+
 	return (
 		<div className="relative ">
 			<div className="max-w-screen-xl min-h-screen px-2 py-4 mx-auto mt-8">
@@ -28,15 +51,27 @@ const Order = () => {
 					})}
 				</h1>
 				<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
-					{isPending &&
-						placeholderProducts.map((product) => (
-							<ProductItem key={product._id} product={product} />
-						))}
-					{data &&
-						(data as IProduct[]).map((product) => (
+					{isPending && (
+						<Space>
+							<Skeleton.Button active />
+							<Skeleton.Avatar active />
+							<Skeleton.Input active />
+						</Space>
+					)}
+					{products &&
+						(products as IProduct[]).map((product) => (
 							<ProductItem key={product._id} product={product} />
 						))}
 				</div>
+			</div>
+			<div className="p-2 pb-8 mx-auto w-fit">
+				<Pagination
+					className="p-2 bg-white border rounded-md "
+					total={totalProducts}
+					defaultCurrent={1}
+					defaultPageSize={pageSize}
+					onChange={(page) => changePage(page)}
+				/>
 			</div>
 
 			<Wave

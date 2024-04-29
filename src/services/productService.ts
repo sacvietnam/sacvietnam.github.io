@@ -4,8 +4,9 @@ import AxiosConfig from "../util/AxiosUtils";
 const axios = AxiosConfig.getAxiosInstance();
 
 // READ: Lấy thông tin của tất cả người dùng
-const getAllProducts = async (): Promise<IProduct[]> => {
-	const result = axios.get("/products");
+// GET /products?limit=10&page=1
+const getAllProducts = async (pageSize = 5, page = 1): Promise<IProduct[]> => {
+	const result = axios.get(`/products?limit=${pageSize}&page=${page}`);
 	return (await result).data.allProducts;
 };
 
@@ -14,4 +15,8 @@ const getProductById = async (id: string): Promise<IProduct> => {
 	return (await axios.get(`/products/${id}`)).data.product;
 };
 
-export { getAllProducts, getProductById };
+const getProductSize = async (): Promise<number> => {
+	return (await axios.get("/products/size")).data.size;
+};
+
+export { getAllProducts, getProductById, getProductSize };

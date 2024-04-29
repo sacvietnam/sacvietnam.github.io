@@ -59,4 +59,6 @@ export interface IProduct {
 	};
 	description: string;
 	inventory: number;
+	rate: number;
+	quantityRate: number;
 }

@@ -17,6 +17,7 @@ const MainLayout = ({ children }: { children: React.ReactElement }) => {
 			<Footer />
 			<ToTopButton />
 			<ScrollProgressBar />
+			
 		</div>
 	);
 };
