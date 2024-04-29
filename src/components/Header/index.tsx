@@ -35,7 +35,7 @@ const menuItem: { label: MultilangContent; path: string }[] = [
 		path: "/download",
 	},
 	{
-		label: { en: "Meet the team", vi: "Gặp gỡ đội" },
+		label: { en: "About us", vi: "Chúng tôi" },
 		path: "/about-us",
 	},
 ];
@@ -80,7 +80,7 @@ const Header = () => {
 											<motion.li
 												whileTap={{ scale: 0.9 }}
 												key={item.path}
-												className="p-2 hoverable-text"
+												className="p-2 text-md hoverable-text"
 											>
 												<NavLink
 													to={item.path}

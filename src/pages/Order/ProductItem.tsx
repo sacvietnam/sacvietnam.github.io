@@ -3,19 +3,7 @@ import { useContext } from "react";
 import { LangContext } from "../../contexts/LangContext";
 import { useNavigate } from "react-router-dom";
 import DiscountPrice from "../../components/DiscountPrice";
-
-export interface IProduct {
-	_id: string;
-	name: string;
-	images: string[];
-	price: number;
-	discount: {
-		type: "percent" | "fixed";
-		value: number;
-	};
-	description: string;
-	inventory: number;
-}
+import { IProduct } from "../../models/DataModel";
 
 const ProductItem = ({ product }: { product: IProduct }) => {
 	const { trans } = useContext(LangContext);
@@ -24,7 +12,7 @@ const ProductItem = ({ product }: { product: IProduct }) => {
 	return (
 		<Card
 			hoverable
-			cover={<img alt={product.name} src={product.images[0]} />}
+			cover={<img className="h-[300px] object-cover" alt={product.name} src={product.images[0]} />}
 			className="relative"
 			onClick={() => {
 				navigate("/order/product/" + product._id);

@@ -1,6 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Spin } from "antd";
 import React, { Suspense } from "react";
 import { RouteObject } from "react-router-dom";
+import OrderLayout from "../layouts/OrderLayout";
 const About = React.lazy(() => import("../pages/About"));
 const Download = React.lazy(() => import("../pages/Download"));
 const Home = React.lazy(() => import("../pages/Home"));
@@ -44,10 +46,12 @@ const routes: {
 	{
 		path: "/order/product/:id",
 		element: ProductDetail,
+		layout: OrderLayout as React.FC<Props>,
 	},
 	{
 		path: "/order",
 		element: Order,
+		layout: OrderLayout as React.FC<Props>,
 	},
 	{
 		path: "/blog",

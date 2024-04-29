@@ -1,13 +1,22 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import productsPlaceholder from "./sac.products.json";
-import ProductItem, { IProduct } from "./ProductItem";
+import ProductItem from "./ProductItem";
 import { LangContext } from "../../contexts/LangContext";
 import Wave from "react-wavify";
-const productList = productsPlaceholder as IProduct[];
+import { getAllProducts } from "../../services/productService";
+import { useQuery } from "@tanstack/react-query";
+import { IProduct } from "../../models/DataModel";
+const placeholderProducts = productsPlaceholder as IProduct[];
 
 const Order = () => {
-	console.log(productList);
-	const [products, setProducts] = React.useState<IProduct[]>(productList);
+	console.log(placeholderProducts);
+
+	const { isPending, data } = useQuery({
+		queryKey: ["products"],
+		queryFn: getAllProducts,
+		select: (response) => response as IProduct[],
+	});
+
 	const lang = useContext(LangContext);
 	return (
 		<div className="relative ">
@@ -19,9 +28,14 @@ const Order = () => {
 					})}
 				</h1>
 				<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
-					{products.map((product) => (
-						<ProductItem key={product._id} product={product} />
-					))}
+					{isPending &&
+						placeholderProducts.map((product) => (
+							<ProductItem key={product._id} product={product} />
+						))}
+					{data &&
+						(data as IProduct[]).map((product) => (
+							<ProductItem key={product._id} product={product} />
+						))}
 				</div>
 			</div>
 
