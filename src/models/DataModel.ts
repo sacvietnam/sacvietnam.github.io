@@ -15,6 +15,7 @@ export interface IFeedback {
 	createdAt: Date;
 	user_id: string;
 	product_id: string;
+	nameUser: string;
 }
 
 export interface IArticle {
@@ -25,6 +26,8 @@ export interface IArticle {
 	content: string;
 	publishedAt: Date;
 	updatedAt: Date;
+	rate: number;
+	quantityRate: number;
 }
 
 export interface IOrderDetail {

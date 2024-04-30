@@ -33,7 +33,7 @@ const BlogArticle = () => {
 		return <NotFoundBlock />;
 	}
 	return (
-		<div>
+		<div className="mb-16">
 			<article
 				className="max-w-screen-lg mx-auto mt-8"
 				id="google_translate_element"
@@ -49,7 +49,7 @@ const BlogArticle = () => {
 					</p>
 					{/* img */}
 					<img
-						className="object-cover w-full h-full max-w-[800px] max-h-[400px] mx-auto my-3"
+						className="object-cover w-full h-full max-w-[800px] max-h-[400px] mx-auto my-6"
 						src={article.image}
 						onError={(e) => {
 							e.currentTarget.src = "https://via.placeholder.com/800x400";

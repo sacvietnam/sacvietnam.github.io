@@ -19,8 +19,10 @@ class AxiosConfig {
 				headers: {
 					"Content-Type": "application/json",
 				},
+				withCredentials: true,
 			});
 		}
+
 		return this.instance;
 	}
 }

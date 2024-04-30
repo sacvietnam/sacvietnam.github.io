@@ -3,6 +3,8 @@ import { GlobalContext, UserData } from "../../contexts/GlobalContext";
 import { logout } from "../../services/authService";
 import { useContext } from "react";
 import { LangContext } from "../../contexts/LangContext";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const LoginUser = (user: UserData) => {
 	const { setUser } = useContext(GlobalContext);
@@ -21,8 +23,20 @@ const LoginUser = (user: UserData) => {
 						👋 {trans({ en: "Hello", vi: "Xin chào" })}, <b>{user.name}</b>
 					</span>
 					<div>
+						<Link to={"/order/cart"}>
+							<Button
+								type="primary"
+								shape="round"
+								className="bg-primary"
+								icon={<ShoppingCartOutlined />}
+							>
+								{trans({ en: "Cart", vi: "Giỏ hàng" })}
+							</Button>
+						</Link>
 						<Button type="text" onClick={handleLogout}>
-							<span className="underline" >{trans({ en: "Logout", vi: "Đăng xuất" })}</span>
+							<span className="underline">
+								{trans({ en: "Logout", vi: "Đăng xuất" })}
+							</span>
 						</Button>
 					</div>
 				</div>

@@ -46,8 +46,9 @@ const login = async (
 };
 
 const refreshToken = async (): Promise<string> => {
-	const result = axios.post("/auth/refresh");
-	return (await result).data.accessToken;
+	const result = await axios.post("/auth/refresh");
+	console.log(result);
+	return (await result).data.data.accessToken;
 };
 
 const logout = async (

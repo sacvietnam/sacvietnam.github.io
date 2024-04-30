@@ -2,34 +2,49 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios";
 import { jwtDecode } from "jwt-decode";
 import { refreshToken } from "../services/authService";
 import { baseURL } from "./AxiosUtils";
+import LocalStorageHandler from "./LocalStorageHandler";
+import { UserData } from "../contexts/GlobalContext";
 
 class AxiosJWTConfig {
-	public static getJWTInstance(
-		accessToken: string,
-		setToken: (newToken: string) => void
-	): AxiosInstance {
-		const JWTInstance = axios.create({
-			baseURL: baseURL,
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
+	private static JWTInstance: AxiosInstance | null = null;
 
-		JWTInstance.interceptors.request.use(
-			async (config: InternalAxiosRequestConfig) => {
-				const decodedToken: { exp: number } = jwtDecode(accessToken);
+	public static getJWTInstance(): AxiosInstance {
+		if (!this.JWTInstance) {
+			this.JWTInstance = axios.create({
+				baseURL: baseURL,
+				headers: {
+					"Content-Type": "application/json",
+				},
+				withCredentials: true,
+			});
 
-				if (decodedToken.exp < new Date().getTime() / 1000) {
-					const refreshedToken = await refreshToken();
-					setToken(refreshedToken);
+			this.JWTInstance.interceptors.request.use(
+				async (config: InternalAxiosRequestConfig) => {
+					const localUserData = LocalStorageHandler.getItem<UserData>("USER");
+					const localAccessToken = localUserData?.accessToken;
+					if (!localAccessToken) {
+						return config;
+					}
 
-					config.headers["authorization"] = `Bearer ${refreshedToken}`;
+					const decodedToken: { exp: number } = jwtDecode(localAccessToken);
+
+					if (decodedToken.exp < new Date().getTime() / 1000) {
+						const refreshedToken = await refreshToken();
+						LocalStorageHandler.setItem("USER", {
+							...localUserData,
+							accessToken: refreshedToken,
+						});
+						console.log("REFRESHED TOKEN", refreshedToken);
+						config.headers["authorization"] = `Bearer ${refreshedToken}`;
+					} else {
+						config.headers["authorization"] = `Bearer ${localAccessToken}`;
+					}
+					return config;
 				}
-				return config;
-			}
-		);
+			);
+		}
 
-		return JWTInstance;
+		return this.JWTInstance;
 	}
 }
 

@@ -1,98 +1,141 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import DiscountPrice from "../../components/DiscountPrice";
-import { Button, Image, Rate, Spin } from "antd";
+import { Spin, message } from "antd";
 import { LangContext } from "../../contexts/LangContext";
-import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { getProductById } from "../../services/productService";
 import NotFoundBlock from "../../components/NotFoundBlock";
-import { IProduct } from "../../models/DataModel";
+import { IFeedback, IProduct } from "../../models/DataModel";
+import { GlobalContext } from "../../contexts/GlobalContext";
+import {
+	addFeedback,
+	getFeedbackByProductId,
+	getFeedbackSizeByProductId,
+} from "../../services/feedbackService";
+import UserFeedbackForm from "./UserFeedbackForm";
+import ProductInfo from "./ProductInfo";
+import FeedbackBlock from "./FeedbackBlock";
+
+const pageSize = 10;
+
 const ProductDetail = () => {
 	const { id } = useParams();
-	const [index, setIndex] = useState<number>(0);
+	const [, messageContext] = message.useMessage();
 	const { trans } = useContext(LangContext);
-	const { data, isLoading } = useQuery({
+	const { user } = useContext(GlobalContext);
+	const { data: product, isLoading } = useQuery({
 		queryKey: ["products", "/id"],
 		queryFn: () => getProductById(id as string),
 		select: (response) => response as IProduct,
 	});
+	const [totalFeedback, setTotalFeedback] = useState<number>(0);
+	const [feedbacks, setFeedbacks] = useState<IFeedback[]>([]);
+	const [update, DispacthUpdate] = useState<boolean>(false);
+	const [currentPage, setCurrentPage] = useState<number>(1);
+	const feedbackBlockRef = useRef<HTMLDivElement>(null);
+
+	const changePage = (page: number) => {
+		setCurrentPage(page);
+		if (feedbackBlockRef.current) {
+			feedbackBlockRef.current.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
+		}
+	};
+
+	const handleSubmitFeedback = async (feedback: {
+		rate: number;
+		content: string;
+	}) => {
+		if (product && user) {
+			try {
+				const isOk = await addFeedback({
+					content: feedback.content,
+					product_id: product._id,
+					rate: feedback.rate,
+					user_id: user._id,
+					nameUser: user.name,
+				});
+				if (isOk) {
+					message.success(
+						trans({ en: "Feedback successfully!", vi: "Đánh giá thành công!" })
+					);
+					DispacthUpdate(!update);
+				} else {
+					message.info(
+						trans({ en: "Feedback failed!", vi: "Đánh giá thất bại!" })
+					);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	};
+
+	useEffect(() => {
+		const getFeedbacks = async () => {
+			try {
+				const response = await getFeedbackByProductId(
+					product?._id as string,
+					pageSize,
+					currentPage
+				);
+				setFeedbacks(response);
+			} catch (error) {
+				setFeedbacks([]);
+			}
+		};
+
+		if (product) {
+			getFeedbacks();
+		}
+	}, [product, update, currentPage]);
+
+	// Get total feedback size for split page logic
+	useEffect(() => {
+		const fetchTotalFeedback = async () => {
+			try {
+				const size = await getFeedbackSizeByProductId(product?._id as string);
+				setTotalFeedback(size);
+			} catch (error) {
+				setTotalFeedback(0);
+			}
+		};
+
+		if (product) {
+			fetchTotalFeedback();
+		}
+	}, [product]);
 
 	if (isLoading) {
 		<div className="max-w-screen-xl min-h-screen px-2 py-4 mx-auto mt-8">
-			<h1>Loading...</h1>
 			<Spin />
 		</div>;
 	}
 
-	if (!data) {
+	if (!product) {
 		return <NotFoundBlock />;
 	}
 
 	return (
 		<div className="relative ">
+			{messageContext}
+
 			<div className="max-w-screen-xl min-h-screen px-2 py-4 mx-auto mt-8">
-				<div className="relative grid grid-cols-1 gap-8 md:grid-cols-2">
-					{/* Product image */}
-					<div className="inline-grid grid-cols-8 gap-2 ">
-						<div className="flex flex-col w-full col-span-1 gap-2">
-							{data?.images.map((image: string, i: number) => (
-								<img
-									src={image}
-									key={i}
-									className={`w-full object-cover ${
-										index === i ? "opacity-70" : ""
-									}`}
-									onMouseEnter={() => setIndex(i)}
-								/>
-							))}
-						</div>
-						<div className="col-span-7">
-							<Image
-								src={data?.images[index]}
-								className="object-cover w-full"
-								placeholder={
-									<Image
-										preview={false}
-										src="https://placehold.co/600x400"
-										width={200}
-									/>
-								}
-							/>
-						</div>
-					</div>
-
-					{/* Product information */}
-					<div>
-						<h2 className="text-2xl font-bold">{data.name}</h2>
-						<DiscountPrice discount={data.discount} price={data.price} />
-						<p className="mt-4">
-							<span className="font-semibold">
-								Mô tả:
-								<br />
-							</span>
-							{data.description}
-						</p>
-						<Button
-							size="large"
-							block
-							type="primary"
-							className="mt-10 bg-primary"
-							icon={<ShoppingCartOutlined />}
-						>
-							{trans({ en: "Buy", vi: "Đặt mua" })}
-						</Button>
-					</div>
-				</div>
-
+				<ProductInfo product={product} />
 				{/* Feedback */}
-				<div className="p-4 mt-4 border rounded-md">
-					<h3 className="text-xl font-semibold ">Đánh giá từ người dùng</h3>
+				<div className="grid grid-cols-12 gap-2 mt-4 " ref={feedbackBlockRef}>
+					<FeedbackBlock
+						product={product}
+						feedbacks={feedbacks}
+						totalFeedback={totalFeedback}
+						pageSize={pageSize}
+						changePage={changePage}
+					/>
 
-					<div className="flex items-center gap-2">
-						<Rate value={0} disabled />
-						<span className="text-xs">(0)</span>
-					</div>
+					{/* User feedback form */}
+					{<UserFeedbackForm onSubmit={handleSubmitFeedback} />}
 				</div>
 			</div>
 		</div>

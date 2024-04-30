@@ -2,6 +2,7 @@
 const LOCAL_STORAGE_KEY = {
 	USER: "user",
 	LOGIN_FORM: "loginForm",
+	ACCESS_TOKEN: "accessToken",
 };
 
 type LOCAL_STORAGE_KEY_TYPE = { [key in keyof typeof LOCAL_STORAGE_KEY]: any };
@@ -11,6 +12,7 @@ class LocalStorageHandler {
 	private static object: LOCAL_STORAGE_KEY_TYPE = {
 		USER: null,
 		LOGIN_FORM: null,
+		ACCESS_TOKEN: null,
 	};
 
 	public static initial() {
