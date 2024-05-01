@@ -1,15 +1,21 @@
 import { IProduct } from "../../models/DataModel";
 import DiscountPrice from "../../components/DiscountPrice";
-import { Button, Image } from "antd";
+import { Button, Image, InputNumber } from "antd";
 import { LangContext } from "../../contexts/LangContext";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
 
-const ProductInfo = ({ product }: { product: IProduct }) => {
+type ProductInfoProps = {
+	product: IProduct;
+	onAddItem: (quantity: number) => void;
+};
+
+const ProductInfo = ({ product, onAddItem }: ProductInfoProps) => {
 	const [index, setIndex] = useState<number>(0);
 	const { trans } = useContext(LangContext);
 	const { user } = useContext(GlobalContext);
+	const [quantity, setQuantity] = useState<number>(1);
 	return (
 		<div className="relative grid grid-cols-1 gap-8 md:grid-cols-2">
 			{/* Product image */}
@@ -53,6 +59,20 @@ const ProductInfo = ({ product }: { product: IProduct }) => {
 					{product.description}
 				</p>
 				<div className="mt-10">
+					<div>
+						<span className="mr-2 text-sm font-semibold">
+							{trans({ en: "Quantity", vi: "Số lượng" })}:
+						</span>
+						<InputNumber
+							size="middle"
+							min={1}
+							max={100}
+							defaultValue={quantity}
+							onChange={(value) => setQuantity(value as number)}
+							className="mb-2"
+						/>
+					</div>
+
 					{!user && (
 						<span className="text-sm italic text-red-400">
 							{trans({
@@ -68,6 +88,7 @@ const ProductInfo = ({ product }: { product: IProduct }) => {
 						className=" bg-primary"
 						icon={<PlusCircleOutlined />}
 						disabled={!user}
+						onClick={() => onAddItem(quantity)}
 					>
 						{trans({ en: "Add to cart", vi: "Thêm vào giỏ hàng" })}
 					</Button>

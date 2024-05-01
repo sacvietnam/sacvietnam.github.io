@@ -15,6 +15,7 @@ import {
 import UserFeedbackForm from "./UserFeedbackForm";
 import ProductInfo from "./ProductInfo";
 import FeedbackBlock from "./FeedbackBlock";
+import { CartStorageHandler } from "../../util/LocalStorageHandler";
 
 const pageSize = 10;
 
@@ -73,6 +74,18 @@ const ProductDetail = () => {
 		}
 	};
 
+	const handleAddItemToCart = (quantity: number) => {
+		if (product) {
+			CartStorageHandler.addItemToCart(product, quantity);
+			message.success(
+				trans({
+					en: `Add ${quantity} /'${product.name}/' to cart!`,
+					vi: `Đã thêm ${quantity} /'${product.name}/' vào giỏ hàng`,
+				})
+			);
+		}
+	};
+
 	useEffect(() => {
 		const getFeedbacks = async () => {
 			try {
@@ -123,7 +136,7 @@ const ProductDetail = () => {
 			{messageContext}
 
 			<div className="max-w-screen-xl min-h-screen px-2 py-4 mx-auto mt-8">
-				<ProductInfo product={product} />
+				<ProductInfo product={product} onAddItem={handleAddItemToCart} />
 				{/* Feedback */}
 				<div className="grid grid-cols-12 gap-2 mt-4 " ref={feedbackBlockRef}>
 					<FeedbackBlock

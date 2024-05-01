@@ -34,7 +34,7 @@ export interface IOrderDetail {
 	productId: string;
 	quantity: number;
 	price: number;
-	discount: number;
+	discount: Discount;
 }
 
 export interface ICustomer {
@@ -51,15 +51,17 @@ export interface IOrder {
 	orderDetails: IOrderDetail[];
 }
 
+interface Discount {
+	type: "percent" | "fixed";
+	value: number;
+}
+
 export interface IProduct {
 	_id: string;
 	name: string;
 	images: string[];
 	price: number;
-	discount: {
-		type: "percent" | "fixed";
-		value: number;
-	};
+	discount: Discount;
 	description: string;
 	inventory: number;
 	rate: number;

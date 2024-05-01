@@ -3,7 +3,6 @@ import { Spin } from "antd";
 import React, { Suspense } from "react";
 import { RouteObject } from "react-router-dom";
 import OrderLayout from "../layouts/OrderLayout";
-import BlogArticle from "../pages/BlogArticle";
 const About = React.lazy(() => import("../pages/About"));
 const Download = React.lazy(() => import("../pages/Download"));
 const Home = React.lazy(() => import("../pages/Home"));
@@ -14,6 +13,8 @@ const MainLayout = React.lazy(() => import("../layouts/MainLayout"));
 const Order = React.lazy(() => import("../pages/Order"));
 const Blog = React.lazy(() => import("../pages/Blog"));
 const ProductDetail = React.lazy(() => import("../pages/ProductDetail"));
+const UserCart = React.lazy(() => import("../pages/UserCart"));
+const BlogArticle = React.lazy(() => import("../pages/BlogArticle"));
 
 type Props = {
 	children?: React.ReactNode;
@@ -43,6 +44,11 @@ const routes: {
 	{
 		path: "/about-us",
 		element: About,
+	},
+	{
+		path: "/order/cart",
+		element: UserCart,
+		layout: OrderLayout as React.FC<Props>,
 	},
 	{
 		path: "/order/product/:id",
