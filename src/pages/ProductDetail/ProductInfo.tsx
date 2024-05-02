@@ -18,7 +18,9 @@ const ProductInfo = ({ product, onAddItem }: ProductInfoProps) => {
 	const { user } = useContext(GlobalContext);
 	const [quantity, setQuantity] = useState<number>(1);
 	return (
-		<div
+		<motion.div 
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
 			className="relative grid grid-cols-1 gap-8 md:grid-cols-2"
 			key={product._id}
 		>
@@ -99,7 +101,7 @@ const ProductInfo = ({ product, onAddItem }: ProductInfoProps) => {
 					</Button>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

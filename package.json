@@ -25,6 +25,7 @@
 		"axios": "^1.6.8",
 		"framer-motion": "^10.16.16",
 		"html-react-parser": "^5.1.10",
+		"jodit-react": "^4.1.2",
 		"jwt-decode": "^4.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
@@ -33,6 +34,8 @@
 		"react-router-dom": "^6.21.1",
 		"react-wavify": "^1.10.0",
 		"styled-components": "^6.1.6",
+		"suneditor": "^2.46.2",
+		"suneditor-react": "^3.6.1",
 		"vite-plugin-checker": "^0.6.4",
 		"vite-tsconfig-paths": "^4.3.2"
 	},

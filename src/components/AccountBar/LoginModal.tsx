@@ -76,7 +76,7 @@ const LoginModal = ({ onCancle, onSubmit, isOpen }: LoginModalProps) => {
 				</Form.Item>
 
 				<Form.Item wrapperCol={{ offset: 4, span: 24 }}>
-					<div className="flex gap-2 justify-end items-end">
+					<div className="flex items-end justify-end gap-2 mr-16 md:mr-0">
 						<Button
 							type="primary"
 							className="mt-2 bg-primary"

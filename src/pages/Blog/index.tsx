@@ -40,7 +40,7 @@ const Blog = () => {
 
 	return (
 		<div className="relative">
-			<div className="max-w-screen-lg min-h-screen mx-4 md:mx-auto">
+			<div className="max-w-screen-lg min-h-screen px-2 mx-auto">
 				<h1 className="mt-8 text-2xl font-bold text-center">
 					{trans({ en: "Blog", vi: "Bài viết" })}
 				</h1>
@@ -49,7 +49,7 @@ const Blog = () => {
 						articles.map((post) => (
 							<Link to={`/blog/${post._id}`} key={post._id}>
 								<motion.article
-									className="grid grid-cols-6 gap-0   hover:shadow-md rounded-r-lg group max-h-[300px]"
+									className="grid grid-cols-6 gap-0 hover:shadow-md rounded-r-lg group max-h-[300px]"
 									initial={{ opacity: 0, x: 100 }}
 									whileInView={{ opacity: 1, x: 0 }}
 									transition={{ duration: 0.5 }}

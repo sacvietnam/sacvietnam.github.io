@@ -1,4 +1,4 @@
-import { Button, Card } from "antd";
+import { Button, Card, Rate } from "antd";
 import { useContext } from "react";
 import { LangContext } from "../../contexts/LangContext";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +31,7 @@ const ProductItem = ({ product }: { product: IProduct }) => {
 				<div className="flex flex-col justify-center h-full gap-2">
 					<div>
 						<h4 className="text-lg font-medium">{product.name}</h4>
+						<Rate value={product.rate} disabled className="text-sm"/>
 						<DiscountPrice price={product.price} discount={product.discount} />
 					</div>
 					<div>

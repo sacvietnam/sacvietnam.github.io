@@ -16,6 +16,7 @@ import UserFeedbackForm from "./UserFeedbackForm";
 import ProductInfo from "./ProductInfo";
 import FeedbackBlock from "./FeedbackBlock";
 import { CartStorageHandler } from "../../util/localStorage/LocalStorageHandler";
+import { motion } from "framer-motion";
 
 const pageSize = 10;
 
@@ -143,7 +144,13 @@ const ProductDetail = () => {
 			<div className="max-w-screen-xl min-h-screen px-2 py-4 mx-auto mt-8">
 				<ProductInfo product={product} onAddItem={handleAddItemToCart} />
 				{/* Feedback */}
-				<div className="grid grid-cols-12 gap-2 mt-4 " ref={feedbackBlockRef}>
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.5, delay: 0.3}}
+					className="grid grid-cols-12 gap-2 mt-4 "
+					ref={feedbackBlockRef}
+				>
 					<FeedbackBlock
 						product={product}
 						feedbacks={feedbacks}
@@ -154,7 +161,7 @@ const ProductDetail = () => {
 
 					{/* User feedback form */}
 					{<UserFeedbackForm onSubmit={handleSubmitFeedback} />}
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	);

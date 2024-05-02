@@ -33,8 +33,8 @@ const Application = () => {
 			/>
 			<div className="grid grid-cols-1 gap-0 mt-8 lg:gap-12 lg:grid-cols-3 place-items-center">
 				<div className="flex flex-col justify-around order-2 w-full h-full">
-					{firstBlockFetures.map((item) => (
-						<div className="w-full p-2 lg:p-8">
+					{firstBlockFetures.map((item, index) => (
+						<div className="w-full p-2 lg:p-8" key={index}>
 							<FeatureItem
 								show={showAll}
 								className="w-full h-[150px] md:h-[200px]"

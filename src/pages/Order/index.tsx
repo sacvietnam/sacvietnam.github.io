@@ -43,7 +43,7 @@ const Order = () => {
 
 	return (
 		<div className="relative ">
-			<div className="max-w-screen-xl min-h-screen px-2 py-4 mx-auto mt-8">
+			<div className="max-w-screen-xl px-2 py-4 mx-auto mt-8">
 				<h1 className="mb-2 text-2xl font-bold">
 					{lang.trans({
 						vi: "Danh sách sản phẩm hiện có",

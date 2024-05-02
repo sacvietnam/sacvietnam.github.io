@@ -1,5 +1,6 @@
 import { Divider, Rate } from "antd";
 import { IFeedback } from "../../models/DataModel";
+import Formatter from "../../util/format/Formatter";
 
 const FeedbackItem = ({ feedback }: { feedback: IFeedback }) => {
 	return (
@@ -14,7 +15,7 @@ const FeedbackItem = ({ feedback }: { feedback: IFeedback }) => {
 					</span>
 					<br />
 					<span className="text-xs text-gray-500">
-						{new Date(feedback.createdAt).toLocaleDateString("vi-VN")}
+						{Formatter.toDateTime(feedback.createdAt)}
 					</span>
 				</div>
 				<Rate value={feedback.rate} className="text-sm" disabled />

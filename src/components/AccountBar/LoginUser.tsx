@@ -17,8 +17,8 @@ const LoginUser = (user: UserData) => {
 	return (
 		<>
 			{contextHolder}
-			<div className="mx-2 sticky z-20 max-w-screen-md p-2 px-4 md:mx-auto  mt-8 bg-white border rounded-lg top-[4.2rem] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60">
-				<div className="flex items-center justify-between">
+			<div className="mx-4 sticky z-20 max-w-screen-md p-2 px-4 lg:mx-auto mt-8 bg-white border rounded-lg top-[4.2rem] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60">
+				<div className="flex flex-col items-center justify-between gap-2 md:flex-row">
 					<span>
 						👋 {trans({ en: "Hello", vi: "Xin chào" })}, <b>{user.name}</b>
 					</span>

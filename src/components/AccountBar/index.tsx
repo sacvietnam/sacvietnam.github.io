@@ -112,7 +112,7 @@ const AccountBar = () => {
 
 	if (!user)
 		return (
-			<>
+			<div className="mx-4">
 				{contextHolder}
 				<MotionDiv
 					initial={{ opacity: 0, y: -30 }}
@@ -155,7 +155,7 @@ const AccountBar = () => {
 					onCancle={handleSignupCancel}
 					onSubmit={handleSignupFinish}
 				/>
-			</>
+			</div>
 		);
 
 	return (
