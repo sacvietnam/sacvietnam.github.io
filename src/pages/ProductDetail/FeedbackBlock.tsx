@@ -20,8 +20,9 @@ const FeedbackBlock = ({
 	changePage,
 }: FeedbackBlockProps) => {
 	const { trans } = useContext(LangContext);
+	console.log('render FeedbackBlock', totalFeedback, pageSize);
 	return (
-		<div className="order-2 col-span-12 p-4 mb-4 border rounded-md lg:order-1 lg:col-span-8">
+		<div className="order-2 col-span-12 p-4 mb-4 border rounded-md md:order-1 md:col-span-8">
 			<h3 className="text-xl font-semibold text-center ">
 				{trans({ en: "Review from user", vi: "Đánh giá từ người dùng" })}
 			</h3>

@@ -2,7 +2,7 @@ import { useContext, useRef } from "react";
 import { LangContext } from "../../contexts/LangContext";
 import type { FormProps } from "antd";
 import { Button, Modal, Form, Input } from "antd";
-import LocalStorageHandler from "../../util/LocalStorageHandler";
+import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler";
 type FieldType = {
 	username: string;
 	password: string;

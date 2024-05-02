@@ -1,5 +1,5 @@
 import React, { Dispatch, createContext, useState } from "react";
-import LocalStorageHandler from "../util/LocalStorageHandler";
+import LocalStorageHandler from "../util/localStorage/LocalStorageHandler";
 
 export interface UserData {
 	_id: string;

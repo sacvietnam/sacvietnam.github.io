@@ -1,6 +1,6 @@
 import { IFeedback } from "../models/DataModel";
-import AxiosJWTConfig from "../util/AxiosJWTConfig";
-import AxiosConfig from "../util/AxiosUtils";
+import AxiosJWTConfig from "../util/axios/AxiosJWTConfig";
+import AxiosConfig from "../util/axios/AxiosUtils";
 
 const axios = AxiosConfig.getAxiosInstance();
 const jwtAxios = AxiosJWTConfig.getJWTInstance();

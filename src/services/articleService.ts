@@ -1,5 +1,5 @@
 import { IArticle } from "../models/DataModel";
-import AxiosConfig from "../util/AxiosUtils";
+import AxiosConfig from "../util/axios/AxiosUtils";
 
 const axios = AxiosConfig.getAxiosInstance();
 

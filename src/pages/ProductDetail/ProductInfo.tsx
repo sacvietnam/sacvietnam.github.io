@@ -5,6 +5,7 @@ import { LangContext } from "../../contexts/LangContext";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
+import { motion } from "framer-motion";
 
 type ProductInfoProps = {
 	product: IProduct;
@@ -17,12 +18,16 @@ const ProductInfo = ({ product, onAddItem }: ProductInfoProps) => {
 	const { user } = useContext(GlobalContext);
 	const [quantity, setQuantity] = useState<number>(1);
 	return (
-		<div className="relative grid grid-cols-1 gap-8 md:grid-cols-2">
+		<div
+			className="relative grid grid-cols-1 gap-8 md:grid-cols-2"
+			key={product._id}
+		>
 			{/* Product image */}
 			<div className="inline-grid grid-cols-8 gap-2 ">
-				<div className="flex flex-col w-full col-span-1 gap-2">
+				<div className="flex flex-col w-full col-span-1 gap-4">
 					{product?.images.map((image: string, i: number) => (
-						<img
+						<motion.img
+							whileHover={{ scale: 1.1, rotate: 5 }}
 							src={image}
 							key={i}
 							className={`w-full object-cover ${

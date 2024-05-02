@@ -6,7 +6,7 @@ import { IArticle } from "../../models/DataModel";
 import { getArticleById } from "../../services/articleService";
 import { Spin } from "antd";
 import NotFoundBlock from "../../components/NotFoundBlock";
-import HTMLParser from "../../util/HTMLParser";
+import HTMLParser from "../../util/format/HTMLParser";
 declare global {
 	interface Window {
 		googleTranslateElementInit: () => void;

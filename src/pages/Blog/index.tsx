@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { getAllArticles, getArticleSize } from "../../services/articleService";
 import Wave from "react-wavify";
 
-const pageSize = 5;
+const pageSize = 10;
 
 const Blog = () => {
 	const { trans } = useContext(LangContext);
@@ -41,41 +41,42 @@ const Blog = () => {
 	return (
 		<div className="relative">
 			<div className="max-w-screen-lg min-h-screen mx-4 md:mx-auto">
-				<h1 className="mt-8 text-3xl font-semibold text-center">
-					{trans({ en: "Blog", vi: "Nhật ký" })}
+				<h1 className="mt-8 text-2xl font-bold text-center">
+					{trans({ en: "Blog", vi: "Bài viết" })}
 				</h1>
 				<div className="flex flex-col gap-10 mt-8">
 					{articles &&
 						articles.map((post) => (
 							<Link to={`/blog/${post._id}`} key={post._id}>
 								<motion.article
-									className="grid grid-cols-6 gap-0 transition-all duration-300 hover:shadow-md rounded-r-lg group max-h-[300px] bg-gray-50"
+									className="grid grid-cols-6 gap-0   hover:shadow-md rounded-r-lg group max-h-[300px]"
 									initial={{ opacity: 0, x: 100 }}
 									whileInView={{ opacity: 1, x: 0 }}
+									transition={{ duration: 0.5 }}
 									viewport={{ once: true }}
 								>
-									<div className="relative col-span-2">
-										<div className="overflow-hidden">
+									<div className=" col-span-full md:col-span-2">
+										<div className="overflow-hidden rounded-l-lg">
 											<img
 												src={post.image}
 												onError={(e) =>
 													((e.target as HTMLImageElement).src =
 														"/placeholder_img.png")
 												}
-												className="group-hover:scale-105 duration-300 transition-all object-cover select-none w-full h-full max-h-[200px] group-hover:brightness-90 rounded-l-lg"
+												className="group-hover:scale-110 duration-300 transition-all object-center object-cover select-none w-full h-full max-h-[200px] group-hover:brightness-90"
 												alt={post.title}
 											/>
-											<span className="absolute left-0 text-lg text-gray-600 -top-6 font-display ">
-												{new Date(post.publishedAt).toLocaleDateString("vi-VN")}
-											</span>
 										</div>
 									</div>
 
-									<div className="col-span-4 p-4 overflow-hidden border rounded-r-lg">
+									<div className="p-4 overflow-hidden bg-white border rounded-r-lg col-span-full md:col-span-4">
 										<h3 className="text-xl font-semibold hoverable-text">
 											{post.title}
 										</h3>
-										<p>{post.description}</p>
+										<span className="font-semibold text-gray-600 text-md">
+											{new Date(post.publishedAt).toLocaleDateString("vi-VN")}
+										</span>
+										<p className="text-sm italic">{post.description}</p>
 									</div>
 								</motion.article>
 							</Link>

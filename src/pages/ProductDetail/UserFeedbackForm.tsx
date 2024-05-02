@@ -1,4 +1,4 @@
-import { Button, Rate } from "antd";
+import { Button, Form, FormProps, Rate } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
@@ -9,6 +9,7 @@ import {
 	SendOutlined,
 	SmileOutlined,
 } from "@ant-design/icons";
+import FormItem from "antd/es/form/FormItem";
 
 type UserFeedbackFormProps = {
 	onSubmit: (feedback: { rate: number; content: string }) => void;
@@ -20,6 +21,9 @@ const customIcons: Record<number, React.ReactNode> = {
 	3: <MehOutlined />,
 	4: <SmileOutlined />,
 	5: <SmileOutlined />,
+};
+type FieldType = {
+	feedback?: string;
 };
 
 const UserFeedbackForm = ({ onSubmit }: UserFeedbackFormProps) => {
@@ -40,6 +44,11 @@ const UserFeedbackForm = ({ onSubmit }: UserFeedbackFormProps) => {
 		setUserFeedback((prev) => {
 			return { ...prev, content: value };
 		});
+	};
+
+	const handleFinish: FormProps<FieldType>["onFinish"] = () => {
+		onSubmit(userFeedback);
+		setUserFeedback({ rate: 5, content: "" });
 	};
 
 	const rateColor = (() => {
@@ -73,7 +82,7 @@ const UserFeedbackForm = ({ onSubmit }: UserFeedbackFormProps) => {
 		}
 	})();
 	return (
-		<div className="order-1 mx-auto w-full lg:order-2 col-span-12 max-w-[500px] max-h-[300px] h-fit p-4  mb-8 lg:col-span-4 border rounded-md">
+		<div className="order-1 mx-auto w-full md:order-2 col-span-12 max-w-[500px] max-h-[300px] h-fit p-4  mb-8 md:col-span-4 border rounded-md">
 			<div className="flex flex-col items-center gap-2 mb-2">
 				<span className="font-semibold">
 					{user
@@ -90,20 +99,46 @@ const UserFeedbackForm = ({ onSubmit }: UserFeedbackFormProps) => {
 					/>
 					<span className="text-sm">{rateText}</span>
 				</div>
-				<TextArea
-					disabled={!user}
-					showCount
-					autoSize={{ minRows: 2, maxRows: 5 }}
-					rows={2}
-					placeholder={trans({
-						en: "Please text your feedback",
-						vi: "Nhập bình luận của bạn...",
-					})}
-					maxLength={200}
-					value={userFeedback.content}
-					onChange={(e) => setContent(e.target.value)}
-					className="mb-4"
-				/>
+				<Form onFinish={handleFinish} className="w-full">
+					<FormItem<FieldType>
+						name="feedback"
+						rules={[
+							{
+								required: true,
+								message: trans({
+									en: "Please share your feeling a little bit...",
+									vi: "Hãy chia sẻ một chút cảm xúc của bạn...",
+								}),
+							},
+						]}
+					>
+						<TextArea
+							disabled={!user}
+							showCount
+							className="w-full mb-4"
+							autoSize={{ minRows: 2, maxRows: 5 }}
+							rows={2}
+							placeholder={trans({
+								en: "Please text your feedback",
+								vi: "Nhập bình luận của bạn...",
+							})}
+							maxLength={200}
+							value={userFeedback.content}
+							onChange={(e) => setContent(e.target.value)}
+						/>
+					</FormItem>
+					<FormItem>
+						<Button
+							icon={<SendOutlined />}
+							disabled={!user}
+							block
+							htmlType="submit"
+							type="dashed"
+						>
+							{trans({ en: "Send feedback", vi: "Gửi phản hồi" })}
+						</Button>
+					</FormItem>
+				</Form>
 				{!user && (
 					<i className="text-xs text-left text-red-400">
 						{trans({
@@ -112,18 +147,6 @@ const UserFeedbackForm = ({ onSubmit }: UserFeedbackFormProps) => {
 						})}
 					</i>
 				)}
-				<Button
-					icon={<SendOutlined />}
-					onClick={() => {
-						onSubmit(userFeedback);
-						setUserFeedback({ rate: 5, content: "" });
-					}}
-					disabled={!user}
-					block
-					type="dashed"
-				>
-					{trans({ en: "Send feedback", vi: "Gửi phản hồi" })}
-				</Button>
 			</div>
 		</div>
 	);

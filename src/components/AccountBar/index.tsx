@@ -5,7 +5,7 @@ import { Button, message } from "antd";
 import { login, register } from "../../services/authService";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import LoginUser from "./LoginUser";
-import LocalStorageHandler from "../../util/LocalStorageHandler";
+import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler";
 import LoginModal from "./LoginModal";
 import { IAccount } from "../../models/DataModel";
 import SignUpModal from "./SignUpModal";

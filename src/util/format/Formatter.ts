@@ -1,5 +1,5 @@
-class Format {
-	static currency(amount: number) {
+class Formatter {
+	static toVND(amount: number) {
 		return new Intl.NumberFormat("vi-VN", {
 			style: "currency",
 			currency: "VND",
@@ -7,4 +7,4 @@ class Format {
 	}
 }
 
-export default Format;
+export default Formatter;

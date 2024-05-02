@@ -1,4 +1,4 @@
-import { IOrderDetail, IProduct } from "../models/DataModel";
+import { IOrderDetail, IProduct } from "../../models/DataModel";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const LOCAL_STORAGE_KEY = {

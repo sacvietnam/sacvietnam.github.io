@@ -27,7 +27,7 @@ const menuItem: { label: MultilangContent; path: string }[] = [
 		path: "/order",
 	},
 	{
-		label: { en: "Blog", vi: "Nhật ký" },
+		label: { en: "Blog", vi: "Bài viết" },
 		path: "/blog",
 	},
 	{

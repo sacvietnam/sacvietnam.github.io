@@ -1,7 +1,7 @@
 import { UserData } from "../contexts/GlobalContext";
 import { IAccount } from "../models/DataModel";
-import AxiosConfig from "../util/AxiosUtils";
-import LocalStorageHandler from "../util/LocalStorageHandler";
+import AxiosConfig from "../util/axios/AxiosUtils";
+import LocalStorageHandler from "../util/localStorage/LocalStorageHandler";
 
 const axios = AxiosConfig.getAxiosInstance();
 

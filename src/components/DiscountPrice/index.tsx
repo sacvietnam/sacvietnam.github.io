@@ -1,4 +1,4 @@
-import Format from "../../util/format";
+import Formatter from "../../util/format/Formatter";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 type DiscountPriceProps = {
@@ -21,20 +21,20 @@ function DiscountPrice({ price, discount }: DiscountPriceProps) {
 					-
 					{discount.type === "percent"
 						? discount.value + "%"
-						: Format.currency(discount.value)}
+						: Formatter.toVND(discount.value)}
 				</span>
 			)}
 
 			{discount.value > 0 && (
 				<>
 					<span className="font-normal font-semibold text-gray-500 line-through">
-						{Format.currency(price)}
+						{Formatter.toVND(price)}
 					</span>
 					<FaLongArrowAltRight className="inline mx-2" />
 				</>
 			)}
 
-			<span className=" font-display">{Format.currency(displayPrice)}</span>
+			<span className=" font-display">{Formatter.toVND(displayPrice)}</span>
 		</div>
 	);
 }

@@ -15,7 +15,7 @@ import {
 import UserFeedbackForm from "./UserFeedbackForm";
 import ProductInfo from "./ProductInfo";
 import FeedbackBlock from "./FeedbackBlock";
-import { CartStorageHandler } from "../../util/LocalStorageHandler";
+import { CartStorageHandler } from "../../util/localStorage/LocalStorageHandler";
 
 const pageSize = 10;
 
@@ -24,14 +24,17 @@ const ProductDetail = () => {
 	const [, messageContext] = message.useMessage();
 	const { trans } = useContext(LangContext);
 	const { user } = useContext(GlobalContext);
-	const { data: product, isLoading } = useQuery({
+	const {
+		data: product,
+		isLoading,
+		refetch: refetchProduct,
+	} = useQuery({
 		queryKey: ["products", "/id"],
 		queryFn: () => getProductById(id as string),
 		select: (response) => response as IProduct,
 	});
 	const [totalFeedback, setTotalFeedback] = useState<number>(0);
 	const [feedbacks, setFeedbacks] = useState<IFeedback[]>([]);
-	const [update, DispacthUpdate] = useState<boolean>(false);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const feedbackBlockRef = useRef<HTMLDivElement>(null);
 
@@ -62,7 +65,8 @@ const ProductDetail = () => {
 					message.success(
 						trans({ en: "Feedback successfully!", vi: "Đánh giá thành công!" })
 					);
-					DispacthUpdate(!update);
+					refetchProduct();
+					setCurrentPage(1);
 				} else {
 					message.info(
 						trans({ en: "Feedback failed!", vi: "Đánh giá thất bại!" })
@@ -79,8 +83,8 @@ const ProductDetail = () => {
 			CartStorageHandler.addItemToCart(product, quantity);
 			message.success(
 				trans({
-					en: `Add ${quantity} /'${product.name}/' to cart!`,
-					vi: `Đã thêm ${quantity} /'${product.name}/' vào giỏ hàng`,
+					en: `Add ${quantity} item "${product.name}" to cart!`,
+					vi: `Đã thêm ${quantity} sản phẩm "${product.name}" vào giỏ hàng`,
 				})
 			);
 		}
@@ -94,6 +98,7 @@ const ProductDetail = () => {
 					pageSize,
 					currentPage
 				);
+				console.log("GET FEEDBACKS");
 				setFeedbacks(response);
 			} catch (error) {
 				setFeedbacks([]);
@@ -103,7 +108,7 @@ const ProductDetail = () => {
 		if (product) {
 			getFeedbacks();
 		}
-	}, [product, update, currentPage]);
+	}, [product, currentPage]);
 
 	// Get total feedback size for split page logic
 	useEffect(() => {

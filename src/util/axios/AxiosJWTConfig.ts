@@ -1,9 +1,9 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios";
 import { jwtDecode } from "jwt-decode";
-import { refreshToken } from "../services/authService";
+import { refreshToken } from "../../services/authService";
 import { baseURL } from "./AxiosUtils";
-import LocalStorageHandler from "./LocalStorageHandler";
-import { UserData } from "../contexts/GlobalContext";
+import LocalStorageHandler from "../localStorage/LocalStorageHandler";
+import { UserData } from "../../contexts/GlobalContext";
 
 class AxiosJWTConfig {
 	private static JWTInstance: AxiosInstance | null = null;
