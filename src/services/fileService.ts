@@ -1,8 +1,22 @@
 import AxiosJWTConfig from "../util/axios/AxiosJWTConfig";
+import { baseURL } from "../util/axios/AxiosUtils";
 
 const axios = AxiosJWTConfig.getJWTInstance();
+const uploadFileToTemp = async (
+	file: File,
+	type: "article" | "product"
+): Promise<string> => {
+	const formData = new FormData();
+	formData.append(type, file);
 
-const uploadFile = async (
+	const result = await axios.post(`/files/${type}/`, formData, {
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	});
+	return baseURL + "/" + result.data.path;
+};
+const uploadFileToOwner = async (
 	file: File,
 	owner_id: string,
 	type: "article" | "product"
@@ -11,7 +25,7 @@ const uploadFile = async (
 	formData.append(type, file);
 
 	const result = await axios.post(
-		`/files/article/${owner_id}/${type}`,
+		`/files/${type}/${owner_id}/${type}`,
 		formData,
 		{
 			headers: {
@@ -19,7 +33,7 @@ const uploadFile = async (
 			},
 		}
 	);
-	return result.data.path;
+	return baseURL + "/" + result.data.path;
 };
 
-export { uploadFile };
+export { uploadFileToTemp, uploadFileToOwner };

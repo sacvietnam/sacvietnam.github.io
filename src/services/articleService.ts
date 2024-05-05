@@ -1,7 +1,9 @@
 import { IArticle } from "../models/DataModel";
+import AxiosJWTConfig from "../util/axios/AxiosJWTConfig";
 import AxiosConfig from "../util/axios/AxiosUtils";
 
 const axios = AxiosConfig.getAxiosInstance();
+const axiosJWT = AxiosJWTConfig.getJWTInstance();
 
 // READ: Get information of all articles
 // GET /articles?limit=10&page=1
@@ -19,4 +21,20 @@ const getArticleSize = async (): Promise<number> => {
 	return (await axios.get("/articles/size")).data.size;
 };
 
-export { getAllArticles, getArticleById, getArticleSize };
+const createArticle = async ({
+	title,
+	description,
+	image,
+	content,
+}: Partial<IArticle>): Promise<IArticle> => {
+	const response = await axiosJWT.post("/articles", {
+		title,
+		description,
+		image,
+		content,
+	});
+	
+	return response.data.article	;
+};
+
+export { getAllArticles, getArticleById, getArticleSize, createArticle };

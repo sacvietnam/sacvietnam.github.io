@@ -51,7 +51,7 @@ export interface IOrder {
 	orderDetails: IOrderDetail[];
 }
 
-interface Discount {
+export interface Discount {
 	type: "percent" | "fixed";
 	value: number;
 }

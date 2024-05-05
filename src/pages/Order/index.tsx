@@ -5,12 +5,13 @@ import Wave from "react-wavify";
 import { getAllProducts, getProductSize } from "../../services/productService";
 import { useQuery } from "@tanstack/react-query";
 import { IProduct } from "../../models/DataModel";
-import { Pagination, Skeleton, Space } from "antd";
+import { Empty, Pagination, Skeleton, Space } from "antd";
 
 // quantity of products per page
 const pageSize = 6;
 
 const Order = () => {
+	const { trans } = useContext(LangContext);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const {
 		isPending,
@@ -42,7 +43,7 @@ const Order = () => {
 	}, [currentPage, refetch]);
 
 	return (
-		<div className="relative ">
+		<div className="relative min-h-lvh">
 			<div className="max-w-screen-xl px-2 py-4 mx-auto mt-8">
 				<h1 className="mb-2 text-2xl font-bold">
 					{lang.trans({
@@ -50,6 +51,18 @@ const Order = () => {
 						en: "Product list available",
 					})}
 				</h1>
+
+				{totalProducts === 0 && (
+					<div className="grid w-full mx-auto my-16 place-items-center">
+						<Empty
+							className="p-4 bg-white border rounded-md"
+							description={trans({
+								en: "Currently, our product is not available for sale. Please come back later.",
+								vi: "Hiện tại, chúng tôi chưa mở bán sản phẩm nào",
+							})}
+						/>
+					</div>
+				)}
 				<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
 					{isPending && (
 						<Space>
@@ -58,21 +71,24 @@ const Order = () => {
 							<Skeleton.Input active />
 						</Space>
 					)}
+
 					{products &&
 						(products as IProduct[]).map((product) => (
 							<ProductItem key={product._id} product={product} />
 						))}
 				</div>
 			</div>
-			<div className="p-2 pb-8 mx-auto w-fit">
-				<Pagination
-					className="p-2 bg-white border rounded-md "
-					total={totalProducts}
-					defaultCurrent={1}
-					defaultPageSize={pageSize}
-					onChange={(page) => changePage(page)}
-				/>
-			</div>
+			{totalProducts && totalProducts > 0 && (
+				<div className="p-2 pb-8 mx-auto w-fit">
+					<Pagination
+						className="p-2 bg-white border rounded-md "
+						total={totalProducts}
+						defaultCurrent={1}
+						defaultPageSize={pageSize}
+						onChange={(page) => changePage(page)}
+					/>
+				</div>
+			)}
 
 			<Wave
 				className="absolute bottom-0.5 left-0 right-0 -z-[1] h-20 lg:h-40 translate-y-1 "
