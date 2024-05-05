@@ -43,7 +43,7 @@ const getBase64 = (file: FileType): Promise<string> =>
 		reader.onerror = (error) => reject(error);
 	});
 
-const CreateProductPage = () => {
+const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
 	const [, context] = message.useMessage();
 	const { trans } = useContext(LangContext);
 	const [price, setPrice] = useState(0);
@@ -96,13 +96,6 @@ const CreateProductPage = () => {
 		const { name, description } = values;
 		const images = imgList.map((img) => img.filepath);
 
-		console.log({
-			name,
-			description,
-			price,
-			discount,
-			images,
-		});
 		try {
 			const result = await createProduct({
 				name,
@@ -111,9 +104,9 @@ const CreateProductPage = () => {
 				discount,
 				images,
 			});
-			console.log(result);
 			if (result) {
 				message.success("Product created successfully");
+				returnHome();
 			}
 		} catch (err) {
 			console.error(err);

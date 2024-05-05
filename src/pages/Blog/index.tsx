@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { getAllArticles, getArticleSize } from "../../services/articleService";
 import Wave from "react-wavify";
+import EmptySVG from "./undraw_adventure_map_hnin.svg?react";
 
 const pageSize = 10;
 
@@ -44,6 +45,19 @@ const Blog = () => {
 				<h1 className="mt-8 text-2xl font-bold text-center">
 					{trans({ en: "Blog", vi: "Bài viết" })}
 				</h1>
+
+				{(!articles || articles.length) === 0 && (
+					<div className="mt-8">
+						<p className="text-center text-gray-500">
+							{trans({
+								en: "Hiện tại, chúng tôi chưa có bài viết nào",
+								vi: "Hiện tại chúng tôi chưa có bài viết nào",
+							})}
+						</p>
+						<EmptySVG className="w-1/2 mx-auto max-w-[800px] max-h-[500px]" />
+					</div>
+				)}
+
 				<div className="flex flex-col gap-10 mt-8">
 					{articles &&
 						articles.map((post) => (

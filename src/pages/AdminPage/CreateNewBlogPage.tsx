@@ -19,7 +19,7 @@ import {
 } from "antd/es/upload";
 import { PlusOutlined } from "@ant-design/icons";
 import SACSunEditor from "./SACSunEditor";
-import { createArticle } from "../../services/articleService";
+import { createArticle } from "../../services/articleService"; 	
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -39,7 +39,7 @@ type FieldType = {
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 	console.log("Failed:", errorInfo);
 };
-const CreateNewBlogPage = () => {
+const CreateNewBlogPage = ({ returnHome }: { returnHome: VoidFunction }) => {
 	const { trans } = useContext(LangContext);
 	const [, context] = message.useMessage();
 	const [content, setContent] = useState<string>("");
@@ -93,6 +93,7 @@ const CreateNewBlogPage = () => {
 			});
 			if (result) {
 				message.success("Create article successfully");
+				returnHome();
 			} else {
 				message.error("Create article failed");
 			}

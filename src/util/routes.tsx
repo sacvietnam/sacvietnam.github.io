@@ -15,7 +15,7 @@ const Blog = React.lazy(() => import("../pages/Blog"));
 const ProductDetail = React.lazy(() => import("../pages/ProductDetail"));
 const UserCart = React.lazy(() => import("../pages/UserCart"));
 const BlogArticle = React.lazy(() => import("../pages/BlogArticle"));
-const AdminPage = React.lazy(() => import("../components/AdminPage"));
+const AdminPage = React.lazy(() => import("../pages/AdminPage"));
 
 type Props = {
 	children?: React.ReactNode;

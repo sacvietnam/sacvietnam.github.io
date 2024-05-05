@@ -66,4 +66,5 @@ export interface IProduct {
 	inventory: number;
 	rate: number;
 	quantityRate: number;
+	sold: number;
 }

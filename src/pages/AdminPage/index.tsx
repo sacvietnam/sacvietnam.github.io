@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
-import useMobile from "../../hooks/useMobile";
+import useMobile from "../../hooks/useMobile.js";
 import { LangContext, MultilangContent } from "../../contexts/LangContext.js";
 
 import { IoIosArrowBack } from "react-icons/io";
@@ -36,12 +36,16 @@ const AdminPage = () => {
 		},
 	];
 
+	const returnHome = () => {
+		setIndex(-1);
+	};
+
 	const currentFunction = useMemo(() => {
 		switch (index) {
 			case 0:
-				return <CreateProductPage />;
+				return <CreateProductPage returnHome={returnHome} />;
 			case 1:
-				return <CreateNewBlogPage />;
+				return <CreateNewBlogPage returnHome={returnHome} />;
 			default:
 				return (
 					<>
