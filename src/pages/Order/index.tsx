@@ -68,23 +68,23 @@ const Order = () => {
 						<>
 							<Space className="flex flex-col">
 								<Skeleton.Image style={{ width: "200px", height: "200px" }} />
-								<Skeleton.Input/>
-								<Skeleton.Input/>
+								<Skeleton.Input />
+								<Skeleton.Input />
 							</Space>
 							<Space className="flex flex-col">
 								<Skeleton.Image style={{ width: "200px", height: "200px" }} />
-								<Skeleton.Input/>
-								<Skeleton.Input/>
+								<Skeleton.Input />
+								<Skeleton.Input />
 							</Space>
 							<Space className="flex flex-col">
 								<Skeleton.Image style={{ width: "200px", height: "200px" }} />
-								<Skeleton.Input/>
-								<Skeleton.Input/>
+								<Skeleton.Input />
+								<Skeleton.Input />
 							</Space>
 							<Space className="flex flex-col">
 								<Skeleton.Image style={{ width: "200px", height: "200px" }} />
-								<Skeleton.Input/>
-								<Skeleton.Input/>
+								<Skeleton.Input />
+								<Skeleton.Input />
 							</Space>
 						</>
 					)}

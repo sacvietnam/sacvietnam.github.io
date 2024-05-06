@@ -58,8 +58,8 @@ const Application = () => {
 					<PhoneMockup />
 				</div>
 				<div className="flex flex-col justify-around order-3 w-full h-full">
-					{secondBlockFetures.map((item) => (
-						<div className="w-full p-2 lg:p-8">
+					{secondBlockFetures.map((item, index) => (
+						<div className="w-full p-2 lg:p-8" key={index}>
 							<FeatureItem
 								show={showAll}
 								className="w-full h-[150px] md:h-[200px]"
