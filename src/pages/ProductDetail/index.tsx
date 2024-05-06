@@ -17,14 +17,13 @@ import ProductInfo from "./ProductInfo";
 import FeedbackBlock from "./FeedbackBlock";
 import { CartStorageHandler } from "../../util/localStorage/LocalStorageHandler";
 import { motion } from "framer-motion";
-import { useMetaTags } from "react-metatags-hook";
 
 const pageSize = 10;
 
 const ProductDetail = () => {
 	const { id } = useParams();
 	const [, messageContext] = message.useMessage();
-	const { language, trans } = useContext(LangContext);
+	const { trans } = useContext(LangContext);
 	const { user } = useContext(GlobalContext);
 	const {
 		data: product,
@@ -39,49 +38,6 @@ const ProductDetail = () => {
 	const [feedbacks, setFeedbacks] = useState<IFeedback[]>([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const feedbackBlockRef = useRef<HTMLDivElement>(null);
-	useMetaTags(
-		{
-			title: product?.name,
-			description: product?.description,
-			charset: "utf8",
-			lang: language,
-			metas: [
-				{
-					name: "keywords",
-					content:
-						"air cooling belt, smartairconclothing, sac, sacvietnam, iuh",
-				},
-				{ name: "robots", content: "index, follow" },
-				{
-					name: "url",
-					content: `http://smartairconclothing.com/#/order/product/${id}`,
-				},
-				{ property: "fb:app_id", content: "1234567890" },
-				{ "http-equiv": "Cache-Control", content: "no-cache" },
-			],
-			links: [
-				{ rel: "canonical", href: "http://smartairconclothing.com" },
-				{ rel: "icon", type: "image/ico", href: "/favicon.ico" },
-				{
-					rel: "apple-touch-icon",
-					sizes: "72x72",
-					type: "image/png",
-					href: "/apple-72.png",
-				},
-			],
-			openGraph: {
-				title: "Page Title",
-				image: product?.images[0],
-				site_name: "My Site",
-			},
-			twitter: {
-				card: "summary",
-				creator: "@smartairconclothing",
-				title: product?.name,
-			},
-		},
-		[id, product]
-	);
 
 	const changePage = (page: number) => {
 		setCurrentPage(page);

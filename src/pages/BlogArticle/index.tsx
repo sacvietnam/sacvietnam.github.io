@@ -7,7 +7,6 @@ import { getArticleById } from "../../services/articleService";
 import { Spin } from "antd";
 import NotFoundBlock from "../../components/NotFoundBlock";
 import HTMLParser from "../../util/format/HTMLParser";
-import { useMetaTags } from "react-metatags-hook";
 declare global {
 	interface Window {
 		googleTranslateElementInit: () => void;
@@ -15,57 +14,13 @@ declare global {
 }
 const BlogArticle = () => {
 	const { id } = useParams<{ id: string }>();
-	const { language, trans } = useContext(LangContext);
+	const { trans } = useContext(LangContext);
 
 	const { data: article, isLoading } = useQuery({
 		queryKey: ["article", "/id"],
 		queryFn: () => getArticleById(id as string),
 		select: (response) => response as IArticle,
 	});
-
-	useMetaTags(
-		{
-			title: article?.title,
-			description: article?.description,
-			charset: "utf8",
-			lang: language,
-			metas: [
-				{
-					name: "keywords",
-					content:
-						"air cooling belt, smartairconclothing, sac, sacvietnam, iuh",
-				},
-				{ name: "robots", content: "index, follow" },
-				{
-					name: "url",
-					content: `http://smartairconclothing.com/#/article/${id}`,
-				},
-				{ property: "fb:app_id", content: "1234567890" },
-				{ "http-equiv": "Cache-Control", content: "no-cache" },
-			],
-			links: [
-				{ rel: "canonical", href: "http://smartairconclothing.com" },
-				{ rel: "icon", type: "image/ico", href: "/favicon.ico" },
-				{
-					rel: "apple-touch-icon",
-					sizes: "72x72",
-					type: "image/png",
-					href: "/apple-72.png",
-				},
-			],
-			openGraph: {
-				title: "Page Title",
-				image: article?.image,
-				site_name: "My Site",
-			},
-			twitter: {
-				card: "summary",
-				creator: "@smartairconclothing",
-				title: article?.title,
-			},
-		},
-		[id, article]
-	);
 
 	if (isLoading) {
 		<div className="max-w-screen-xl min-h-screen px-2 py-4 mx-auto mt-8">

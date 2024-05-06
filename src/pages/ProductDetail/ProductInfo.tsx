@@ -18,7 +18,7 @@ const ProductInfo = ({ product, onAddItem }: ProductInfoProps) => {
 	const { user } = useContext(GlobalContext);
 	const [quantity, setQuantity] = useState<number>(1);
 	return (
-		<motion.div 
+		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			className="relative grid grid-cols-1 gap-8 md:grid-cols-2"
@@ -39,10 +39,10 @@ const ProductInfo = ({ product, onAddItem }: ProductInfoProps) => {
 						/>
 					))}
 				</div>
-				<div className="col-span-7">
+				<div className="grid col-span-7 place-items-center">
 					<Image
 						src={product?.images[index]}
-						className="object-cover w-full"
+						className="object-cover w-full max-h-[400px] "
 						placeholder={
 							<Image
 								preview={false}

@@ -10,9 +10,12 @@ import { IconType } from "react-icons";
 import { Button } from "antd";
 import CreateProductPage from "./CreateProductPage.js";
 import CreateNewBlogPage from "./CreateNewBlogPage.js";
+import { GlobalContext } from "../../contexts/GlobalContext.js";
+import { Link } from "react-router-dom";
 
 const AdminPage = () => {
 	const isMobile = useMobile();
+	const { user } = useContext(GlobalContext);
 	const { trans } = useContext(LangContext);
 	const [index, setIndex] = useState<number>(-1);
 
@@ -72,6 +75,20 @@ const AdminPage = () => {
 			});
 		};
 	}, [index]);
+
+	if (!user || user.role !== "admin") {
+		return (
+			<div className="flex flex-col justify-center max-w-screen-lg px-8 mx-auto mt-16">
+				<h1 className="my-8 text-3xl text-center text-red-500">
+					What are you doing here? 😈
+				</h1>
+				<p className="my-2 mb-8 italic text-center text-gray-500">This funciton is not for you role, try to ask thanhcanhit</p>
+				<Link to={"/"}>
+					<Button type="primary" block size="large">BACK TO HOME</Button>
+				</Link>
+			</div>
+		);
+	}
 
 	if (isMobile)
 		return (

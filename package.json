@@ -31,7 +31,6 @@
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.12.0",
 		"react-intersection-observer": "^9.5.3",
-		"react-metatags-hook": "^2.0.0",
 		"react-router-dom": "^6.21.1",
 		"react-wavify": "^1.10.0",
 		"styled-components": "^6.1.6",

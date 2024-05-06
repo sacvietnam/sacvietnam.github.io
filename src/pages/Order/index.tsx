@@ -63,13 +63,30 @@ const Order = () => {
 						/>
 					</div>
 				)}
-				<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
+				<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
 					{isPending && (
-						<Space>
-							<Skeleton.Button active />
-							<Skeleton.Avatar active />
-							<Skeleton.Input active />
-						</Space>
+						<>
+							<Space className="flex flex-col">
+								<Skeleton.Image style={{ width: "200px", height: "200px" }} />
+								<Skeleton.Input/>
+								<Skeleton.Input/>
+							</Space>
+							<Space className="flex flex-col">
+								<Skeleton.Image style={{ width: "200px", height: "200px" }} />
+								<Skeleton.Input/>
+								<Skeleton.Input/>
+							</Space>
+							<Space className="flex flex-col">
+								<Skeleton.Image style={{ width: "200px", height: "200px" }} />
+								<Skeleton.Input/>
+								<Skeleton.Input/>
+							</Space>
+							<Space className="flex flex-col">
+								<Skeleton.Image style={{ width: "200px", height: "200px" }} />
+								<Skeleton.Input/>
+								<Skeleton.Input/>
+							</Space>
+						</>
 					)}
 
 					{products &&
@@ -78,7 +95,7 @@ const Order = () => {
 						))}
 				</div>
 			</div>
-			{totalProducts && totalProducts > 0 && (
+			{totalProducts && (
 				<div className="p-2 pb-8 mx-auto w-fit">
 					<Pagination
 						className="p-2 bg-white border rounded-md "
