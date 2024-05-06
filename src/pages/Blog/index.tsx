@@ -50,7 +50,7 @@ const Blog = () => {
 					<div className="mt-8">
 						<p className="text-center text-gray-500">
 							{trans({
-								en: "Hiện tại, chúng tôi chưa có bài viết nào",
+								en: "Currently, we do not have any articles",
 								vi: "Hiện tại chúng tôi chưa có bài viết nào",
 							})}
 						</p>
@@ -98,15 +98,17 @@ const Blog = () => {
 				</div>
 			</div>
 
-			<div className="p-2 pb-8 mx-auto w-fit">
-				<Pagination
-					className="p-2 bg-white border rounded-md "
-					total={total}
-					defaultCurrent={1}
-					defaultPageSize={pageSize}
-					onChange={(page) => changePage(page)}
-				/>
-			</div>
+			{articles && articles.length > 0 && (
+				<div className="p-2 pb-8 mx-auto w-fit">
+					<Pagination
+						className="p-2 bg-white border rounded-md "
+						total={total}
+						defaultCurrent={1}
+						defaultPageSize={pageSize}
+						onChange={(page) => changePage(page)}
+					/>
+				</div>
+			)}
 
 			<Wave
 				className="absolute bottom-0.5 left-0 right-0 -z-[1] h-20 lg:h-40 translate-y-1 "
