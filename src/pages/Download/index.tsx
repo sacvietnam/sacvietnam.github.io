@@ -6,18 +6,23 @@ import { Image, Spin } from "antd";
 import { motion } from "framer-motion";
 import Each from "../../util/Each";
 import appImgs from "../../assets/imgs/appImgs";
-import { LangContext } from "../../contexts/LangContext";
+import { LangContext, MultilangContent } from "../../contexts/LangContext";
 
 const appInfo: {
 	releaseDate: string;
 	version: string;
 	size: string;
-	apk: string;
+	apkHref: string;
+	versionDetail: MultilangContent;
 } = {
-	releaseDate: "17/01/2024",
-	version: "1.1",
-	size: "45mb",
-	apk: "https://sacvietnam.github.io/apk/SAC%20Remote%201.1.apk",
+	releaseDate: "01/06/2024",
+	version: "2.0",
+	size: "68.86mb",
+	apkHref: "/apk/Sac Remote 2.0.apk",
+	versionDetail: {
+		en: "Fix bugs and improve performance, add Vietnamese language support",
+		vi: "Sửa lỗi và cải thiện hiệu suất, thêm hỗ trợ ngôn ngữ tiếng Việt",
+	},
 };
 
 const Download = () => {
@@ -91,7 +96,7 @@ const Download = () => {
 						) : (
 							<a
 								onClick={() => setClicked(true)}
-								href="/apk/SAC Remote 1.1.apk"
+								href={appInfo.apkHref}
 								target="_blank"
 								className="mx-auto md:mx-0 w-fit"
 							>
@@ -107,6 +112,13 @@ const Download = () => {
 					</div>
 				</div>
 				<div className="w-full mt-8">
+					<h3 className="mb-2 text-xl">
+						{trans({
+							en: "Version details:",
+							vi: "Chi tiết phiên bản:",
+						})}
+					</h3>
+					<p className="mb-4 ml-2 text-md">* {trans(appInfo.versionDetail)}</p>
 					<h3 className="mb-2 text-xl">
 						{trans({
 							en: "Some images of the software:",

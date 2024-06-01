@@ -35,7 +35,7 @@ const BlogArticle = () => {
 	return (
 		<div className="mb-16">
 			<article
-				className="max-w-screen-lg mx-auto mt-8"
+				className="max-w-screen-lg pb-16 mx-auto mt-8 mb-16"
 				id="google_translate_element"
 			>
 				{/* Heading */}

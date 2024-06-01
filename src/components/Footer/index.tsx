@@ -63,8 +63,8 @@ const Footer = () => {
 									href="https://maps.app.goo.gl/KHdGvGRkz3PPztaU7"
 								>
 									{trans({
-										en: "X7.02 LAB, 12 Nguyen Van Bao, Ward 4, District Go Vap, Ho Chi Minh City, Viet Nam",
-										vi: "X7.02 LAB, Số 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, Thành phố Hồ Chí Minh",
+										en: "Building V7, Room 02 - Programing Lab, 12 Nguyen Van Bao, Ward 4, Go Vap District, Ho Chi Minh City, VietNam",
+										vi: "Tòa V, Phòng 7.2, Số 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, Thành phố Hồ Chí Minh",
 									})}
 								</a>
 							</h3>

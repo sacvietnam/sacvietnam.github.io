@@ -10,11 +10,11 @@ const option: SunEditorOptions = {
 	mode: "classic",
 	rtl: false,
 	katex: "window.katex",
-	imageWidth: "800",
-	imageHeight: "600",
 	imageRotation: true,
 	imageUploadUrl: "",
 	imageUploadSizeLimit: 15000000,
+	popupDisplay: "full",
+	imageResizing: false,
 	videoFileInput: false,
 	tabDisable: false,
 	buttonList: [
