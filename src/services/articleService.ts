@@ -66,6 +66,20 @@ const createArticle = async ({
   return response.data.article;
 };
 
+const updateArticle = async (
+  { title, description, image, content }: Partial<IArticle>,
+  _id: string,
+): Promise<boolean> => {
+  const response = await axiosJWT.patch(`/articles/${_id}`, {
+    title,
+    description,
+    image,
+    content,
+  });
+
+  return response.status === 200;
+};
+
 export {
   getAllArticles,
   getArticleById,
@@ -74,6 +88,7 @@ export {
   getDeletedArticles,
   hardDeleteArticle,
   createArticle,
+  updateArticle,
   restoreDeletedArticle,
   softDeleteArticle,
 };

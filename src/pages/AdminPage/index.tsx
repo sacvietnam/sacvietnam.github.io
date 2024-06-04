@@ -13,10 +13,10 @@ import { IconType } from "react-icons";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext.js";
 import BlogManager from "./BlogManager.js";
-import CreateNewBlogPage from "./CreateNewBlogPage.js";
 import CreateProductPage from "./CreateProductPage.js";
 import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler.js";
 import ArticleRecycleBin from "./ArticleRecycleBin.js";
+import BlogEditor from "../../components/BlogEditor/index.js";
 
 const localIndexPage = LocalStorageHandler.getItem<number>("ADMIN_INDEX_PAGE");
 
@@ -25,49 +25,60 @@ const FUNCTION_INDEX = {
   CREATE_BLOG: 1,
   BLOG_MANAGER: 2,
   ARTICLE_RECYCLE_BIN: 3,
+  EDIT_BLOG: 4,
 };
 
 export type AdminFunctionIndex = keyof typeof FUNCTION_INDEX;
+
+const functions: {
+  name: MultilangContent;
+  icon: IconType | null;
+  hidden?: boolean;
+}[] = [
+  {
+    name: {
+      en: "Create new Product",
+      vi: "Tạo Sản phẩm mới",
+    },
+    icon: IoBagAdd,
+  },
+  {
+    name: {
+      en: "Create new Blog",
+      vi: "Tạo Bài viết mới",
+    },
+    icon: FaPager,
+  },
+  {
+    name: {
+      en: "Blog Manager",
+      vi: "Quản lí bài viết",
+    },
+    icon: BiMessageSquareEdit,
+  },
+  {
+    name: {
+      en: "Deleted Articles",
+      vi: "Bài viết đã xóa",
+    },
+    icon: FaRegTrashCan,
+  },
+  {
+    name: {
+      en: "Edit Blog",
+      vi: "Chỉnh sửa bài viết",
+    },
+    hidden: true,
+    icon: null,
+  },
+];
 
 const AdminPage = () => {
   const isMobile = useMobile();
   const { user } = useContext(GlobalContext);
   const { trans } = useContext(LangContext);
+  const [objectId, setObjectId] = useState<string>("");
   const [index, setIndex] = useState<number>(Number(localIndexPage));
-
-  const functions: {
-    name: MultilangContent;
-    icon: IconType;
-  }[] = [
-    {
-      name: {
-        en: "Create new Product",
-        vi: "Tạo Sản phẩm mới",
-      },
-      icon: IoBagAdd,
-    },
-    {
-      name: {
-        en: "Create new Blog",
-        vi: "Tạo Bài viết mới",
-      },
-      icon: FaPager,
-    },
-    {
-      name: {
-        en: "Blog Manager",
-        vi: "Quản lí bài viết",
-      },
-      icon: BiMessageSquareEdit,
-    },
-    {
-      name: {
-        en: "Deleted Articles",
-        vi: "Bài viết đã xóa",
-      },
-      icon: FaRegTrashCan,
-    },
-  ];
 
   const returnHome = () => {
     setIndex(-1);
@@ -82,11 +93,15 @@ const AdminPage = () => {
       case FUNCTION_INDEX.CREATE_PRODUCT:
         return <CreateProductPage returnHome={returnHome} />;
       case FUNCTION_INDEX.CREATE_BLOG:
-        return <CreateNewBlogPage returnHome={returnHome} />;
+        return <BlogEditor action="create" />;
       case FUNCTION_INDEX.BLOG_MANAGER:
-        return <BlogManager changeFunction={changeFunction} />;
+        return (
+          <BlogManager changeFunction={changeFunction} setId={setObjectId} />
+        );
       case FUNCTION_INDEX.ARTICLE_RECYCLE_BIN:
         return <ArticleRecycleBin />;
+      case FUNCTION_INDEX.EDIT_BLOG:
+        return <BlogEditor action="edit" id={objectId} />;
       default:
         return (
           <>
@@ -94,7 +109,7 @@ const AdminPage = () => {
           </>
         );
     }
-  }, [index]);
+  }, [index, objectId]);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -116,6 +131,7 @@ const AdminPage = () => {
 
   // sync with local storage
   useEffect(() => {
+    if (functions[index]?.hidden) return;
     LocalStorageHandler.setItem("ADMIN_INDEX_PAGE", JSON.stringify(index));
   }, [index]);
 
@@ -166,18 +182,22 @@ const AdminPage = () => {
           <span className="block text-primary">The sharks team</span>
         </h1>
         <div className="grid grid-cols-3 gap-8 mt-8 lg:gap-16 lg:grid-cols-5">
-          {functions.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => setIndex(index)}
-              className="grid gap-4 p-4 border rounded-md cursor-pointer hover:shadow-md place-items-center w-[200px] h-[150px] group select-none"
-            >
-              <div className="text-3xl text-gray-500 transition-colors group-hover:text-primary">
-                <item.icon />
+          {functions.map((item, index) =>
+            !item.hidden ? (
+              <div
+                key={index}
+                onClick={() => setIndex(index)}
+                className="grid gap-4 p-4 border rounded-md cursor-pointer hover:shadow-md place-items-center w-[200px] h-[150px] group select-none"
+              >
+                <div className="text-3xl text-gray-500 transition-colors group-hover:text-primary">
+                  {item.icon ? <item.icon /> : <></>}
+                </div>
+                <p className="font-semibold text-center">{trans(item.name)}</p>
               </div>
-              <p className="font-semibold text-center">{trans(item.name)}</p>
-            </div>
-          ))}
+            ) : (
+              <></>
+            ),
+          )}
         </div>
       </div>
     );

@@ -45,6 +45,7 @@ const ArticleRecycleBin = () => {
   const { trans } = useContext(LangContext);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [, contextHolder] = message.useMessage();
+  const [rerender, setRerender] = useState<boolean>(false);
 
   const { data: total } = useQuery({
     queryKey: ["articlesSize"],
@@ -55,11 +56,16 @@ const ArticleRecycleBin = () => {
     const isCompleted = await hardDeleteArticle(id);
     if (isCompleted) {
       message.success("Delete article successfully");
+      handleRerender();
     }
   };
 
   const handleCancel = () => {
     console.log("Clicked cancel button");
+  };
+
+  const handleRerender = () => {
+    setRerender((prev) => !prev);
   };
 
   const columnsWithAction: TableProps<IArticle>["columns"] = [
@@ -93,15 +99,17 @@ const ArticleRecycleBin = () => {
   return (
     <>
       {contextHolder}
-      <TableDataManager<IArticle>
-        currentPage={currentPage}
-        pageSize={pageSize}
-        setPage={setCurrentPage}
-        total={total || 0}
-        queryFn={getDeletedArticles}
-        queryKey="deletedArticles"
-        columns={columnsWithAction}
-      />
+      <div key={JSON.stringify(rerender)}>
+        <TableDataManager<IArticle>
+          currentPage={currentPage}
+          pageSize={pageSize}
+          setPage={setCurrentPage}
+          total={total || 0}
+          queryFn={getDeletedArticles}
+          queryKey="deletedArticles"
+          columns={columnsWithAction}
+        />
+      </div>
     </>
   );
 };

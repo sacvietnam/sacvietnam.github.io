@@ -8,9 +8,12 @@ import {
   Upload,
   message,
 } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LangContext } from "../../contexts/LangContext";
-import { uploadFileToTemp } from "../../services/fileService";
+import {
+  uploadFileToOwner,
+  uploadFileToTemp,
+} from "../../services/fileService";
 import {
   RcFile,
   UploadChangeParam,
@@ -18,11 +21,15 @@ import {
   UploadProps,
 } from "antd/es/upload";
 import { PlusOutlined } from "@ant-design/icons";
-import SACSunEditor from "./SACSunEditor";
-import { createArticle } from "../../services/articleService";
+import SACSunEditor from "../../components/BlogEditor/SACSunEditor";
+import {
+  createArticle,
+  getArticleById,
+  updateArticle,
+} from "../../services/articleService";
+import { useNavigate } from "react-router-dom";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
-
 const getBase64 = (file: FileType): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -35,13 +42,21 @@ type FieldType = {
   title: string;
   description: string;
 };
-
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
-const CreateNewBlogPage = ({ returnHome }: { returnHome: VoidFunction }) => {
+
+type BlogEditorProps = {
+  action: "create" | "edit";
+  id?: string;
+  onComplete?: () => void;
+};
+
+const BlogEditor = ({ action, id, onComplete }: BlogEditorProps) => {
   const { trans } = useContext(LangContext);
   const [, context] = message.useMessage();
+  const navigate = useNavigate();
+  const [article, setArticle] = useState<IArticle | null>(null);
   const [content, setContent] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -57,7 +72,12 @@ const CreateNewBlogPage = ({ returnHome }: { returnHome: VoidFunction }) => {
   };
 
   const handleUploadAction = async (file: RcFile) => {
-    const path = await uploadFileToTemp(file, "article");
+    let path: string;
+    if (action === "edit" && article) {
+      path = await uploadFileToOwner(file, article._id, "article");
+    } else {
+      path = await uploadFileToTemp(file, "article");
+    }
     setImage(path);
     return path;
   };
@@ -71,7 +91,7 @@ const CreateNewBlogPage = ({ returnHome }: { returnHome: VoidFunction }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleUploadChange = (info: UploadChangeParam<UploadFile<any>>) => {
     const { status } = info.file;
-    if (status !== "uploading") {
+    if (status === "uploading") {
       message.loading(`${info.file.name} file uploading...`);
     }
     if (status === "done") {
@@ -82,34 +102,68 @@ const CreateNewBlogPage = ({ returnHome }: { returnHome: VoidFunction }) => {
   };
   const handleSubmit = async (values: FieldType) => {
     const { title, description } = values;
-    console.table({ title, description, image, content });
 
     try {
-      const result = await createArticle({
-        title,
-        description,
-        content,
-        image,
-      });
+      const result = await (action === "edit" && article
+        ? updateArticle(
+            {
+              title,
+              description,
+              content,
+              image,
+            },
+            article._id,
+          )
+        : createArticle({
+            title,
+            description,
+            content,
+            image,
+          }));
+
+      const id = article?._id || (result as IArticle)._id;
+
       if (result) {
-        message.success("Create article successfully");
-        returnHome();
-      } else {
-        message.error("Create article failed");
+        message.success(
+          action === "edit"
+            ? "Update article successfully"
+            : "Create article successfully",
+        );
+        onComplete && onComplete();
+        navigate(`/blog/${id}`);
       }
     } catch (err) {
-      message.error("Create article failed (duplicate title)");
+      message.error(
+        action === "edit" ? "Update article failed" : "Create article failed",
+      );
     }
   };
+
+  useEffect(() => {
+    if (action === "edit" && id) {
+      const fetchData = async () => {
+        const article = await getArticleById(id);
+        setArticle(article);
+        setContent(article.content);
+        setImage(article.image);
+      };
+
+      fetchData();
+    }
+  }, [action, id]);
 
   return (
     <>
       {context}
       <Form
+        key={article?._id || "create"}
         name="login"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
+        initialValues={{
+          title: article?.title || "",
+          description: article?.description || "",
+        }}
         onFinish={handleSubmit}
         onFinishFailed={onFinishFailed}
         autoComplete="on"
@@ -152,24 +206,32 @@ const CreateNewBlogPage = ({ returnHome }: { returnHome: VoidFunction }) => {
             vi: "Hình ảnh đại diện bài viết",
           })}
         >
-          <Upload
-            action={handleUploadAction}
-            onChange={handleUploadChange}
-            listType="picture-card"
-            showUploadList
-            hasControlInside
-            onPreview={handleUploadPreview}
-            onRemove={handleRemoveImage}
-            className="my-2"
-            maxCount={1}
-          >
-            {!image ? (
+          <div className="flex flex-col gap-4 ">
+            {article?.image === image && (
+              <img
+                src={article.image}
+                alt="article preview"
+                style={{ aspectRatio: "16/9" }}
+                className="w-[300px]  object-cover"
+              />
+            )}
+            <Upload
+              action={handleUploadAction}
+              onChange={handleUploadChange}
+              listType="picture-card"
+              showUploadList
+              hasControlInside
+              onPreview={handleUploadPreview}
+              onRemove={handleRemoveImage}
+              className="my-2"
+              maxCount={1}
+            >
               <button style={{ border: 0, background: "none" }} type="button">
                 <PlusOutlined />
                 <div style={{ marginTop: 8 }}>Upload</div>
               </button>
-            ) : null}
-          </Upload>
+            </Upload>
+          </div>
         </Form.Item>
 
         <Form.Item
@@ -192,7 +254,11 @@ const CreateNewBlogPage = ({ returnHome }: { returnHome: VoidFunction }) => {
             className="mt-2 bg-primary"
             htmlType="submit"
           >
-            {trans({ en: "Create new article", vi: "Tạo bài viết" })}
+            {trans(
+              action === "create"
+                ? { en: "Create new article", vi: "Tạo bài viết" }
+                : { en: "Update article", vi: "Cập nhật bài viết" },
+            )}
           </Button>
         </Form.Item>
       </Form>
@@ -212,4 +278,4 @@ const CreateNewBlogPage = ({ returnHome }: { returnHome: VoidFunction }) => {
   );
 };
 
-export default CreateNewBlogPage;
+export default BlogEditor;
