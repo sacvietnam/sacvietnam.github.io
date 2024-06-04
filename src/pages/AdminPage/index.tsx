@@ -6,6 +6,7 @@ import { BiMessageSquareEdit } from "react-icons/bi";
 import { FaPager } from "react-icons/fa6";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoBagAdd } from "react-icons/io5";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 import { Button } from "antd";
 import { IconType } from "react-icons";
@@ -15,8 +16,18 @@ import BlogManager from "./BlogManager.js";
 import CreateNewBlogPage from "./CreateNewBlogPage.js";
 import CreateProductPage from "./CreateProductPage.js";
 import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler.js";
+import ArticleRecycleBin from "./ArticleRecycleBin.js";
 
 const localIndexPage = LocalStorageHandler.getItem<number>("ADMIN_INDEX_PAGE");
+
+const FUNCTION_INDEX = {
+  CREATE_PRODUCT: 0,
+  CREATE_BLOG: 1,
+  BLOG_MANAGER: 2,
+  ARTICLE_RECYCLE_BIN: 3,
+};
+
+export type AdminFunctionIndex = keyof typeof FUNCTION_INDEX;
 
 const AdminPage = () => {
   const isMobile = useMobile();
@@ -49,20 +60,33 @@ const AdminPage = () => {
       },
       icon: BiMessageSquareEdit,
     },
+    {
+      name: {
+        en: "Deleted Articles",
+        vi: "Bài viết đã xóa",
+      },
+      icon: FaRegTrashCan,
+    },
   ];
 
   const returnHome = () => {
     setIndex(-1);
   };
 
+  const changeFunction = (index: AdminFunctionIndex) => {
+    setIndex(FUNCTION_INDEX[index]);
+  };
+
   const currentFunction = useMemo(() => {
     switch (index) {
-      case 0:
+      case FUNCTION_INDEX.CREATE_PRODUCT:
         return <CreateProductPage returnHome={returnHome} />;
-      case 1:
+      case FUNCTION_INDEX.CREATE_BLOG:
         return <CreateNewBlogPage returnHome={returnHome} />;
-      case 2:
-        return <BlogManager />;
+      case FUNCTION_INDEX.BLOG_MANAGER:
+        return <BlogManager changeFunction={changeFunction} />;
+      case FUNCTION_INDEX.ARTICLE_RECYCLE_BIN:
+        return <ArticleRecycleBin />;
       default:
         return (
           <>

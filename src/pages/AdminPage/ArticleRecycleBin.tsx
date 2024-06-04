@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
 import { LangContext } from "../../contexts/LangContext";
 import {
-  getArticleSize,
+  getDeletedArticleSize,
   getDeletedArticles,
-  softDeleteArticle,
+  hardDeleteArticle,
 } from "../../services/articleService";
 import {
   Button,
@@ -15,10 +15,10 @@ import {
   TableProps,
   message,
 } from "antd";
-import { MdEdit } from "react-icons/md";
 import { BsTrash3Fill } from "react-icons/bs";
+import { TbRestore } from "react-icons/tb";
+
 import Formatter from "../../util/format/Formatter";
-import { Link } from "react-router-dom";
 
 const pageSize = 10;
 const columns: TableProps<IArticle>["columns"] = [
@@ -39,12 +39,12 @@ const columns: TableProps<IArticle>["columns"] = [
     title: "Publish At",
     dataIndex: "publishedAt",
     key: "publishedAt",
-    render: (date) => Formatter.toDateTime(date),
+    render: (date) => Formatter.toDate(date),
   },
   {
     title: "Deleted At",
-    dataIndex: "detletedAt",
-    key: "detletedAt",
+    dataIndex: "deletedAt",
+    key: "deletedAt",
     render: (date) => Formatter.toDateTime(date),
   },
 ];
@@ -58,7 +58,7 @@ const ArticleRecycleBin = () => {
     select: (response) => response as IArticle[],
   });
   const handleOK = async (id: string) => {
-    const isCompleted = await softDeleteArticle(id);
+    const isCompleted = await hardDeleteArticle(id);
     if (isCompleted) {
       message.success("Delete article successfully");
       refetch();
@@ -71,7 +71,7 @@ const ArticleRecycleBin = () => {
 
   const { data: total } = useQuery({
     queryKey: ["articlesSize"],
-    queryFn: getArticleSize,
+    queryFn: getDeletedArticleSize,
   });
   const changePage = (page: number) => {
     setCurrentPage(page);
@@ -90,18 +90,6 @@ const ArticleRecycleBin = () => {
       {contextHolder}
       <Table
         size="middle"
-        footer={() => (
-          <div className="grid place-items-end">
-            <Link to="/admin/blog/trash">
-              <Button icon={<BsTrash3Fill />} type="dashed">
-                {trans({
-                  en: "Recover deleted articles",
-                  vi: "Khôi phục bài viết đã xóa",
-                })}
-              </Button>
-            </Link>
-          </div>
-        )}
         columns={[
           ...columns,
           {
@@ -111,14 +99,13 @@ const ArticleRecycleBin = () => {
             width: 100,
             render: (_, record) => (
               <Space size="middle">
-                <Link to="/admin/blog/edit">
-                  <Button icon={<MdEdit />}></Button>
-                </Link>
+                <Button icon={<TbRestore />}></Button>
                 <Popconfirm
                   title="Delete article?"
+                  okType="danger"
                   description={trans({
-                    en: "Are you sure to delete this task? (It can recover later)",
-                    vi: "Bạn có chắc chắn muốn xóa bài viết này không? (Có thể khôi phục sau này)",
+                    en: "Are you sure you want to delete this article? (It can't be restored later)",
+                    vi: "Bạn có chắc chắn muốn xóa bài viết này không? (Không thể khôi phục sau này)",
                   })}
                   onConfirm={() => handleOK(record._id)}
                   onCancel={handleCancel}

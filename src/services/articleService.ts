@@ -15,8 +15,10 @@ const getDeletedArticles = async (
   pageSize = 5,
   page = 1,
 ): Promise<IArticle[]> => {
-  const result = axios.get(`/articles/deleted?limit=${pageSize}&page=${page}`);
-  return (await result).data.allArticle;
+  const result = axiosJWT.get(
+    `/articles/deleted?limit=${pageSize}&page=${page}`,
+  );
+  return (await result).data.deletedArticles;
 };
 
 // READ: Get information of an article by ID
@@ -28,8 +30,22 @@ const getArticleSize = async (): Promise<number> => {
   return (await axios.get("/articles/size")).data.size;
 };
 
+const getDeletedArticleSize = async (): Promise<number> => {
+  return (await axiosJWT.get("/articles/deleted/size")).data.size;
+};
+
 const softDeleteArticle = async (id: string): Promise<boolean> => {
   const response = await axiosJWT.patch(`/articles/${id}/soft-delete`);
+  return response.status === 200;
+};
+
+const hardDeleteArticle = async (id: string): Promise<boolean> => {
+  const response = await axiosJWT.delete(`/articles/${id}`);
+  return response.status === 200;
+};
+
+const restoreDeletedArticle = async (id: string): Promise<boolean> => {
+  const response = await axiosJWT.patch(`/articles/${id}/restore`);
   return response.status === 200;
 };
 
@@ -54,7 +70,10 @@ export {
   getAllArticles,
   getArticleById,
   getArticleSize,
+  getDeletedArticleSize,
   getDeletedArticles,
+  hardDeleteArticle,
   createArticle,
+  restoreDeletedArticle,
   softDeleteArticle,
 };

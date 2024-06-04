@@ -16,7 +16,7 @@ const ProductItem = ({ product }: { product: IProduct }) => {
           <img
             className="h-[300px] object-contain border-b"
             alt={product.name}
-            src={product.images[0]}
+            src={product?.images[0]}
             onError={(e) => {
               e.currentTarget.src = "https://placehold.co/600x400";
             }}

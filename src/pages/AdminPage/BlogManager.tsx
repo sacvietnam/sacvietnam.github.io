@@ -18,7 +18,7 @@ import {
 import { MdEdit } from "react-icons/md";
 import { BsTrash3Fill } from "react-icons/bs";
 import Formatter from "../../util/format/Formatter";
-import { Link } from "react-router-dom";
+import { AdminFunctionIndex } from ".";
 
 const pageSize = 10;
 
@@ -48,7 +48,11 @@ const columns: TableProps<IArticle>["columns"] = [
     key: "view",
   },
 ];
-const BlogManager = () => {
+const BlogManager = ({
+  changeFunction,
+}: {
+  changeFunction(index: AdminFunctionIndex): void;
+}) => {
   const { trans } = useContext(LangContext);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [, contextHolder] = message.useMessage();
@@ -94,14 +98,16 @@ const BlogManager = () => {
         size="middle"
         footer={() => (
           <div className="grid place-items-end">
-            <Link to="/admin/blog/trash">
-              <Button icon={<BsTrash3Fill />} type="dashed">
-                {trans({
-                  en: "Recover deleted articles",
-                  vi: "Khôi phục bài viết đã xóa",
-                })}
-              </Button>
-            </Link>
+            <Button
+              icon={<BsTrash3Fill />}
+              type="dashed"
+              onClick={() => changeFunction("ARTICLE_RECYCLE_BIN")}
+            >
+              {trans({
+                en: "Recover deleted articles",
+                vi: "Khôi phục bài viết đã xóa",
+              })}
+            </Button>
           </div>
         )}
         columns={[
@@ -113,9 +119,7 @@ const BlogManager = () => {
             width: 100,
             render: (_, record) => (
               <Space size="middle">
-                <Link to="/admin/blog/edit">
-                  <Button icon={<MdEdit />}></Button>
-                </Link>
+                <Button icon={<MdEdit />}></Button>
                 <Popconfirm
                   title="Delete article?"
                   description={trans({
