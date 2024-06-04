@@ -18,15 +18,15 @@ const router = createHashRouter(routesObject);
 LocalStorageHandler.initial();
 
 export default function App() {
-	return (
-		<QueryClientProvider client={queryClient}>
-			<GlobalProvider>
-				<LanguageProvider>
-					<React.StrictMode>
-						<RouterProvider router={router} />
-					</React.StrictMode>
-				</LanguageProvider>
-			</GlobalProvider>
-		</QueryClientProvider>
-	);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <GlobalProvider>
+        <LanguageProvider>
+          <React.StrictMode>
+            <RouterProvider router={router} />
+          </React.StrictMode>
+        </LanguageProvider>
+      </GlobalProvider>
+    </QueryClientProvider>
+  );
 }

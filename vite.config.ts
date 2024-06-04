@@ -5,8 +5,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
-	plugins: [svgr(), react(), checker({ typescript: true }), tsconfigPaths()],
-	server: {
-		port: 5173,
-	},
+  plugins: [svgr(), react(), checker({ typescript: true }), tsconfigPaths()],
+  server: {
+    port: 5173,
+  },
 });

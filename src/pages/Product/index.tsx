@@ -4,18 +4,18 @@ import Features from "./Features";
 import ProductBanner from "./ProductBanner";
 
 const Product = () => {
-	return (
-		<>
-			<ProductBanner />
-			<div className="max-w-screen-xl mx-auto">
-				<ProductDesc />
-			</div>
+  return (
+    <>
+      <ProductBanner />
+      <div className="max-w-screen-xl mx-auto">
+        <ProductDesc />
+      </div>
 
-			<Features />
+      <Features />
 
-			<Application />
-		</>
-	);
+      <Application />
+    </>
+  );
 };
 
 export default Product;

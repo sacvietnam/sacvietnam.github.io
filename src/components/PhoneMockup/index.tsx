@@ -7,80 +7,80 @@ import appImgs from "../../assets/imgs/appImgs";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Device = styled.div`
-	background-image: url(${phone});
-	background-repeat: no-repeat;
-	background-size: contain;
-	aspect-ratio: 6/12;
-	max-width: 300px;
-	min-width: 200px;
-	height: fit-content;
-	padding-block: 24px;
-	padding-inline: 16px;
-	position: relative;
-	user-select: none;
+  background-image: url(${phone});
+  background-repeat: no-repeat;
+  background-size: contain;
+  aspect-ratio: 6/12;
+  max-width: 300px;
+  min-width: 200px;
+  height: fit-content;
+  padding-block: 24px;
+  padding-inline: 16px;
+  position: relative;
+  user-select: none;
 `;
 
 const InnerDevice = styled.div`
-	position: absolute;
-	z-index: -1;
-	inset: 0;
-	overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
 `;
 
 const RoundButton = styled(motion.button)`
-	position: absolute;
-	border-radius: 50%;
-	padding: 8px;
-	top: 50%;
-	color: gray;
-	border-width: 1px;
+  position: absolute;
+  border-radius: 50%;
+  padding: 8px;
+  top: 50%;
+  color: gray;
+  border-width: 1px;
 `;
 
 const PhoneMockup = () => {
-	const [index, setIndex] = useState<number>(0);
+  const [index, setIndex] = useState<number>(0);
 
-	const imgSrc = appImgs[index];
+  const imgSrc = appImgs[index];
 
-	const prev = () => {
-		setIndex((prevIndex) => (prevIndex > 0 ? index - 1 : appImgs.length - 1));
-	};
-	const next = () => {
-		setIndex((prevIndex) => (prevIndex < appImgs.length - 1 ? index + 1 : 0));
-	};
+  const prev = () => {
+    setIndex((prevIndex) => (prevIndex > 0 ? index - 1 : appImgs.length - 1));
+  };
+  const next = () => {
+    setIndex((prevIndex) => (prevIndex < appImgs.length - 1 ? index + 1 : 0));
+  };
 
-	return (
-		<Device className="w-[200px] lg:w-[300px]">
-			<InnerDevice className=" md:px-4 md:py-2.5 p-2.5 py-1 overflow-hidden rounded-[50px] md:rounded-[60px]">
-				<AnimatePresence>
-					<motion.img
-						key={index}
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						src={imgSrc}
-						className="object-cover w-full h-full border"
-					/>
-				</AnimatePresence>
-			</InnerDevice>
-			<div>
-				<RoundButton
-					onClick={prev}
-					className="shadow-md -left-9"
-					whileTap={{ scale: 0.9 }}
-					initial={{ y: "-50%" }}
-				>
-					<FaCaretLeft />
-				</RoundButton>
-				<RoundButton
-					onClick={next}
-					className="shadow-md -right-8"
-					whileTap={{ scale: 0.8 }}
-					initial={{ y: "-50%" }}
-				>
-					<FaCaretRight />
-				</RoundButton>
-			</div>
-		</Device>
-	);
+  return (
+    <Device className="w-[200px] lg:w-[300px]">
+      <InnerDevice className=" md:px-4 md:py-2.5 p-2.5 py-1 overflow-hidden rounded-[50px] md:rounded-[60px]">
+        <AnimatePresence>
+          <motion.img
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            src={imgSrc}
+            className="object-cover w-full h-full border"
+          />
+        </AnimatePresence>
+      </InnerDevice>
+      <div>
+        <RoundButton
+          onClick={prev}
+          className="shadow-md -left-9"
+          whileTap={{ scale: 0.9 }}
+          initial={{ y: "-50%" }}
+        >
+          <FaCaretLeft />
+        </RoundButton>
+        <RoundButton
+          onClick={next}
+          className="shadow-md -right-8"
+          whileTap={{ scale: 0.8 }}
+          initial={{ y: "-50%" }}
+        >
+          <FaCaretRight />
+        </RoundButton>
+      </div>
+    </Device>
+  );
 };
 
 export default PhoneMockup;

@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {}
+@layer components {
+}
 
 @layer utilities {
   .hoverable-text {
-    transition: all .3s ease;
-    @apply hover:text-primary
+    transition: all 0.3s ease;
+    @apply hover:text-primary;
   }
 }
 

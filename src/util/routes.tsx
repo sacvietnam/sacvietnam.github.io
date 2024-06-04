@@ -18,99 +18,99 @@ const BlogArticle = React.lazy(() => import("../pages/BlogArticle"));
 const AdminPage = React.lazy(() => import("../pages/AdminPage"));
 
 type Props = {
-	children?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const routes: {
-	path: string;
-	element: React.FC;
-	layout?: React.FC<Props> | null;
+  path: string;
+  element: React.FC;
+  layout?: React.FC<Props> | null;
 }[] = [
-	{
-		path: "/",
-		element: Home,
-	},
-	{
-		path: "/story",
-		element: Story,
-	},
-	{
-		path: "/product",
-		element: Product,
-	},
-	{
-		path: "/download",
-		element: Download,
-	},
-	{
-		path: "/about-us",
-		element: About,
-	},
-	{
-		path: "/order/cart",
-		element: UserCart,
-		layout: OrderLayout as React.FC<Props>,
-	},
-	{
-		path: "/order/product/:id",
-		element: ProductDetail,
-		layout: OrderLayout as React.FC<Props>,
-	},
-	{
-		path: "/order",
-		element: Order,
-		layout: OrderLayout as React.FC<Props>,
-	},
-	{
-		path: "/blog/:id",
-		element: BlogArticle,
-	},
-	{
-		path: "/blog",
-		element: Blog,
-	},
-	{
-		path: "/admin",
-		element: AdminPage,
-	},
+  {
+    path: "/",
+    element: Home,
+  },
+  {
+    path: "/story",
+    element: Story,
+  },
+  {
+    path: "/product",
+    element: Product,
+  },
+  {
+    path: "/download",
+    element: Download,
+  },
+  {
+    path: "/about-us",
+    element: About,
+  },
+  {
+    path: "/order/cart",
+    element: UserCart,
+    layout: OrderLayout as React.FC<Props>,
+  },
+  {
+    path: "/order/product/:id",
+    element: ProductDetail,
+    layout: OrderLayout as React.FC<Props>,
+  },
+  {
+    path: "/order",
+    element: Order,
+    layout: OrderLayout as React.FC<Props>,
+  },
+  {
+    path: "/blog/:id",
+    element: BlogArticle,
+  },
+  {
+    path: "/blog",
+    element: Blog,
+  },
+  {
+    path: "/admin",
+    element: AdminPage,
+  },
 ];
 
 const routesObject: RouteObject[] = routes.map((route) => {
-	// Default layout
-	let element = (
-		<MainLayout>
-			<route.element />
-		</MainLayout>
-	);
+  // Default layout
+  let element = (
+    <MainLayout>
+      <route.element />
+    </MainLayout>
+  );
 
-	// If has alter layout, set it
-	if (route.layout)
-		element = (
-			<route.layout>
-				<route.element />
-			</route.layout>
-		);
-	// If layout is null, return just element
-	else if (route.layout === null) element = <route.element />;
+  // If has alter layout, set it
+  if (route.layout)
+    element = (
+      <route.layout>
+        <route.element />
+      </route.layout>
+    );
+  // If layout is null, return just element
+  else if (route.layout === null) element = <route.element />;
 
-	return {
-		path: route.path,
-		element: (
-			<Suspense
-				fallback={
-					<MainLayout>
-						<div className="container flex items-center justify-center mx-auto w-lvw h-lvh">
-							<Spin />
-						</div>
-					</MainLayout>
-				}
-			>
-				{element}
-			</Suspense>
-		),
-		errorElement: route.path === "/" ? <Error /> : null,
-		id: route.path,
-	};
+  return {
+    path: route.path,
+    element: (
+      <Suspense
+        fallback={
+          <MainLayout>
+            <div className="container flex items-center justify-center mx-auto w-lvw h-lvh">
+              <Spin />
+            </div>
+          </MainLayout>
+        }
+      >
+        {element}
+      </Suspense>
+    ),
+    errorElement: route.path === "/" ? <Error /> : null,
+    id: route.path,
+  };
 });
 
 export default routesObject;
