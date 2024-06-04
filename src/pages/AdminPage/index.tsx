@@ -7,6 +7,7 @@ import { FaPager } from "react-icons/fa6";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoBagAdd } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { FaBoxesStacked } from "react-icons/fa6";
 
 import { Button } from "antd";
 import { IconType } from "react-icons";
@@ -18,89 +19,145 @@ import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler.js"
 import ArticleRecycleBin from "./ArticleRecycleBin.js";
 import BlogEditor from "../../components/BlogEditor/index.js";
 
-const localIndexPage = LocalStorageHandler.getItem<number>("ADMIN_INDEX_PAGE");
-
 const FUNCTION_INDEX = {
+  HOME_PAGE: -1,
   CREATE_PRODUCT: 0,
   CREATE_BLOG: 1,
   BLOG_MANAGER: 2,
   ARTICLE_RECYCLE_BIN: 3,
   EDIT_BLOG: 4,
+  EDIT_PRODUCT: 5,
+  PRODUCT_MANAGER: 6,
+  PRODUCT_RECYCLE_BIN: 7,
 };
+const FUNCTION_GROUP = ["product", "blog", null] as const;
+type FunctionGroup = (typeof FUNCTION_GROUP)[number];
 
 export type AdminFunctionIndex = keyof typeof FUNCTION_INDEX;
+const localIndexPage =
+  LocalStorageHandler.getItem<AdminFunctionIndex>("ADMIN_INDEX_PAGE");
 
 const functions: {
-  name: MultilangContent;
-  icon: IconType | null;
-  hidden?: boolean;
-}[] = [
-  {
+  [key in AdminFunctionIndex]: {
+    name: MultilangContent;
+    icon: IconType | null;
+    group: FunctionGroup;
+    hidden?: boolean;
+  };
+} = {
+  HOME_PAGE: {
     name: {
-      en: "Create new Product",
-      vi: "Tạo Sản phẩm mới",
+      en: "Welcome to admin page",
+      vi: "Chào mừng đến với trang quản trị viên",
     },
-    icon: IoBagAdd,
+    group: null,
+    icon: null,
+    hidden: true,
   },
-  {
+  CREATE_BLOG: {
     name: {
       en: "Create new Blog",
       vi: "Tạo Bài viết mới",
     },
+    group: "blog",
     icon: FaPager,
   },
-  {
+  BLOG_MANAGER: {
     name: {
       en: "Blog Manager",
       vi: "Quản lí bài viết",
     },
+    group: "blog",
     icon: BiMessageSquareEdit,
   },
-  {
+  ARTICLE_RECYCLE_BIN: {
     name: {
       en: "Deleted Articles",
       vi: "Bài viết đã xóa",
     },
+    group: "blog",
     icon: FaRegTrashCan,
   },
-  {
+  EDIT_BLOG: {
     name: {
       en: "Edit Blog",
       vi: "Chỉnh sửa bài viết",
     },
+    group: "blog",
     hidden: true,
     icon: null,
   },
-];
+  CREATE_PRODUCT: {
+    name: {
+      en: "Create new Product",
+      vi: "Tạo Sản phẩm mới",
+    },
+    group: "product",
+    icon: IoBagAdd,
+  },
+  EDIT_PRODUCT: {
+    name: {
+      en: "Edit Blog",
+      vi: "Chỉnh sửa bài viết",
+    },
+    group: "product",
+    hidden: true,
+    icon: null,
+  },
+  PRODUCT_MANAGER: {
+    name: {
+      en: "Product Manager",
+      vi: "Quản lí sản phẩm",
+    },
+    group: "product",
+    icon: FaBoxesStacked,
+  },
+  PRODUCT_RECYCLE_BIN: {
+    name: {
+      en: "Deleted Products",
+      vi: "Sản phẩm đã xóa",
+    },
+    group: "product",
+    icon: FaRegTrashCan,
+  },
+};
+
+// make functions to array
+const functionsArray = Object.keys(functions).map((key) => ({
+  ...functions[key as AdminFunctionIndex],
+  key,
+}));
 
 const AdminPage = () => {
   const isMobile = useMobile();
   const { user } = useContext(GlobalContext);
   const { trans } = useContext(LangContext);
   const [objectId, setObjectId] = useState<string>("");
-  const [index, setIndex] = useState<number>(Number(localIndexPage));
+  const [index, setIndex] = useState<AdminFunctionIndex>(
+    localIndexPage || "HOME_PAGE",
+  );
 
   const returnHome = () => {
-    setIndex(-1);
+    setIndex("HOME_PAGE");
   };
 
-  const changeFunction = (index: AdminFunctionIndex) => {
-    setIndex(FUNCTION_INDEX[index]);
+  const changeFunction = (newIndex: AdminFunctionIndex) => {
+    setIndex(newIndex);
   };
 
   const currentFunction = useMemo(() => {
     switch (index) {
-      case FUNCTION_INDEX.CREATE_PRODUCT:
+      case "CREATE_PRODUCT":
         return <CreateProductPage returnHome={returnHome} />;
-      case FUNCTION_INDEX.CREATE_BLOG:
+      case "CREATE_BLOG":
         return <BlogEditor action="create" />;
-      case FUNCTION_INDEX.BLOG_MANAGER:
+      case "BLOG_MANAGER":
         return (
           <BlogManager changeFunction={changeFunction} setId={setObjectId} />
         );
-      case FUNCTION_INDEX.ARTICLE_RECYCLE_BIN:
+      case "ARTICLE_RECYCLE_BIN":
         return <ArticleRecycleBin />;
-      case FUNCTION_INDEX.EDIT_BLOG:
+      case "EDIT_BLOG":
         return <BlogEditor action="edit" id={objectId} />;
       default:
         return (
@@ -118,7 +175,7 @@ const AdminPage = () => {
       return (event.returnValue = "Are you sure you want to leave the page?");
     };
 
-    if (index !== -1)
+    if (index !== "HOME_PAGE")
       window.addEventListener("beforeunload", onConfirmRefresh, {
         capture: true,
       });
@@ -132,7 +189,7 @@ const AdminPage = () => {
   // sync with local storage
   useEffect(() => {
     if (functions[index]?.hidden) return;
-    LocalStorageHandler.setItem("ADMIN_INDEX_PAGE", JSON.stringify(index));
+    LocalStorageHandler.setItem("ADMIN_INDEX_PAGE", index);
   }, [index]);
 
   if (!user || user.role !== "admin") {
@@ -171,7 +228,7 @@ const AdminPage = () => {
       </div>
     );
 
-  if (index === -1)
+  if (index === "HOME_PAGE")
     return (
       <div className="relative max-w-screen-lg px-2 mx-auto my-4 mt-8">
         <h1 className="mt-2 text-2xl font-semibold text-center">
@@ -181,23 +238,34 @@ const AdminPage = () => {
           })}
           <span className="block text-primary">The sharks team</span>
         </h1>
-        <div className="grid grid-cols-3 gap-8 mt-8 lg:gap-16 lg:grid-cols-5">
-          {functions.map((item, index) =>
-            !item.hidden ? (
-              <div
-                key={index}
-                onClick={() => setIndex(index)}
-                className="grid gap-4 p-4 border rounded-md cursor-pointer hover:shadow-md place-items-center w-[200px] h-[150px] group select-none"
-              >
-                <div className="text-3xl text-gray-500 transition-colors group-hover:text-primary">
-                  {item.icon ? <item.icon /> : <></>}
-                </div>
-                <p className="font-semibold text-center">{trans(item.name)}</p>
+
+        <div className="flex flex-col gap-8 mt-8">
+          {FUNCTION_GROUP.slice(0, 2).map((group) => (
+            <div key={group} className="p-4 border rounded-lg min-h-[230px]">
+              <h3 className="mb-2 text-xl font-semibold capitalize text-primary">
+                {group || "Other"}
+              </h3>
+
+              <div className="grid grid-cols-3 gap-8 lg:gap-16 lg:grid-cols-5">
+                {functionsArray.map((item, index) =>
+                  item.group === group && !item.hidden ? (
+                    <div
+                      key={index}
+                      onClick={() => setIndex(item.key as AdminFunctionIndex)}
+                      className="grid gap-4 p-4 border rounded-md cursor-pointer hover:shadow-md place-items-center w-[200px] h-[150px] group select-none"
+                    >
+                      <div className="text-3xl text-gray-500 transition-colors group-hover:text-primary">
+                        {item.icon ? <item.icon /> : <></>}
+                      </div>
+                      <p className="font-semibold text-center">
+                        {trans(item.name)}
+                      </p>
+                    </div>
+                  ) : null,
+                )}
               </div>
-            ) : (
-              <></>
-            ),
-          )}
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -210,16 +278,19 @@ const AdminPage = () => {
           type="primary"
           className="w-fit"
           icon={<IoIosArrowBack />}
-          onClick={() => setIndex(-1)}
+          onClick={returnHome}
         >
           {trans({ en: "Back", vi: "Quay lại" })}
         </Button>
 
-        <h2 className="flex-auto text-xl font-bold text-center text-primary">
-          {trans(functions[index].name)}
-        </h2>
+        {functions[index]?.name && (
+          <h2 className="flex-auto text-xl font-bold text-center text-primary">
+            {trans(functions[index]?.name)}
+          </h2>
+        )}
       </div>
-      <div className="flex flex-col mt-4">{currentFunction}</div>{" "}
+
+      <div className="flex flex-col mt-4">{currentFunction}</div>
     </div>
   );
 };
