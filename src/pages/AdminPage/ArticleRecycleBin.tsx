@@ -5,6 +5,7 @@ import {
   getDeletedArticleSize,
   getDeletedArticles,
   hardDeleteArticle,
+  restoreDeletedArticle,
 } from "../../services/articleService";
 import { Button, Popconfirm, Space, TableProps, message } from "antd";
 import { BsTrash3Fill } from "react-icons/bs";
@@ -52,10 +53,18 @@ const ArticleRecycleBin = () => {
     queryFn: getDeletedArticleSize,
   });
 
-  const handleOK = async (id: string) => {
+  const handleHardDelete = async (id: string) => {
     const isCompleted = await hardDeleteArticle(id);
     if (isCompleted) {
       message.success("Delete article successfully");
+      handleRerender();
+    }
+  };
+
+  const handleRestore = async (id: string) => {
+    const isCompleted = await restoreDeletedArticle(id);
+    if (isCompleted) {
+      message.success("Restore article successfully");
       handleRerender();
     }
   };
@@ -77,7 +86,20 @@ const ArticleRecycleBin = () => {
       width: 100,
       render: (_, record) => (
         <Space size="middle">
-          <Button icon={<TbRestore />}></Button>
+          <Popconfirm
+            title="Restore article?"
+            okType="primary"
+            description={trans({
+              en: "Are you sure you want to restore this article?",
+              vi: "Bạn có chắc chắn muốn khôi phục bài viết này không?",
+            })}
+            onConfirm={() => handleRestore(record._id)}
+            onCancel={handleCancel}
+            okText="Restore"
+            cancelText="Cancel"
+          >
+            <Button icon={<TbRestore />}></Button>
+          </Popconfirm>
           <Popconfirm
             title="Delete article?"
             okType="danger"
@@ -85,7 +107,7 @@ const ArticleRecycleBin = () => {
               en: "Are you sure you want to delete this article? (It can't be restored later)",
               vi: "Bạn có chắc chắn muốn xóa bài viết này không? (Không thể khôi phục sau này)",
             })}
-            onConfirm={() => handleOK(record._id)}
+            onConfirm={() => handleHardDelete(record._id)}
             onCancel={handleCancel}
             okText="Delete"
             cancelText="Cancel"

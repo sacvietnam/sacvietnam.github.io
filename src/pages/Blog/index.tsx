@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { getAllArticles, getArticleSize } from "../../services/articleService";
 import Wave from "react-wavify";
+import { IoMdEye } from "react-icons/io";
+
 import PaginationDataList from "../../components/PaginationDataList";
 
 const pageSize = 10;
@@ -46,6 +48,10 @@ const Blog = () => {
             <h3 className="text-xl font-semibold hoverable-text">
               {post.title}
             </h3>
+            <div className="flex gap-1">
+              <IoMdEye />
+              <p className="text-sm font-semibold">{post.view}</p>
+            </div>
             <span className="font-semibold text-gray-600 text-md">
               {new Date(post.publishedAt).toLocaleDateString("vi-VN")}
             </span>

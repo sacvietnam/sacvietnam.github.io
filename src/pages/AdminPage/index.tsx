@@ -34,6 +34,7 @@ const FUNCTION_GROUP = ["product", "blog", null] as const;
 type FunctionGroup = (typeof FUNCTION_GROUP)[number];
 
 export type AdminFunctionIndex = keyof typeof FUNCTION_INDEX;
+
 const localIndexPage =
   LocalStorageHandler.getItem<AdminFunctionIndex>("ADMIN_INDEX_PAGE");
 
@@ -188,7 +189,6 @@ const AdminPage = () => {
 
   // sync with local storage
   useEffect(() => {
-    if (functions[index]?.hidden) return;
     LocalStorageHandler.setItem("ADMIN_INDEX_PAGE", index);
   }, [index]);
 

@@ -11,6 +11,9 @@ import { LangContext, MultilangContent } from "../../contexts/LangContext";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { CodeOutlined } from "@ant-design/icons";
 import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler";
+import type { AdminFunctionIndex } from "../../pages/AdminPage/index";
+
+const HomeAdmin: AdminFunctionIndex = "HOME_PAGE";
 
 const menuItem: { label: MultilangContent; path: string }[] = [
   {
@@ -108,7 +111,10 @@ const Header = () => {
                     <Link to="/admin">
                       <Button
                         onClick={() =>
-                          LocalStorageHandler.setItem("ADMIN_INDEX_PAGE", -1)
+                          LocalStorageHandler.setItem(
+                            "ADMIN_INDEX_PAGE",
+                            HomeAdmin,
+                          )
                         }
                         icon={<CodeOutlined />}
                       ></Button>

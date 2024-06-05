@@ -80,6 +80,13 @@ const updateArticle = async (
   return response.status === 200;
 };
 
+const increaseView = async (id: string): Promise<boolean> => {
+  const response = await axios.patch(`/articles/${id}/viewed`);
+
+  return response.status === 200;
+};
+
+
 export {
   getAllArticles,
   getArticleById,
@@ -91,4 +98,5 @@ export {
   updateArticle,
   restoreDeletedArticle,
   softDeleteArticle,
+  increaseView,
 };

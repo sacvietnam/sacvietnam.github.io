@@ -15,10 +15,10 @@ const appInfo: {
   apkHref: string;
   versionDetail: MultilangContent;
 } = {
-  releaseDate: "01/06/2024",
+  releaseDate: "05/06/2024",
   version: "2.0",
   size: "68.86mb",
-  apkHref: "/apk/Sac Remote 2.0.apk",
+  apkHref: "/apk/SAC Remote 2.apk",
   versionDetail: {
     en: "Fix bugs and improve performance, add Vietnamese language support",
     vi: "Sửa lỗi và cải thiện hiệu suất, thêm hỗ trợ ngôn ngữ tiếng Việt",
