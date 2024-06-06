@@ -26,6 +26,7 @@ type FieldType = {
   price: number;
   discountValue: number;
   discountType: string;
+  inventory: number;
 };
 
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
@@ -92,7 +93,8 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
   };
 
   const handleFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-    const { name, description } = values;
+    const { name, description, inventory } = values;
+
     const images = imgList.map((img) => img.filepath);
 
     try {
@@ -102,11 +104,14 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
         price,
         discount,
         images,
+        inventory,
       });
+
       if (result) {
         message.success("Product created successfully");
         returnHome();
       }
+      
     } catch (err) {
       console.error(err);
       message.error("Failed to create product");
@@ -237,6 +242,32 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
               ),
             )}
           </p>
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label={trans({ en: "Product Inventory", vi: "Sản phẩm tồn kho" })}
+          name="inventory"
+          initialValue={0}
+          rules={[
+            {
+              required: false,
+              min: 0,
+              type: "number",
+            },
+          ]}
+        >
+          <InputNumber
+            defaultValue={0}
+            className="w-full"
+            size="large"
+            formatter={(value) =>
+              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }
+            parser={(value) =>
+              value?.replace(/\$\s?|(,*)/g, "") as unknown as 0
+            }
+            onChange={(value) => setPrice(value as number)}
+          />
         </Form.Item>
 
         <Form.Item

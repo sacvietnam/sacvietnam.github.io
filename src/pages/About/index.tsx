@@ -8,7 +8,7 @@ import img4 from "../../assets/imgs/team/canh.png";
 import img5 from "../../assets/imgs/team/huyen.png";
 import img6 from "../../assets/imgs/team/nguyen.png";
 import img7 from "../../assets/imgs/team/thao.png";
-import img8 from "../../assets/imgs/team/thKien.png";
+import img8 from "../../assets/imgs/team/TTinh.png";
 import Each from "../../util/Each";
 import { useContext } from "react";
 import { LangContext, MultilangContent } from "../../contexts/LangContext";
@@ -36,17 +36,6 @@ const About = () => {
               )}
             />
           </div>
-        </div>
-        <div className="flex flex-col items-center justify-center mt-20">
-          <h2 className="mb-8 text-4xl text-center text-primary font-display">
-            <AnimatedText
-              text={trans({
-                en: "MENTOR",
-                vi: "CỐ VẤN",
-              })}
-            />
-          </h2>
-          <Member index={0} member={mentor} popover={false} />
         </div>
       </div>
     </div>
@@ -176,13 +165,21 @@ const informations: MemberInformation[] = [
       vi: "Muốn trải nghiệm qua những dự án để được cọ sát với thực tế và tích lũy thêm nhiều kiến thức và kinh nghiệm cho bản thân sau này.",
     },
   },
-];
-const mentor: MemberInformation = {
-  img: img8,
-  color: "#4CAF50",
-  name: "TS. Cao Văn Kiên",
-  major: {
-    en: "Faculty of Electronics Technology",
-    vi: "Khoa Công nghệ điện tử",
+  {
+    img: img8,
+    color: "#8bc472",
+    name: "Nguyễn Tâm Tính",
+    major: {
+      en: "IoT and Applied Artificial Intelligence",
+      vi: "IOT và trí tuệ nhân tạo ứng dụng",
+    },
+    interest: {
+      en: "Electronic technology and IOT field",
+      vi: "Công nghệ điện tử và lĩnh vực về IOT",
+    },
+    reasons: {
+      en: "Want to experience and work with everyone.",
+      vi: "Muốn trải nghiệm và làm việc cùng với mọi người.",
+    },
   },
-};
+];

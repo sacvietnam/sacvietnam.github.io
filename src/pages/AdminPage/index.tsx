@@ -18,6 +18,8 @@ import CreateProductPage from "./CreateProductPage.js";
 import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler.js";
 import ArticleRecycleBin from "./ArticleRecycleBin.js";
 import BlogEditor from "../../components/BlogEditor/index.js";
+import ProductManager from "./ProductManager.js";
+import ProductRecycleBin from "./ProductRecycleBin.js";
 
 const FUNCTION_INDEX = {
   HOME_PAGE: -1,
@@ -160,6 +162,17 @@ const AdminPage = () => {
         return <ArticleRecycleBin />;
       case "EDIT_BLOG":
         return <BlogEditor action="edit" id={objectId} />;
+      case "PRODUCT_MANAGER":
+        return (
+          <ProductManager
+            key={"productManager"}
+            setId={setObjectId}
+            changeFunction={changeFunction}
+          />
+        );
+      case "PRODUCT_RECYCLE_BIN":
+        return <ProductRecycleBin />;
+      case "EDIT_PRODUCT": 
       default:
         return (
           <>
