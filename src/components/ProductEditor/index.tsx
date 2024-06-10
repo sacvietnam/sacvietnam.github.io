@@ -9,17 +9,22 @@ import {
   Upload,
   message,
 } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LangContext } from "../../contexts/LangContext";
 import { uploadFileToTemp } from "../../services/fileService";
-
+import { FiTrash2 } from "react-icons/fi";
 import { PlusOutlined } from "@ant-design/icons";
 import type { GetProp, UploadFile, UploadProps } from "antd";
 import { Option } from "antd/es/mentions";
 import { RcFile, UploadChangeParam } from "antd/es/upload";
-import { createProduct } from "../../services/productService";
+import {
+  createProduct,
+  getProductById,
+  updateProduct,
+} from "../../services/productService";
 import Formatter from "../../util/format/Formatter";
 import TextArea from "antd/es/input/TextArea";
+import { useNavigate } from "react-router-dom";
 
 type FieldType = {
   name: string;
@@ -44,10 +49,18 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
+type ProductEditorProps = {
+  action: "create" | "edit";
+  id?: string;
+  onComplete?: () => void;
+};
+
+const ProductEditor = ({ action, id, onComplete }: ProductEditorProps) => {
   const [, context] = message.useMessage();
   const { trans } = useContext(LangContext);
+  const [product, setProduct] = useState<IProduct | null>(null);
   const [price, setPrice] = useState(0);
+  const navigate = useNavigate();
   const [discount, setDiscount] = useState<Discount>({
     type: "percent",
     value: 0,
@@ -74,8 +87,15 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleRemoveImage = (file: UploadFile<any>) => {
+  const handleRemoveImage = (file: UploadFile<any> | string) => {
     // filter out the removed image
+    if (typeof file === "string") {
+      console.log("remove image", file);
+      setImgList((prev) => prev.filter((img) => img.filepath !== file));
+      console.log(imgList);
+      return;
+    }
+
     setImgList((prev) => prev.filter((img) => img.uid_temp !== file.uid));
   };
 
@@ -99,35 +119,75 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
     const images = imgList.map((img) => img.filepath);
 
     try {
-      const result = await createProduct({
-        name,
-        description,
-        price,
-        discount,
-        images,
-        inventory,
-      });
+      const result = await (action === "edit" && product
+        ? updateProduct(
+            {
+              name,
+              description,
+              price,
+              discount,
+              images,
+              inventory,
+            },
+            product._id,
+          )
+        : createProduct({
+            name,
+            description,
+            price,
+            discount,
+            images,
+            inventory,
+          }));
+
+      const id = product?._id || (result as IProduct)._id;
 
       if (result) {
-        message.success("Product created successfully");
-        returnHome();
+        message.success(
+          action === "edit"
+            ? "Update product successfully"
+            : "Create product successfully",
+        );
+        onComplete && onComplete();
+        navigate(`/order/product/${id}`);
       }
-      
     } catch (err) {
       console.error(err);
       message.error("Failed to create product");
     }
   };
 
+  useEffect(() => {
+    if (action === "edit" && id) {
+      const fetchData = async () => {
+        const product = await getProductById(id);
+        setProduct(product);
+        setPrice(product.price);
+        setImgList(
+          product.images.map((img) => ({ filepath: img, uid_temp: "" })) || [],
+        );
+      };
+
+      fetchData();
+    }
+  }, [action, id]);
   return (
     <>
       {context}
 
       <Form
-        name="login"
+        key={product?._id || "create"}
+        name="product"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
+        initialValues={{
+          name: product?.name || "",
+          description: product?.description || "",
+          price: product?.price || 0,
+          discountValue: product?.discount.value || 0,
+          discountType: product?.discount.type || "percent",
+          inventory: product?.inventory || 0,
+        }}
         onFinish={handleFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="on"
@@ -167,7 +227,6 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
         <Form.Item<FieldType>
           label={trans({ en: "Product Price", vi: "Giá thành sản phẩm" })}
           name="price"
-          initialValue={0}
           rules={[
             {
               required: true,
@@ -183,6 +242,7 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
           <InputNumber
             className="w-full"
             size="large"
+            value={price}
             formatter={(value) =>
               `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
@@ -274,6 +334,27 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
         <Form.Item
           label={trans({ en: "Product images", vi: "Hình ảnh sản phẩm" })}
         >
+          <div className="flex flex-wrap gap-2">
+            {product &&
+              imgList.map((img, index) => (
+                <div className="flex flex-col items-center gap-2 p-2 border rounded-md">
+                  <Image
+                    key={index}
+                    src={img.filepath}
+                    alt="product image"
+                    width={50}
+                    height={50}
+                    className="object-contain"
+                  />
+                  <Button
+                    danger
+                    block
+                    icon={<FiTrash2 />}
+                    onClick={() => handleRemoveImage(img.filepath)}
+                  ></Button>
+                </div>
+              ))}
+          </div>
           <Upload
             action={handleUploadAction}
             onChange={handleUploadChange}
@@ -300,7 +381,11 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
               className="mt-2 bg-primary"
               htmlType="submit"
             >
-              {trans({ en: "Create product", vi: "Tạo sản phẩm" })}
+              {trans(
+                action === "create"
+                  ? { en: "Create product", vi: "Tạo sản phẩm" }
+                  : { en: "Update product", vi: "Cập nhật sản phẩm" },
+              )}
             </Button>
           </div>
         </Form.Item>
@@ -321,4 +406,4 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
   );
 };
 
-export default CreateProductPage;
+export default ProductEditor;

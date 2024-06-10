@@ -157,7 +157,7 @@ const BlogEditor = ({ action, id, onComplete }: BlogEditorProps) => {
       {context}
       <Form
         key={article?._id || "create"}
-        name="login"
+        name="article"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{

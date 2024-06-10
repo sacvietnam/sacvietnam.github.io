@@ -1,46 +1,32 @@
 import { useContext } from "react";
 import { LangContext } from "../../contexts/LangContext";
 import type { FormProps } from "antd";
-import { Button, Modal, Form, Input, Radio } from "antd";
-type FieldType = {
-  username: string;
-  password: string;
-  name: string;
-  phone: string;
-  email: string;
-  gender: "male" | "female" | "other";
-};
+import { Button, Form, Input, Radio } from "antd";
+import { SignUpFieldType } from "./LoginSignUpModal";
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+const onFinishFailed: FormProps<SignUpFieldType>["onFinishFailed"] = (
+  errorInfo,
+) => {
   console.log("Failed:", errorInfo);
 };
 
-type SignUpModalProps = {
-  isOpen: boolean;
-  onCancle: () => void;
-  onSubmit: (values: FieldType) => void;
-};
-
-const SignUpModal = ({ onCancle, onSubmit, isOpen }: SignUpModalProps) => {
+function SignUpForm({
+  onSignUp,
+  changeToLogin,
+}: {
+  onSignUp: (values: SignUpFieldType) => void;
+  changeToLogin: () => void;
+}) {
   const { trans } = useContext(LangContext);
   return (
-    <Modal
-      title={trans({ en: "Sign up", vi: "Đăng ký" })}
-      open={isOpen}
-      footer={null}
-      onCancel={onCancle}
-    >
+    <div className="w-full max-w-full p-8">
       <Form
-        name="login"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onFinish={onSubmit}
+        name="signup"
+        layout="vertical"
+        onFinish={onSignUp}
         onFinishFailed={onFinishFailed}
-        autoComplete="on"
       >
-        <Form.Item<FieldType>
+        <Form.Item<SignUpFieldType>
           label={trans({ en: "Username", vi: "Tên đăng nhập" })}
           name="username"
           rules={[
@@ -63,7 +49,7 @@ const SignUpModal = ({ onCancle, onSubmit, isOpen }: SignUpModalProps) => {
           <Input />
         </Form.Item>
 
-        <Form.Item<FieldType>
+        <Form.Item<SignUpFieldType>
           label={trans({ en: "Password", vi: "Mật khẩu" })}
           name="password"
           rules={[
@@ -86,7 +72,7 @@ const SignUpModal = ({ onCancle, onSubmit, isOpen }: SignUpModalProps) => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item<FieldType>
+        <Form.Item<SignUpFieldType>
           label={trans({ en: "Full name", vi: "Tên của bạn" })}
           name="name"
           rules={[
@@ -102,7 +88,7 @@ const SignUpModal = ({ onCancle, onSubmit, isOpen }: SignUpModalProps) => {
           <Input />
         </Form.Item>
 
-        <Form.Item<FieldType>
+        <Form.Item<SignUpFieldType>
           label={trans({ en: "Phone number", vi: "Số điện thoại" })}
           name="phone"
           rules={[
@@ -126,13 +112,13 @@ const SignUpModal = ({ onCancle, onSubmit, isOpen }: SignUpModalProps) => {
           <Input />
         </Form.Item>
 
-        <Form.Item<FieldType>
+        <Form.Item<SignUpFieldType>
           name="gender"
           initialValue={"male"}
           label={trans({ en: "Gender", vi: "Giới tính" })}
           rules={[{ required: true }]}
         >
-          <Radio.Group defaultValue={"male"}>
+          <Radio.Group defaultValue={"male"} className="flex justify-evenly">
             <Radio value={"male"}>{trans({ en: "Male", vi: "Nam" })}</Radio>
             <Radio value={"female"}>{trans({ en: "Female", vi: "Nữ" })}</Radio>
             <Radio value={"other"}>{trans({ en: "Other", vi: "Khác" })}</Radio>
@@ -140,30 +126,25 @@ const SignUpModal = ({ onCancle, onSubmit, isOpen }: SignUpModalProps) => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
-          <div className="flex gap-2 justify-end items-end">
-            <Button
-              type="primary"
-              className="mt-2 bg-primary"
-              htmlType="submit"
-            >
-              {trans({ en: "Sign up", vi: "Đăng ký tài khoản" })}
-            </Button>
-            <Button
-              type="text"
-              className="mt-2"
-              htmlType="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                onCancle();
-              }}
-            >
-              {trans({ en: "Back", vi: "Quay lại" })}
-            </Button>
-          </div>
+          <Button
+            type="primary"
+            className="mt-2 bg-primary"
+            htmlType="submit"
+            size="large"
+            block
+          >
+            {trans({ en: "Sign up", vi: "Đăng ký tài khoản" })}
+          </Button>
+          <Button type="link" className="mt-2" block onClick={changeToLogin}>
+            {trans({
+              en: "Already have an account? Login now!",
+              vi: "Đã có tài khoản? Đăng nhập ngay!",
+            })}
+          </Button>
         </Form.Item>
       </Form>
-    </Modal>
+    </div>
   );
-};
+}
 
-export default SignUpModal;
+export default SignUpForm;

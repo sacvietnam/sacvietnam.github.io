@@ -8,6 +8,8 @@ import NotFoundBlock from "../../components/NotFoundBlock";
 import { IoMdEye } from "react-icons/io";
 import HTMLParser from "../../util/format/HTMLParser";
 
+import CommingSoon from "../../assets/imgs/comingsoon-square.png";
+
 const BlogArticle = () => {
   const { id } = useParams<{ id: string }>();
   const { trans } = useContext(LangContext);
@@ -62,9 +64,9 @@ const BlogArticle = () => {
           {/* img */}
           <img
             className="object-cover w-full h-full max-w-[800px] max-h-[400px] mx-auto my-6"
-            src={article.image}
+            src={article.image || CommingSoon}
             onError={(e) => {
-              e.currentTarget.src = "https://via.placeholder.com/800x400";
+              e.currentTarget.src = CommingSoon;
             }}
             alt={article.title}
           />

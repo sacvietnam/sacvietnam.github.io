@@ -42,7 +42,7 @@ const Download = () => {
     };
   }, [isClicked]);
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-8 pb-32">
       <div className="max-w-screen-xl px-2 py-4 mx-auto">
         <div className="flex flex-col gap-8 md:gap-16 md:flex-row">
           <div className="grid place-items-center">

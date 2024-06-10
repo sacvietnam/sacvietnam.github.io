@@ -14,12 +14,12 @@ import { IconType } from "react-icons";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext.js";
 import BlogManager from "./BlogManager.js";
-import CreateProductPage from "./CreateProductPage.js";
 import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler.js";
 import ArticleRecycleBin from "./ArticleRecycleBin.js";
 import BlogEditor from "../../components/BlogEditor/index.js";
 import ProductManager from "./ProductManager.js";
 import ProductRecycleBin from "./ProductRecycleBin.js";
+import ProductEditor from "../../components/ProductEditor/index.js";
 
 const FUNCTION_INDEX = {
   HOME_PAGE: -1,
@@ -32,6 +32,7 @@ const FUNCTION_INDEX = {
   PRODUCT_MANAGER: 6,
   PRODUCT_RECYCLE_BIN: 7,
 };
+
 const FUNCTION_GROUP = ["product", "blog", null] as const;
 type FunctionGroup = (typeof FUNCTION_GROUP)[number];
 
@@ -100,8 +101,8 @@ const functions: {
   },
   EDIT_PRODUCT: {
     name: {
-      en: "Edit Blog",
-      vi: "Chỉnh sửa bài viết",
+      en: "Edit Product",
+      vi: "Chỉnh sửa sản phẩm",
     },
     group: "product",
     hidden: true,
@@ -151,7 +152,7 @@ const AdminPage = () => {
   const currentFunction = useMemo(() => {
     switch (index) {
       case "CREATE_PRODUCT":
-        return <CreateProductPage returnHome={returnHome} />;
+        return <ProductEditor action="create" />;
       case "CREATE_BLOG":
         return <BlogEditor action="create" />;
       case "BLOG_MANAGER":
@@ -172,7 +173,8 @@ const AdminPage = () => {
         );
       case "PRODUCT_RECYCLE_BIN":
         return <ProductRecycleBin />;
-      case "EDIT_PRODUCT": 
+      case "EDIT_PRODUCT":
+        return <ProductEditor action="edit" id={objectId} />;
       default:
         return (
           <>

@@ -7,8 +7,8 @@ import { useState } from "react";
 import { getAllArticles, getArticleSize } from "../../services/articleService";
 import Wave from "react-wavify";
 import { IoMdEye } from "react-icons/io";
-
 import PaginationDataList from "../../components/PaginationDataList";
+import CommingSoon from "../../assets/imgs/comingsoon-square.png";
 
 const pageSize = 10;
 
@@ -34,9 +34,9 @@ const Blog = () => {
           <div className=" col-span-full md:col-span-2">
             <div className="overflow-hidden rounded-l-lg">
               <img
-                src={post.image}
+                src={post.image || CommingSoon}
                 onError={(e) =>
-                  ((e.target as HTMLImageElement).src = "/placeholder_img.png")
+                  ((e.target as HTMLImageElement).src = CommingSoon)
                 }
                 className="group-hover:scale-110 duration-300 transition-all object-center object-cover select-none w-full h-full max-h-[200px] group-hover:brightness-90"
                 alt={post.title}
@@ -65,8 +65,8 @@ const Blog = () => {
   return (
     <div className="relative">
       <div className="max-w-screen-lg min-h-screen px-2 mx-auto">
-        <h1 className="mt-8 text-2xl font-bold text-center">
-          {trans({ en: "Blog", vi: "Bài viết" })}
+        <h1 className="mt-8 mb-8 text-2xl font-bold text-center font-display">
+          {trans({ en: "SAC's journey", vi: "Hành trình của SAC" })}
         </h1>
 
         <PaginationDataList<IArticle>

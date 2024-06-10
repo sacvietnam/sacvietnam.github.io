@@ -16,14 +16,14 @@ import { LangContext, MultilangContent } from "../../contexts/LangContext";
 const About = () => {
   const { trans } = useContext(LangContext);
   return (
-    <div>
+    <div className="pb-48">
       <div className="max-w-screen-xl px-2 py-8 mx-auto">
         <div>
-          <h2 className="mb-8 text-4xl text-center text-primary font-display">
+          <h2 className="text-4xl text-center mb-14 text-primary font-display">
             <AnimatedText
               text={trans({
-                en: "OUR MEMBERS",
-                vi: "THÀNH VIÊN",
+                en: "OUR TEAM",
+                vi: "ĐỘI NGŨ CỦA CHÚNG TÔI",
               })}
             />
           </h2>

@@ -1,32 +1,19 @@
 import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useMobile from "./../../hooks/useMobile";
 import { FiMenu } from "react-icons/fi";
 import Logo from "../Logo";
 import Each from "../../util/Each";
 import LanguageButton from "../LanguageButton";
-import { Button, Popover } from "antd";
+import { Popover } from "antd";
 import { LangContext, MultilangContent } from "../../contexts/LangContext";
-import { GlobalContext } from "../../contexts/GlobalContext";
-import { CodeOutlined } from "@ant-design/icons";
-import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler";
-import type { AdminFunctionIndex } from "../../pages/AdminPage/index";
-
-const HomeAdmin: AdminFunctionIndex = "HOME_PAGE";
+import AccountBar from "../AccountBar";
 
 const menuItem: { label: MultilangContent; path: string }[] = [
   {
     label: { en: "Home", vi: "Trang chủ" },
     path: "/",
-  },
-  {
-    label: { en: "The Story", vi: "Câu chuyện" },
-    path: "/story",
-  },
-  {
-    label: { en: "The Product", vi: "Sản phẩm" },
-    path: "/product",
   },
   {
     label: { en: "Place an order", vi: "Đặt mua" },
@@ -37,27 +24,18 @@ const menuItem: { label: MultilangContent; path: string }[] = [
     path: "/blog",
   },
   {
-    label: { en: "Application", vi: "Phần mềm" },
-    path: "/download",
-  },
-  {
-    label: { en: "About us", vi: "Chúng tôi" },
+    label: { en: "Team", vi: "Đội ngũ" },
     path: "/about-us",
   },
 ];
-
 const Header = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const isMobile = useMobile();
-  const { user } = useContext(GlobalContext);
+  const { trans } = useContext(LangContext);
 
   const toggleMenu = () => {
     setOpen(!isOpen);
   };
-
-  const { trans } = useContext(LangContext);
-
-  const isAdmin = user?.role === "admin";
 
   return (
     <header className="sticky top-0 z-50 p-2 bg-white border-b-2 border-gray-200 shadow-sm bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60">
@@ -80,10 +58,7 @@ const Header = () => {
               className="max-h-screen overflow-auto md:overflow-hidden"
             >
               <nav>
-                <ul
-                  className="flex flex-col items-end justify-center gap-8 pt-4 mx-4 mr-8 font-bold md:h-full lg:items-center md:flex-row md:pt-0"
-                  onClick={toggleMenu}
-                >
+                <ul className="flex flex-col items-end justify-center gap-8 pt-4 mx-4 mr-8 font-bold md:h-full lg:items-center md:flex-row md:pt-0">
                   <Each
                     of={menuItem}
                     render={(item) => (
@@ -91,6 +66,7 @@ const Header = () => {
                         whileTap={{ scale: 0.9 }}
                         key={item.path}
                         className="md:text-sm hoverable-text text-clip"
+                        onClick={toggleMenu}
                       >
                         <NavLink
                           to={item.path}
@@ -107,19 +83,6 @@ const Header = () => {
                       </motion.li>
                     )}
                   />
-                  {isAdmin && (
-                    <Link to="/admin">
-                      <Button
-                        onClick={() =>
-                          LocalStorageHandler.setItem(
-                            "ADMIN_INDEX_PAGE",
-                            HomeAdmin,
-                          )
-                        }
-                        icon={<CodeOutlined />}
-                      ></Button>
-                    </Link>
-                  )}
                   <Popover
                     trigger="hover"
                     content={trans({
@@ -131,6 +94,7 @@ const Header = () => {
                       <LanguageButton variant="round" />
                     </li>
                   </Popover>
+                  <AccountBar />
                 </ul>
               </nav>
             </motion.div>

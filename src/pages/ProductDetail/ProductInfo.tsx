@@ -5,6 +5,7 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { motion } from "framer-motion";
+import CommingSoon from "../../assets/imgs/comingsoon-square.png";
 
 type ProductInfoProps = {
   product: IProduct;
@@ -43,13 +44,16 @@ const ProductInfo = ({ product, onAddItem }: ProductInfoProps) => {
             src={product?.images[index]}
             className="object-cover w-full max-h-[400px] "
             placeholder={
-              <Image
-                preview={false}
-                src="https://placehold.co/600x400"
-                width={200}
-              />
+              <Image preview={false} src={CommingSoon} width={200} />
             }
           />
+          {product.images.length == 0 && (
+            <Image
+              preview={false}
+              className="object-cover w-full max-h-[400px] "
+              src={CommingSoon}
+            />
+          )}
         </div>
       </div>
 

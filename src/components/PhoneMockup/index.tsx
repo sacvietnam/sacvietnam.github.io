@@ -57,7 +57,7 @@ const PhoneMockup = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             src={imgSrc}
-            className="object-cover w-full h-full border"
+            className="object-cover w-full h-full p-1 -translate-x-[2px]"
           />
         </AnimatePresence>
       </InnerDevice>

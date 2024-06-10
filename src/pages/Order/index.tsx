@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
-import Wave from "react-wavify";
 import PaginationDataList from "../../components/PaginationDataList";
 import { LangContext } from "../../contexts/LangContext";
 import { getAllProducts, getProductSize } from "../../services/productService";
@@ -20,7 +19,7 @@ const Order = () => {
   return (
     <div className="relative min-h-lvh">
       <div className="max-w-screen-xl px-2 py-4 mx-auto mt-8">
-        <h1 className="mb-2 text-2xl font-bold">
+        <h1 className="mb-8 text-2xl font-bold text-center font-display ">
           {trans({
             vi: "Danh sách sản phẩm hiện có",
             en: "Product list available",
@@ -40,17 +39,6 @@ const Order = () => {
           )}
         />
       </div>
-
-      <Wave
-        className="absolute bottom-0.5 left-0 right-0 -z-[1] h-20 lg:h-40 translate-y-1 "
-        fill="#4096ff"
-        paused={false}
-        options={{
-          amplitude: 20,
-          speed: 0.2,
-          points: 3,
-        }}
-      />
     </div>
   );
 };

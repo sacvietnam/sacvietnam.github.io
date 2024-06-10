@@ -2,6 +2,7 @@ import { Card, Rate } from "antd";
 import { useNavigate } from "react-router-dom";
 import DiscountPrice from "../../components/DiscountPrice";
 import { motion } from "framer-motion";
+import CommingSoon from "../../assets/imgs/comingsoon-square.png";
 
 const MotionDiv = motion.div;
 
@@ -16,9 +17,9 @@ const ProductItem = ({ product }: { product: IProduct }) => {
           <img
             className="h-[300px] object-contain border-b"
             alt={product.name}
-            src={product?.images[0]}
+            src={product?.images[0] || CommingSoon}
             onError={(e) => {
-              e.currentTarget.src = "https://placehold.co/600x400";
+              e.currentTarget.src = CommingSoon;
             }}
           />
         }

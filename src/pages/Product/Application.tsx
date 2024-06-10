@@ -44,7 +44,7 @@ const Application = () => {
           ))}
         </div>
         <div className="order-1 lg:order-2 h-fit">
-          <div className="flex justify-center my-4">
+          <div className="flex justify-center my-8 mt-16">
             {!showAll && (
               <TCButton
                 label={trans({

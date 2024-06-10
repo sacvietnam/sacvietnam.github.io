@@ -18,7 +18,7 @@ const LanguageButton = ({ variant }: LanguageButtonProps) => {
   };
 
   return (
-    <motion.div className="inline-block drop-shadow-md">
+    <motion.div className="inline-block">
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.9 }}
@@ -27,7 +27,7 @@ const LanguageButton = ({ variant }: LanguageButtonProps) => {
         <div
           className={
             variant === "normal"
-              ? "px-4 py-2 text-white rounded-md drop-shadow-md bg-primary min-w-[120px] flex gap-2 items-center"
+              ? "px-4 py-2 text-secondary border-dashed border-2 rounded-md drop-shadow-sm bg-white min-w-[120px] flex gap-2 items-center"
               : "translate-y-1"
           }
         >

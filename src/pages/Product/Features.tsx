@@ -30,7 +30,7 @@ const Features = () => {
         className="text-2xl text-center lg:text-4xl font-display text-primary"
       />
 
-      <div className="flex flex-col items-center justify-center my-4">
+      <div className="flex flex-col items-center justify-center my-8 mt-16">
         {!showAll && (
           <>
             <TCButton

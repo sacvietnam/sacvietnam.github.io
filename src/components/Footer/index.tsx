@@ -8,6 +8,7 @@ import { HiMail } from "react-icons/hi";
 import { IconType } from "react-icons";
 import { useContext } from "react";
 import { LangContext } from "../../contexts/LangContext";
+import Wave from "react-wavify";
 
 const ContactInfo = ({
   Icon,
@@ -102,8 +103,18 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="text-center text-white p-1/2 bg-primary">
-        <span>2024 The Sharks Team</span>
+      <div className="relative h-8 text-center text-white p-1/2">
+        <span className="relative z-10">2024 The Sharks Team</span>
+        <Wave
+          className="absolute bottom-0 left-0 right-0 h-[64px] -z-[10]translate-y-4 "
+          fill="#4096ff"
+          paused={false}
+          options={{
+            amplitude: 10,
+            speed: 0.2,
+            points: 3,
+          }}
+        />
       </div>
     </footer>
   );
