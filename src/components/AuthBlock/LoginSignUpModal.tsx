@@ -1,20 +1,19 @@
 import { Modal, Segmented } from "antd";
 import { useContext } from "react";
+import sacLogo from "../../assets/imgs/logo/saco.png";
 import { LangContext } from "../../contexts/LangContext";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
-import sacLogo from "../../assets/imgs/logo/saco.png";
 
 export type LoginFieldType = {
-  username: string;
+  phone: string;
   password: string;
 };
 
 export type SignUpFieldType = {
-  username: string;
+  phone: string;
   password: string;
   name: string;
-  phone: string;
   email: string;
   gender: "male" | "female" | "other";
 };

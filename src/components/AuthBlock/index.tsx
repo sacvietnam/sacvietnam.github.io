@@ -1,30 +1,30 @@
 import type { FormProps, MenuProps } from "antd";
-import { Button, Dropdown, message } from "antd";
+import { Badge, Button, Dropdown, message } from "antd";
 import { AxiosError } from "axios";
 import { useContext, useState } from "react";
-import { FaCode } from "react-icons/fa6";
-import { IoSettingsOutline } from "react-icons/io5";
-import { LiaUser } from "react-icons/lia";
 import { CiShoppingCart } from "react-icons/ci";
+import { FaCode } from "react-icons/fa6";
+import { LiaUser } from "react-icons/lia";
 import { LuDoorOpen } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { LangContext } from "../../contexts/LangContext";
 import { login, logout, register } from "../../services/authService";
 import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler";
-import LoginSignUpModal, { LoginSignUpViewType } from "./LoginSignUpModal";
+import LoginSignUpModal, {
+  LoginFieldType,
+  LoginSignUpViewType,
+} from "./LoginSignUpModal";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { CartContext } from "../../contexts/CartContext";
 
-export type LoginFieldType = {
-  username: string;
-  password: string;
-};
-
-const AccountBar = () => {
+const AuthBlock = () => {
   const { trans } = useContext(LangContext);
   const { user, setUser } = useContext(GlobalContext);
   const [, contextHolder] = message.useMessage();
   const [isOpen, setOpen] = useState(false);
   const [type, setType] = useState<LoginSignUpViewType>("Login");
+  const { cart } = useContext(CartContext);
 
   // Login Logic
   const showModal = () => {
@@ -85,21 +85,23 @@ const AccountBar = () => {
       message.success(
         trans({ en: "Sign up successfully", vi: "Đăng ký thành công" }),
       );
+      setType("Login");
     } catch (err) {
-      switch ((err as AxiosError).response?.status) {
+      const axiosErr = err as AxiosError;
+      switch (axiosErr.response?.status) {
         case 500:
           message.warning(
             trans({
-              en: "Username is already taken",
-              vi: "Tên tài khoản đã tồn tại",
+              en: "An error occurred, please try again later",
+              vi: "Đã xảy ra lỗi, vui lòng thử lại sau",
             }),
           );
           break;
         case 400:
-          message.warning(
+          message.error(
             trans({
-              en: "Please fill all required fields",
-              vi: "Hãy điền đầy đủ thông tin",
+              en: "This phone number is already in use",
+              vi: "Số điện thoại này đã được sử dụng",
             }),
           );
           break;
@@ -128,13 +130,6 @@ const AccountBar = () => {
         </Link>
       ),
       icon: <LiaUser />,
-      disabled: true,
-    },
-    {
-      key: "setting",
-      label: trans({ en: "Setting", vi: "Cài đặt" }),
-      icon: <IoSettingsOutline />,
-      disabled: true,
     },
     {
       key: "cart",
@@ -211,14 +206,27 @@ const AccountBar = () => {
     );
 
   return (
-    <Dropdown
-      menu={{ items }}
-      trigger={["hover", "click"]}
-      className="text-sm bg-white cursor-pointer"
-    >
-      <Button type="default">{user.name}</Button>
-    </Dropdown>
+    <div className="flex flex-col items-end gap-3 md:items-center md:flex-row">
+      <Badge count={cart.reduce((sum, item) => sum + item.quantity, 0)}>
+        <Link to={"/order/cart"}>
+          <Button
+            type="dashed"
+            size="middle"
+            shape="round"
+            className="bg-white"
+            icon={<ShoppingCartOutlined />}
+          ></Button>
+        </Link>
+      </Badge>
+      <Dropdown
+        menu={{ items }}
+        trigger={["hover", "click"]}
+        className="text-sm bg-white cursor-pointer"
+      >
+        <Button type="default">{user.name}</Button>
+      </Dropdown>
+    </div>
   );
 };
 
-export default AccountBar;
+export default AuthBlock;

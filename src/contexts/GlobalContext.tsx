@@ -1,13 +1,7 @@
 import React, { Dispatch, createContext, useState } from "react";
 import LocalStorageHandler from "../util/localStorage/LocalStorageHandler";
 
-export interface UserData {
-  _id: string;
-  username: string;
-  phone: string;
-  gender: string;
-  name: string;
-  role: "admin" | "user";
+export interface UserData extends IAccount {
   accessToken: string;
 }
 

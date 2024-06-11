@@ -34,7 +34,7 @@ const Member = ({ member, index, popover }: MemberProps) => {
             {member.name}
           </h4>
         }
-        trigger="click"
+        trigger={["hover", "click"]}
         className="cursor-pointer"
         content={
           popover && isValid ? (
@@ -80,13 +80,15 @@ const Member = ({ member, index, popover }: MemberProps) => {
             className="absolute top-0 bottom-0 right-0 block object-cover object-top w-full h-full select-none drop-shadow-2xl"
           />
           <div
-            className="top-[20%] transition-all absolute bottom-0 left-0 right-0 z-[-1] rounded-r-md rounded-l-md"
+            className="top-[50%] transition-all absolute bottom-0 left-0 right-0 z-[-1] rounded-r-md rounded-l-md"
             style={{ backgroundColor: member.color }}
           ></div>
         </motion.div>
       </Popover>
       <div className="mt-2 text-center">
-        <h4 className="font-semibold text-md md:text-xl">{member.name}</h4>
+        <h4 className="p-1 mb-1 font-semibold rounded-lg bg-gray-50 text-md md:text-xl ">
+          {member.name}
+        </h4>
         <p>{trans(member.major || emptyContent)}</p>
       </div>
     </motion.div>

@@ -11,6 +11,7 @@ import LanguageProvider from "./contexts/LangContext";
 import GlobalProvider from "./contexts/GlobalContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LocalStorageHandler from "./util/localStorage/LocalStorageHandler";
+import CartProvider from "./contexts/CartContext";
 const queryClient = new QueryClient();
 
 const router = createHashRouter(routesObject);
@@ -22,9 +23,11 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <GlobalProvider>
         <LanguageProvider>
-          <React.StrictMode>
-            <RouterProvider router={router} />
-          </React.StrictMode>
+          <CartProvider>
+            <React.StrictMode>
+              <RouterProvider router={router} />
+            </React.StrictMode>
+          </CartProvider>
         </LanguageProvider>
       </GlobalProvider>
     </QueryClientProvider>

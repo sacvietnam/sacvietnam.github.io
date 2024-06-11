@@ -14,8 +14,8 @@ import {
 import UserFeedbackForm from "./UserFeedbackForm";
 import ProductInfo from "./ProductInfo";
 import FeedbackBlock from "./FeedbackBlock";
-import { CartStorageHandler } from "../../util/localStorage/LocalStorageHandler";
 import { motion } from "framer-motion";
+import { CartContext } from "../../contexts/CartContext";
 
 const pageSize = 10;
 
@@ -24,6 +24,7 @@ const ProductDetail = () => {
   const [, messageContext] = message.useMessage();
   const { trans } = useContext(LangContext);
   const { user } = useContext(GlobalContext);
+  const { addItemToCart } = useContext(CartContext);
   const {
     data: product,
     isLoading,
@@ -80,7 +81,7 @@ const ProductDetail = () => {
 
   const handleAddItemToCart = (quantity: number) => {
     if (product) {
-      CartStorageHandler.addItemToCart(product, quantity);
+      addItemToCart(product, quantity);
       message.success(
         trans({
           en: `Add ${quantity} item "${product.name}" to cart!`,

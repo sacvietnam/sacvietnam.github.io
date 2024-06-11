@@ -1,8 +1,8 @@
 import { Button, Form, FormProps, Input } from "antd";
 import { useContext, useRef } from "react";
-import { LoginFieldType } from ".";
 import { LangContext } from "../../contexts/LangContext";
 import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler";
+import { LoginFieldType } from "./LoginSignUpModal";
 
 const onFinishFailed: FormProps<LoginFieldType>["onFinishFailed"] = (
   errorInfo,
@@ -33,9 +33,9 @@ function LoginForm({
         autoComplete="on"
       >
         <Form.Item<LoginFieldType>
-          label={trans({ en: "Username", vi: "Tên tài khoản" })}
-          name="username"
-          initialValue={localLoginForm?.username}
+          label={trans({ en: "Phone number", vi: "Số điện thoại" })}
+          name="phone"
+          initialValue={localLoginForm?.phone}
           rules={[
             {
               required: true,

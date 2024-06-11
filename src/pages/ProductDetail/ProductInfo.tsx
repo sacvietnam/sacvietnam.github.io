@@ -61,13 +61,23 @@ const ProductInfo = ({ product, onAddItem }: ProductInfoProps) => {
       <div>
         <h2 className="text-2xl font-bold">{product.name}</h2>
         <DiscountPrice discount={product.discount} price={product.price} />
-        <p className="mt-4">
+        <div className="mt-4">
           <span className="font-semibold">
             {trans({ en: "Description", vi: "Mô tả" })}:
             <br />
           </span>
-          {product.description}
-        </p>
+          <ul className="pl-8 list-disc">
+            {product.description.split("\n").map(
+              (line, i) =>
+                line.length !== 0 && (
+                  <li key={i}>
+                    {line}
+                    <br />
+                  </li>
+                ),
+            )}
+          </ul>
+        </div>
         <div className="mt-10">
           <div>
             <span className="mr-2 text-sm font-semibold">

@@ -1,5 +1,4 @@
 import { Button, Divider, Empty, message } from "antd";
-import { CartStorageHandler } from "../../util/localStorage/LocalStorageHandler";
 import React, { useContext } from "react";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { LangContext } from "../../contexts/LangContext";
@@ -8,9 +7,10 @@ import CartCaculator from "../../util/CartCalculator";
 import Formatter from "../../util/format/Formatter";
 import OrderDetailItem from "./OrderDetailItem";
 import { motion } from "framer-motion";
+import { CartContext } from "../../contexts/CartContext";
 
 const UserCart = () => {
-  const cart = CartStorageHandler.getInstance();
+  const { cart, removeItemFromCart } = useContext(CartContext);
   const [rerender, setRerender] = React.useState<boolean>(false);
   const { trans } = useContext(LangContext);
   const { user } = useContext(GlobalContext);
@@ -68,7 +68,7 @@ const UserCart = () => {
                 <OrderDetailItem
                   item={item}
                   onRemove={() => {
-                    CartStorageHandler.removeItemFromCart(item, item.quantity);
+                    removeItemFromCart(item, item.quantity);
                     setRerender(!rerender);
                   }}
                 />
@@ -87,14 +87,17 @@ const UserCart = () => {
                   key={item.productId}
                   className="flex justify-between overflow-auto"
                 >
-                  <p className="text-nowrap">
-                    {index + 1} {". "}
-                    {item.product.name}{" "}
-                    <span className="text-xs text-gray-600">
-                      {" "}
-                      x {item.quantity}
-                    </span>
-                  </p>
+                  <div>
+                    <p className="text-wrap">
+                      {index + 1} {". "}
+                      {item.product.name}{" "}
+                      <b className="text-lg text-gray-600">
+                        {" "}
+                        x {item.quantity}
+                      </b>
+                    </p>
+                  </div>
+
                   <p className="font-semibold">
                     {Formatter.toVND(CartCaculator.calculateLineTotal(item))}
                   </p>

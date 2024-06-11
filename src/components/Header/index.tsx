@@ -1,14 +1,14 @@
-import { useContext, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
-import useMobile from "./../../hooks/useMobile";
-import { FiMenu } from "react-icons/fi";
-import Logo from "../Logo";
-import Each from "../../util/Each";
-import LanguageButton from "../LanguageButton";
 import { Popover } from "antd";
+import { AnimatePresence, motion } from "framer-motion";
+import { useContext, useState } from "react";
+import { FiMenu } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
 import { LangContext, MultilangContent } from "../../contexts/LangContext";
-import AccountBar from "../AccountBar";
+import Each from "../../util/Each";
+import AuthBlock from "../AuthBlock";
+import LanguageButton from "../LanguageButton";
+import Logo from "../Logo";
+import useMobile from "./../../hooks/useMobile";
 
 const menuItem: { label: MultilangContent; path: string }[] = [
   {
@@ -38,7 +38,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 p-2 bg-white border-b-2 border-gray-200 shadow-sm bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60">
+    <header className="sticky top-0 z-50 p-2 overflow-auto bg-white border-b-2 border-gray-200 shadow-sm md:overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60">
       <div className="flex flex-col justify-between max-w-screen-xl mx-auto md:flex-row md:items-center ">
         <div className="flex items-center justify-between">
           <Logo />
@@ -55,7 +55,7 @@ const Header = () => {
               initial={isMobile && { opacity: 0, height: 0 }}
               animate={isMobile && { opacity: 1, height: "auto" }}
               exit={{ height: 0, opacity: 0 }}
-              className="max-h-screen overflow-auto md:overflow-hidden"
+              className="max-h-screen "
             >
               <nav>
                 <ul className="flex flex-col items-end justify-center gap-8 pt-4 mx-4 mr-8 font-bold md:h-full lg:items-center md:flex-row md:pt-0">
@@ -94,7 +94,7 @@ const Header = () => {
                       <LanguageButton variant="round" />
                     </li>
                   </Popover>
-                  <AccountBar />
+                  <AuthBlock />
                 </ul>
               </nav>
             </motion.div>

@@ -1,5 +1,3 @@
-import { CartItem } from "./localStorage/LocalStorageHandler";
-
 class CartCaculator {
   public static calculateRealPrice(item: CartItem): number {
     const price = Number(item.price);

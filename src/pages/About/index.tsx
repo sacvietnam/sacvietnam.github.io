@@ -8,7 +8,7 @@ import img4 from "../../assets/imgs/team/canh.png";
 import img5 from "../../assets/imgs/team/huyen.png";
 import img6 from "../../assets/imgs/team/nguyen.png";
 import img7 from "../../assets/imgs/team/thao.png";
-import img8 from "../../assets/imgs/team/TTinh.png";
+import img8 from "../../assets/imgs/team/tinh.png";
 import Each from "../../util/Each";
 import { useContext } from "react";
 import { LangContext, MultilangContent } from "../../contexts/LangContext";
@@ -19,7 +19,7 @@ const About = () => {
     <div className="pb-48">
       <div className="max-w-screen-xl px-2 py-8 mx-auto">
         <div>
-          <h2 className="text-4xl text-center mb-14 text-primary font-display">
+          <h2 className="mb-8 text-4xl text-center text-primary font-display">
             <AnimatedText
               text={trans({
                 en: "OUR TEAM",
@@ -70,7 +70,7 @@ const informations: MemberInformation[] = [
   },
   {
     img: img2,
-    color: "#2196F3",
+    color: "#7fc8f8",
     name: "Lê Chí Thiện",
     major: {
       en: "IoT and Applied Artificial Intelligence",
@@ -88,7 +88,7 @@ const informations: MemberInformation[] = [
   },
   {
     img: img3,
-    color: "#FF9800",
+    color: "#f3d8c7",
     name: "Trần Xuân Đoan",
     major: { en: "International Business", vi: "Kinh doanh quốc tế" },
     interest: {
@@ -102,7 +102,7 @@ const informations: MemberInformation[] = [
   },
   {
     img: img4,
-    color: "#607D8B",
+    color: "#95b8d1",
     name: "Nguyễn Thanh Cảnh",
     major: { en: "Software Engineering", vi: "Kỹ thuật phần mềm" },
     interest: {
@@ -116,7 +116,7 @@ const informations: MemberInformation[] = [
   },
   {
     img: img5,
-    color: "#FFC107",
+    color: "#ffe45e",
     name: "Nguyễn Minh Huyền",
     major: {
       en: "E-commerce",
@@ -133,7 +133,7 @@ const informations: MemberInformation[] = [
   },
   {
     img: img6,
-    color: "#7E57C2",
+    color: "#cdc1ff",
     name: "Lê Thị Bình Nguyên",
     major: {
       en: "Marketing",
@@ -150,7 +150,7 @@ const informations: MemberInformation[] = [
   },
   {
     img: img7,
-    color: "#009688",
+    color: "#7ec4cf",
     name: "Lê Thị Thu Thảo",
     major: {
       en: "E-commerce",
@@ -167,7 +167,7 @@ const informations: MemberInformation[] = [
   },
   {
     img: img8,
-    color: "#8bc472",
+    color: "#ff928b",
     name: "Nguyễn Tâm Tính",
     major: {
       en: "IoT and Applied Artificial Intelligence",

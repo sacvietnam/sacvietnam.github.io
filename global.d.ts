@@ -1,11 +1,17 @@
+declare type Language = "vi" | "en";
+declare type UserRole = "admin" | "user";
+declare type Gender = "male" | "female" | "other";
+
 declare interface IAccount {
   _id: string;
-  username: string;
   phone: string;
   password: string;
   name: string;
-  gender: "male" | "female" | "other";
-  role: "admin" | "user";
+  email?: string;
+  gender: Gender;
+  role: UserRole;
+  avatar?: string;
+  address?: string[];
 }
 
 declare interface IFeedback {
@@ -36,6 +42,10 @@ declare interface IOrderDetail {
   quantity: number;
   price: number;
   discount: Discount;
+}
+
+declare interface CartItem extends IOrderDetail {
+  product: IProduct;
 }
 
 declare interface ICustomer {

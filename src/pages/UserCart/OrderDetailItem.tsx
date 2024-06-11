@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { CartItem } from "../../util/localStorage/LocalStorageHandler";
 import Formatter from "../../util/format/Formatter";
 import CartCaculator from "../../util/CartCalculator";
 import { Button, Popconfirm } from "antd";

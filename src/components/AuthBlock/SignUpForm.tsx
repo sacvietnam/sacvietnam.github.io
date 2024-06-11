@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { LangContext } from "../../contexts/LangContext";
 import type { FormProps } from "antd";
 import { Button, Form, Input, Radio } from "antd";
+import { useContext } from "react";
+import { LangContext } from "../../contexts/LangContext";
 import { SignUpFieldType } from "./LoginSignUpModal";
 
 const onFinishFailed: FormProps<SignUpFieldType>["onFinishFailed"] = (
@@ -27,53 +27,7 @@ function SignUpForm({
         onFinishFailed={onFinishFailed}
       >
         <Form.Item<SignUpFieldType>
-          label={trans({ en: "Username", vi: "Tên đăng nhập" })}
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: trans({
-                en: "Please input your username",
-                vi: "Hãy nhập tên đăng nhập của bạn",
-              }),
-            },
-            {
-              pattern: /^[a-zA-Z0-9]{6,20}$/,
-              message: trans({
-                en: "Username must be 6-20 characters long, no special characters",
-                vi: "Tên đăng nhập phải từ 6-20 ký tự, không chứa ký tự đặc biệt",
-              }),
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item<SignUpFieldType>
-          label={trans({ en: "Password", vi: "Mật khẩu" })}
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: trans({
-                en: "Please input your password",
-                vi: "Hãy nhập mật khẩu của bạn",
-              }),
-            },
-            {
-              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,24}$/,
-              message: trans({
-                en: "Password must be 8-24 characters long, contain at least 1 uppercase letter, 1 lowercase letter and 1 number",
-                vi: "Mật khẩu phải từ 8-24 ký tự, chứa ít nhất 1 chữ hoa, 1 chữ thường và 1 số",
-              }),
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item<SignUpFieldType>
-          label={trans({ en: "Full name", vi: "Tên của bạn" })}
+          label={trans({ en: "Full name", vi: "Họ tên" })}
           name="name"
           rules={[
             {
@@ -123,6 +77,66 @@ function SignUpForm({
             <Radio value={"female"}>{trans({ en: "Female", vi: "Nữ" })}</Radio>
             <Radio value={"other"}>{trans({ en: "Other", vi: "Khác" })}</Radio>
           </Radio.Group>
+        </Form.Item>
+
+        <Form.Item<SignUpFieldType>
+          label={trans({ en: "Password", vi: "Mật khẩu" })}
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: trans({
+                en: "Please input your password",
+                vi: "Hãy nhập mật khẩu của bạn",
+              }),
+            },
+            {
+              pattern:
+                /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,24}$/,
+              message: trans({
+                en: "Password must be 8-24 characters long, contain at least 1 uppercase letter, 1 lowercase letter and 1 number",
+                vi: "Mật khẩu phải từ 8-24 ký tự, chứa ít nhất 1 chữ hoa, 1 chữ thường và 1 số",
+              }),
+            },
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item
+          name="confirm"
+          label={trans({
+            en: "Confirm Password",
+            vi: "Xác nhận mật khẩu",
+          })}
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: trans({
+                en: "Please confirm your password",
+                vi: "Hãy xác nhận mật khẩu của bạn",
+              }),
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error(
+                    trans({
+                      en: "The two passwords that you entered do not match!",
+                      vi: "Hai mật khẩu bạn nhập không khớp!",
+                    }),
+                  ),
+                );
+              },
+            }),
+          ]}
+        >
+          <Input.Password />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 0, span: 24 }}>

@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { LangContext } from "../../contexts/LangContext";
-import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { getAllArticles, getArticleSize } from "../../services/articleService";
-import Wave from "react-wavify";
+import { motion } from "framer-motion";
+import { useContext, useState } from "react";
 import { IoMdEye } from "react-icons/io";
-import PaginationDataList from "../../components/PaginationDataList";
+import { Link } from "react-router-dom";
+import Wave from "react-wavify";
 import CommingSoon from "../../assets/imgs/comingsoon-square.png";
+import PaginationDataList from "../../components/PaginationDataList";
+import { LangContext } from "../../contexts/LangContext";
+import { getAllArticles, getArticleSize } from "../../services/articleService";
 
 const pageSize = 10;
 
@@ -31,7 +30,7 @@ const Blog = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <div className=" col-span-full md:col-span-2">
+          <div className="col-span-full md:col-span-2">
             <div className="overflow-hidden rounded-l-lg">
               <img
                 src={post.image || CommingSoon}
@@ -74,7 +73,7 @@ const Blog = () => {
           pageSize={pageSize}
           setPage={setCurrentPage}
           total={total || 0}
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-16 md:gap-4 "
           queryFn={getAllArticles}
           renderEach={postRenderer}
           queryKey="articles"

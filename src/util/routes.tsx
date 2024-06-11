@@ -2,6 +2,7 @@
 import { Spin } from "antd";
 import React, { Suspense } from "react";
 import { RouteObject } from "react-router-dom";
+import Profile from "../pages/Profile";
 const About = React.lazy(() => import("../pages/About"));
 const Download = React.lazy(() => import("../pages/Download"));
 const Home = React.lazy(() => import("../pages/Home"));
@@ -68,6 +69,10 @@ const routes: {
   {
     path: "/admin",
     element: AdminPage,
+  },
+  {
+    path: "/profile",
+    element: Profile,
   },
 ];
 
