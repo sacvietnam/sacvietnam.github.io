@@ -109,7 +109,7 @@ const ProductRecycleBin = () => {
             okText="Restore"
             cancelText="Cancel"
           >
-            <Button icon={< TbRestore />}></Button>
+            <Button icon={<TbRestore />}></Button>
           </Popconfirm>
           <Popconfirm
             title="Delete article?"

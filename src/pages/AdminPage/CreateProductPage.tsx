@@ -112,7 +112,6 @@ const CreateProductPage = ({ returnHome }: { returnHome: VoidFunction }) => {
         message.success("Product created successfully");
         returnHome();
       }
-      
     } catch (err) {
       console.error(err);
       message.error("Failed to create product");

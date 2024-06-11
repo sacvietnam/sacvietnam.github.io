@@ -57,7 +57,7 @@ const Profile = () => {
             items={items}
             onChange={(e) => console.log(e)}
           />
-          <NotFoundBlock/>
+          <NotFoundBlock />
         </div>
       </div>
     </div>

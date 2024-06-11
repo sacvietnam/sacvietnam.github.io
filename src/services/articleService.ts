@@ -86,7 +86,6 @@ const increaseView = async (id: string): Promise<boolean> => {
   return response.status === 200;
 };
 
-
 export {
   getAllArticles,
   getArticleById,
