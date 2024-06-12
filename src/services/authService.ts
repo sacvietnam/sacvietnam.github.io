@@ -5,7 +5,7 @@ import LocalStorageHandler from "../util/localStorage/LocalStorageHandler";
 const axios = AxiosConfig.getAxiosInstance();
 
 const register = async (values: Partial<IAccount>): Promise<IAccount> => {
-  if (!values.phone || !values.password || !values.name) {
+  if (!values.phone || !values.password || !values.name || !values.email) {
     throw new Error("Please fill all required fields");
   }
 
@@ -29,15 +29,15 @@ const register = async (values: Partial<IAccount>): Promise<IAccount> => {
 
 const login = async (
   {
-    phone,
+    username,
     password,
   }: {
-    phone: string;
+    username: string;
     password: string;
   },
   dispatch: React.Dispatch<React.SetStateAction<UserData | null>>,
 ): Promise<UserData | null> => {
-  const result = await axios.post("/auth/login", { phone, password });
+  const result = await axios.post("/auth/login", { username, password });
 
   if (result.status === 401) {
     throw new Error("Username or password is incorrect");

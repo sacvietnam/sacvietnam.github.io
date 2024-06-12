@@ -67,6 +67,30 @@ function SignUpForm({
         </Form.Item>
 
         <Form.Item<SignUpFieldType>
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: trans({
+                en: "Please input your email",
+                vi: "Hãy nhập email của bạn",
+              }),
+            },
+
+            {
+              pattern: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
+              message: trans({
+                en: "Please input a valid email",
+                vi: "Hãy nhập email hợp lệ",
+              }),
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item<SignUpFieldType>
           name="gender"
           initialValue={"male"}
           label={trans({ en: "Gender", vi: "Giới tính" })}

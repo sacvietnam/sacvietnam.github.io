@@ -33,15 +33,18 @@ function LoginForm({
         autoComplete="on"
       >
         <Form.Item<LoginFieldType>
-          label={trans({ en: "Phone number", vi: "Số điện thoại" })}
-          name="phone"
-          initialValue={localLoginForm?.phone}
+          label={trans({
+            en: "Phone number or Email",
+            vi: "Số điện thoại hoặc Email",
+          })}
+          name="username"
+          initialValue={localLoginForm?.username}
           rules={[
             {
               required: true,
               message: trans({
-                en: "Please input your username",
-                vi: "Hãy nhập tên tài khoản của bạn",
+                en: "Please input your Phone number or Email",
+                vi: "Hãy nhập Số điện thoại hoặc Email của bạn",
               }),
             },
           ]}

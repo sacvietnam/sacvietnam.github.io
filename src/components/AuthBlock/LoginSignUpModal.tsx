@@ -6,7 +6,7 @@ import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 
 export type LoginFieldType = {
-  phone: string;
+  username: string;
   password: string;
 };
 
@@ -17,6 +17,7 @@ export type SignUpFieldType = {
   email: string;
   gender: "male" | "female" | "other";
 };
+
 export type LoginSignUpViewType = "Login" | "Signup";
 
 type LoginSignUpModalProps = {

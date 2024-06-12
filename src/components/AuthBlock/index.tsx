@@ -1,3 +1,4 @@
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import type { FormProps, MenuProps } from "antd";
 import { Badge, Button, Dropdown, message } from "antd";
 import { AxiosError } from "axios";
@@ -7,6 +8,7 @@ import { FaCode } from "react-icons/fa6";
 import { LiaUser } from "react-icons/lia";
 import { LuDoorOpen } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../contexts/CartContext";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { LangContext } from "../../contexts/LangContext";
 import { login, logout, register } from "../../services/authService";
@@ -14,9 +16,12 @@ import LocalStorageHandler from "../../util/localStorage/LocalStorageHandler";
 import LoginSignUpModal, {
   LoginFieldType,
   LoginSignUpViewType,
+  SignUpFieldType,
 } from "./LoginSignUpModal";
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { CartContext } from "../../contexts/CartContext";
+
+interface ErrorResponseData {
+  message: string;
+}
 
 const AuthBlock = () => {
   const { trans } = useContext(LangContext);
@@ -76,7 +81,7 @@ const AuthBlock = () => {
     }
   };
 
-  const handleSignupFinish: FormProps<LoginFieldType>["onFinish"] = async (
+  const handleSignupFinish: FormProps<SignUpFieldType>["onFinish"] = async (
     values,
   ) => {
     try {
@@ -87,7 +92,7 @@ const AuthBlock = () => {
       );
       setType("Login");
     } catch (err) {
-      const axiosErr = err as AxiosError;
+      const axiosErr = err as AxiosError<ErrorResponseData>;
       switch (axiosErr.response?.status) {
         case 500:
           message.warning(
@@ -98,12 +103,24 @@ const AuthBlock = () => {
           );
           break;
         case 400:
-          message.error(
-            trans({
-              en: "This phone number is already in use",
-              vi: "Số điện thoại này đã được sử dụng",
-            }),
-          );
+          console.log(axiosErr);
+          if (
+            axiosErr?.response?.data?.message === "Phone number already exist"
+          )
+            message.error(
+              trans({
+                en: "This phone number is already in use",
+                vi: "Số điện thoại này đã được sử dụng",
+              }),
+            );
+          else {
+            message.error(
+              trans({
+                en: "This email is already in use",
+                vi: "Email này đã được sử dụng",
+              }),
+            );
+          }
           break;
         default:
           message.error(
