@@ -10,7 +10,7 @@ export const LangContext = createContext<{
   setLanguage: Dispatch<React.SetStateAction<Language>>;
   trans: (content: MultilangContent) => string;
 }>({
-  language: "en",
+  language: "vi",
   setLanguage: () => {
     console.log("Undefined language");
   },
@@ -19,7 +19,7 @@ export const LangContext = createContext<{
 
 const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
   const [language, setLanguage] = useState<Language>(() => {
-    return LocalStorageHandler.getItem<Language>("LANGUAGE") || "en";
+    return LocalStorageHandler.getItem<Language>("LANGUAGE") || "vi";
   });
 
   useEffect(() => {
