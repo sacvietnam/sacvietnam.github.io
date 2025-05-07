@@ -79,3 +79,12 @@ declare interface IProduct {
   quantityRate: number;
   sold: number;
 }
+
+// Add Vite environment variable interface
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}

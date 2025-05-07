@@ -1,8 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
-export const baseURL = import.meta.env.DEV
-  ? "http://localhost:3000/api"
-  : "https://smartairconclothing.com/api";
+export const baseURL = import.meta.env.VITE_API_URL;
 
 // Singleton class to create axios instance
 class AxiosConfig {
